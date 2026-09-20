@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NFL Monte Carlo — Game Simulator</title>
+    <meta
+      name="description"
+      content="Browser-side Monte Carlo NFL game simulator. Sample ratings only — model estimates, not betting advice."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="app-header">
+        <div class="brand">
+          <h1>NFL <span>Monte Carlo</span></h1>
+          <p class="tagline">
+            Pick a matchup · simulate thousands of games · inspect win rates &amp; score distributions
+          </p>
+        </div>
+        <div class="badge-row">
+          <span class="badge ok">Sample data</span>
+          <span class="badge">Model estimates</span>
+          <span class="badge">Runs in browser</span>
+        </div>
+      </header>
+
+      <div class="layout">
+        <aside>
+          <div class="card">
+            <h2>Matchup</h2>
+            <div class="field">
+              <label for="game-select">Game</label>
+              <select id="game-select"></select>
+            </div>
+            <div class="field">
+              <label>Simulations (N)</label>
+              <div class="n-pills">
+                <button type="button" data-n="1000">1k</button>
+                <button type="button" data-n="5000">5k</button>
+                <button type="button" data-n="10000" class="active">10k</button>
+                <button type="button" data-n="25000">25k</button>
+              </div>
+            </div>
+            <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
+            <p class="timing" id="hint">Uses correlated Gaussian scores · no server required</p>
+
+            <div class="matchup-preview">
+              <div class="teams-row">
+                <div class="team-chip away">
+                  <div class="abbr" id="chip-away-abbr">BUF</div>
+                  <div class="name" id="chip-away-name">Away</div>
+                </div>
+                <div class="vs">@</div>
+                <div class="team-chip home">
+                  <div class="abbr" id="chip-home-abbr">KC</div>
+                  <div class="name" id="chip-home-name">Home</div>
+                </div>
+              </div>
+              <div class="lines">
+                <div class="line-box">
+                  <div class="k">Sample spread</div>
+                  <div class="v" id="line-spread">—</div>
+                </div>
+                <div class="line-box">
+                  <div class="k">Sample total</div>
+                  <div class="v" id="line-total">—</div>
+                </div>
+              </div>
+              <div class="ratings-mini">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Rating</th>
+                      <th>Away</th>
+                      <th>Home</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ratings-body"></tbody>
+                </table>
+                <p style="margin: 10px 0 0">
+                  Model expected:
+                  <span style="color: var(--away)" id="exp-away">—</span>
+                  –
+                  <span style="color: var(--home)" id="exp-home">—</span>
+                  (margin
+                  <span id="exp-margin">—</span>)
+                </p>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main>
+          <div id="results"></div>
+
+          <div class="card model-panel" style="margin-top: 18px">
+            <h2>Transparent model</h2>
+            <p>
+              Each trial draws correlated home/away scores from a bivariate normal centered on
+              expected points derived from offensive, defensive, and recent-form ratings, plus
+              home-field advantage. Scores are rounded to integers and floored at zero.
+            </p>
+            <div class="model-eq" id="model-exp"></div>
+            <div class="model-eq">score_away = E[away] + σ · Z₁
+score_home = E[home] + σ · (ρ·Z₁ + √(1−ρ²)·Z₂)
+Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
+            <div class="model-params">
+              <div class="param">
+                <div class="k">Base points</div>
+                <div class="v">22.5</div>
+              </div>
+              <div class="param">
+                <div class="k">Home field (HFA)</div>
+                <div class="v">+2.4</div>
+              </div>
+              <div class="param">
+                <div class="k">σ (score noise)</div>
+                <div class="v">9.8</div>
+              </div>
+              <div class="param">
+                <div class="k">ρ (correlation)</div>
+                <div class="v">0.18</div>
+              </div>
+            </div>
+            <p style="margin-top: 12px">
+              Win probability is the share of trials where one team outscores the other. Cover /
+              over probabilities use the synthetic closing spread and total attached to each sample
+              game.
+            </p>
+          </div>
+        </main>
+      </div>
+
+      <div class="disclaimer">
+        <strong>Not betting advice.</strong>
+        This app uses synthetic team ratings and sample lines for demonstration and critique only.
+        Outputs are model estimates from a simplified generative process — not predictions of real
+        games, not edges against live markets, and not a recommendation to wager.
+      </div>
+
+      <footer class="app-footer">
+        NFL Monte Carlo · offline-capable after first load · static HTML / CSS / JS
+      </footer>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
