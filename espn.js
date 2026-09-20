@@ -5,8 +5,10 @@
 
 import { ESPN_DEFAULTS } from "./data.js";
 
-const SCOREBOARD_URL =
-  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard";
+const SCOREBOARD_URLS = [
+  "https://site.web.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+  "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard",
+];
 
 /**
  * @param {{ seasontype?: number, week?: number, dates?: number }} opts
@@ -17,16 +19,28 @@ export async function fetchEspnScoreboard(opts = {}) {
   const week = opts.week ?? ESPN_DEFAULTS.week;
   const dates = opts.dates ?? ESPN_DEFAULTS.dates;
 
-  const url = new URL(SCOREBOARD_URL);
-  url.searchParams.set("seasontype", String(seasontype));
-  url.searchParams.set("week", String(week));
-  url.searchParams.set("dates", String(dates));
-
-  const res = await fetch(url.toString());
-  if (!res.ok) {
-    throw new Error(`ESPN scoreboard HTTP ${res.status}`);
+  let data = null;
+  let lastErr = null;
+  for (const base of SCOREBOARD_URLS) {
+    const url = new URL(base);
+    url.searchParams.set("seasontype", String(seasontype));
+    url.searchParams.set("week", String(week));
+    url.searchParams.set("dates", String(dates));
+    try {
+      const res = await fetch(url.toString());
+      if (!res.ok) {
+        lastErr = new Error(`ESPN scoreboard HTTP ${res.status}`);
+        continue;
+      }
+      data = await res.json();
+      break;
+    } catch (err) {
+      lastErr = err;
+    }
   }
-  const data = await res.json();
+  if (!data) {
+    throw lastErr || new Error("ESPN scoreboard failed");
+  }
   const weekNumber = data?.week?.number ?? week;
   const seasonYear = data?.season?.year ?? dates;
   const games = (data.events || []).map(normalizeEvent).filter(Boolean);

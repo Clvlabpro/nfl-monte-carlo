@@ -6,7 +6,7 @@
     <title>Hayden clvpro Monte Carlo</title>
     <meta
       name="description"
-      content="Browser Monte Carlo NFL simulator calibrated to live DraftKings lines via ESPN. Not betting advice."
+      content="Browser Monte Carlo NFL simulator calibrated to multi-book median consensus lines. Not betting advice."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,17 +22,18 @@
         <div class="brand">
           <h1>Hayden clvpro <span>Monte Carlo</span></h1>
           <p class="tagline">
-            Live DraftKings lines · market-implied scores · thousands of sims in your browser
+            Multi-book consensus lines · market-implied scores · thousands of sims in your browser
           </p>
         </div>
         <div class="badge-row">
-          <span class="badge ok" id="badge-source">Live DK lines</span>
-          <span class="badge">Market-calibrated</span>
+          <span class="badge ok" id="badge-source">Multi-book lines</span>
+          <span class="badge">Median consensus</span>
           <span class="badge">Runs in browser</span>
         </div>
       </header>
 
       <div id="load-status" class="load-status loading" hidden>Loading…</div>
+      <p class="lines-updated" id="lines-updated">Lines updated: —</p>
 
       <div class="layout">
         <aside>
@@ -55,7 +56,9 @@
               <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
               <button type="button" class="btn-secondary" id="btn-refresh">Refresh lines</button>
             </div>
-            <p class="timing" id="hint">Correlated Gaussian around market means · ESPN free API</p>
+            <p class="timing" id="hint">
+              Correlated Gaussian around consensus means · snapshot + live ESPN DK
+            </p>
 
             <div class="matchup-preview">
               <div class="teams-row">
@@ -71,15 +74,15 @@
               </div>
               <div class="lines lines-4">
                 <div class="line-box">
-                  <div class="k">Spread (home)</div>
+                  <div class="k">Consensus spread</div>
                   <div class="v" id="line-spread">—</div>
                 </div>
                 <div class="line-box">
-                  <div class="k">Total</div>
+                  <div class="k">Consensus total</div>
                   <div class="v" id="line-total">—</div>
                 </div>
                 <div class="line-box">
-                  <div class="k">Book</div>
+                  <div class="k">Source</div>
                   <div class="v" id="line-book">—</div>
                 </div>
                 <div class="line-box">
@@ -88,6 +91,20 @@
                 </div>
               </div>
               <p class="kickoff-line">Kickoff: <span id="line-kickoff">—</span></p>
+
+              <div class="books-table-wrap">
+                <table class="books-table">
+                  <thead>
+                    <tr>
+                      <th>Book</th>
+                      <th>Spread (home)</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="books-body"></tbody>
+                </table>
+              </div>
+
               <div class="ratings-mini">
                 <table>
                   <thead>
@@ -117,10 +134,11 @@
           <div class="card model-panel" style="margin-top: 18px">
             <h2>Transparent model</h2>
             <p>
-              Expected points are <strong>market-implied</strong> from the live home spread and
-              total (DraftKings via ESPN). Noise is a bivariate normal around those means; scores
-              are rounded to integers and floored at zero. ATS cover rates sit near 50% by design;
-              win probability is driven by the spread.
+              Expected points are <strong>market-implied</strong> from the
+              <strong>median consensus</strong> home spread and total across DraftKings (via ESPN),
+              FanDuel, BetMGM, and Bovada when available. Noise is a bivariate normal around those
+              means; scores are rounded to integers and floored at zero. ATS cover rates sit near
+              50% by design; win probability is driven by the spread.
             </p>
             <div class="model-eq" id="model-exp"></div>
             <div class="model-eq">marginExp = −spread
@@ -133,7 +151,7 @@ Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
             <div class="model-params">
               <div class="param">
                 <div class="k">Means</div>
-                <div class="v">spread + total</div>
+                <div class="v">median consensus</div>
               </div>
               <div class="param">
                 <div class="k">σ (score noise)</div>
@@ -145,12 +163,14 @@ Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
               </div>
               <div class="param">
                 <div class="k">Source</div>
-                <div class="v">ESPN / DK</div>
+                <div class="v">multi-book</div>
               </div>
             </div>
             <p style="margin-top: 12px">
-              Lines move — use <em>Refresh lines</em>. Finals without odds show the score only;
-              ATS / totals sim is skipped when no line is posted.
+              FanDuel / BetMGM / Bovada are baked into <code>lines.json</code> (scraped on the box)
+              because their APIs are not CORS-friendly from GitHub Pages. Refresh reloads that
+              snapshot and merges live ESPN DraftKings. Re-run
+              <code>scripts/fetch-lines.py</code> to refresh the snapshot.
             </p>
           </div>
         </main>
@@ -158,14 +178,14 @@ Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
 
       <div class="disclaimer">
         <strong>Not betting advice.</strong>
-        Spreads and totals are live DraftKings lines surfaced by ESPN’s public scoreboard API.
-        This tool samples outcomes around those market means for education and critique — not an
-        edge finder, not a tip service, and not a recommendation to wager. Lines change; always
-        refresh before interpreting results.
+        Multi-book spreads and totals were last scraped at the timestamp above; consensus is the
+        <em>median</em> of available books. This tool samples outcomes around those market means for
+        education and critique — not an edge finder, not a tip service, and not a recommendation to
+        wager. Lines change; always refresh before interpreting results.
       </div>
 
       <footer class="app-footer">
-        NFL Monte Carlo · static HTML / CSS / JS · data from ESPN site API
+        NFL Monte Carlo · static HTML / CSS / JS · multi-book snapshot + ESPN live
       </footer>
     </div>
     <script type="module" src="./app.js"></script>

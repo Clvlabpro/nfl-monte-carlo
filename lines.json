@@ -1,0 +1,837 @@
+{
+  "week": 2,
+  "seasonYear": 2026,
+  "fetchedAt": "2026-09-20T16:44:01Z",
+  "consensusMethod": "median",
+  "sources": {
+    "espn_draftkings": {
+      "week": 2,
+      "seasonYear": 2026,
+      "ok": true,
+      "count": 15,
+      "error": null
+    },
+    "fanduel": {
+      "ok": true,
+      "count": 30,
+      "error": null
+    },
+    "betmgm": {
+      "ok": true,
+      "count": 15,
+      "error": null
+    },
+    "bovada": {
+      "ok": true,
+      "count": 15,
+      "error": null
+    }
+  },
+  "blocked": {
+    "DraftKings (direct API)": "HTTP 403 from sportsbook.draftkings.com",
+    "Caesars": "HTTP 403 from api.americanwagering.com",
+    "ESPN BET": "hostname unresolved / not probed successfully"
+  },
+  "disclaimer": "Multi-book lines scraped from public book endpoints for education only. Not betting advice. Lines move; consensus is the median of available books.",
+  "games": [
+    {
+      "id": "401872933",
+      "key": "CAR@ATL",
+      "away": {
+        "abbr": "CAR",
+        "name": "Carolina Panthers"
+      },
+      "home": {
+        "abbr": "ATL",
+        "name": "Atlanta Falcons"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 2.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": 2.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": 2.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": 2.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": 2.5,
+        "total": 43.5,
+        "method": "median"
+      },
+      "spread": 2.5,
+      "total": 43.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872937",
+      "key": "MIN@CHI",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Vikings"
+      },
+      "home": {
+        "abbr": "CHI",
+        "name": "Chicago Bears"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -4.5,
+          "total": 46.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -4.5,
+          "total": 46.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -4.5,
+          "total": 46.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -4.0,
+          "total": 46.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -4.5,
+        "total": 46.5,
+        "method": "median"
+      },
+      "spread": -4.5,
+      "total": 46.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872939",
+      "key": "PHI@TEN",
+      "away": {
+        "abbr": "PHI",
+        "name": "Philadelphia Eagles"
+      },
+      "home": {
+        "abbr": "TEN",
+        "name": "Tennessee Titans"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 7.0,
+          "total": 39.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": 7.0,
+          "total": 39.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": 7.0,
+          "total": 39.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": 7.0,
+          "total": 39.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": 7.0,
+        "total": 39.5,
+        "method": "median"
+      },
+      "spread": 7.0,
+      "total": 39.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872946",
+      "key": "PIT@NE",
+      "away": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Steelers"
+      },
+      "home": {
+        "abbr": "NE",
+        "name": "New England Patriots"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -4.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -4.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -5.0,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -4.5,
+          "total": 41.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -4.5,
+        "total": 41.5,
+        "method": "median"
+      },
+      "spread": -4.5,
+      "total": 41.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872936",
+      "key": "GB@NYJ",
+      "away": {
+        "abbr": "GB",
+        "name": "Green Bay Packers"
+      },
+      "home": {
+        "abbr": "NYJ",
+        "name": "New York Jets"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 3.5,
+          "total": 44.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": 3.5,
+          "total": 44.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": 3.0,
+          "total": 44.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": 3.0,
+          "total": 44.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": 3.25,
+        "total": 44.5,
+        "method": "median"
+      },
+      "spread": 3.25,
+      "total": 44.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872935",
+      "key": "CLE@TB",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Browns"
+      },
+      "home": {
+        "abbr": "TB",
+        "name": "Tampa Bay Buccaneers"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -8.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -8.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -7.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -8.0,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -8.25,
+        "total": 41.5,
+        "method": "median"
+      },
+      "spread": -8.25,
+      "total": 41.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872938",
+      "key": "NO@BAL",
+      "away": {
+        "abbr": "NO",
+        "name": "New Orleans Saints"
+      },
+      "home": {
+        "abbr": "BAL",
+        "name": "Baltimore Ravens"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -8.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -8.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -8.5,
+          "total": 45.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -7.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -8.5,
+        "total": 45.5,
+        "method": "median"
+      },
+      "spread": -8.5,
+      "total": 45.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872934",
+      "key": "CIN@HOU",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Bengals"
+      },
+      "home": {
+        "abbr": "HOU",
+        "name": "Houston Texans"
+      },
+      "kickoffIso": "2026-09-20T17:00Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -3.0,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -3.0,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -2.75,
+        "total": 45.5,
+        "method": "median"
+      },
+      "spread": -2.75,
+      "total": 45.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872940",
+      "key": "JAX@DEN",
+      "away": {
+        "abbr": "JAX",
+        "name": "Jacksonville Jaguars"
+      },
+      "home": {
+        "abbr": "DEN",
+        "name": "Denver Broncos"
+      },
+      "kickoffIso": "2026-09-20T20:05Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -2.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -2.5,
+        "total": 45.5,
+        "method": "median"
+      },
+      "spread": -2.5,
+      "total": 45.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872941",
+      "key": "LV@LAC",
+      "away": {
+        "abbr": "LV",
+        "name": "Las Vegas Raiders"
+      },
+      "home": {
+        "abbr": "LAC",
+        "name": "Los Angeles Chargers"
+      },
+      "kickoffIso": "2026-09-20T20:05Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -6.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -6.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -6.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -6.5,
+          "total": 43.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -6.5,
+        "total": 43.5,
+        "method": "median"
+      },
+      "spread": -6.5,
+      "total": 43.5,
+      "hasOdds": true
+    },
+    {
+      "id": "401872944",
+      "key": "WSH@DAL",
+      "away": {
+        "abbr": "WSH",
+        "name": "Washington Commanders"
+      },
+      "home": {
+        "abbr": "DAL",
+        "name": "Dallas Cowboys"
+      },
+      "kickoffIso": "2026-09-20T20:25Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -4.5,
+          "total": 50.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -4.5,
+          "total": 50.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -4.0,
+          "total": 51.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -4.0,
+          "total": 51.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -4.25,
+        "total": 50.75,
+        "method": "median"
+      },
+      "spread": -4.25,
+      "total": 50.75,
+      "hasOdds": true
+    },
+    {
+      "id": "401872943",
+      "key": "SEA@ARI",
+      "away": {
+        "abbr": "SEA",
+        "name": "Seattle Seahawks"
+      },
+      "home": {
+        "abbr": "ARI",
+        "name": "Arizona Cardinals"
+      },
+      "kickoffIso": "2026-09-20T20:25Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 3.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": 4.5,
+          "total": 41.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": 4.0,
+          "total": 41.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": 3.5,
+          "total": 41.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": 3.75,
+        "total": 41.25,
+        "method": "median"
+      },
+      "spread": 3.75,
+      "total": 41.25,
+      "hasOdds": true
+    },
+    {
+      "id": "401872942",
+      "key": "MIA@SF",
+      "away": {
+        "abbr": "MIA",
+        "name": "Miami Dolphins"
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco 49ers"
+      },
+      "kickoffIso": "2026-09-20T20:25Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -13.5,
+          "total": 44.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -13.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -13.5,
+          "total": 45.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -13.0,
+          "total": 45.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -13.5,
+        "total": 45.0,
+        "method": "median"
+      },
+      "spread": -13.5,
+      "total": 45.0,
+      "hasOdds": true
+    },
+    {
+      "id": "401872945",
+      "key": "IND@KC",
+      "away": {
+        "abbr": "IND",
+        "name": "Indianapolis Colts"
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Chiefs"
+      },
+      "kickoffIso": "2026-09-21T00:20Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -6.0,
+          "total": 46.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -6.5,
+          "total": 45.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -3.5,
+          "total": 46.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -5.5,
+          "total": 46.0,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -5.75,
+        "total": 46.0,
+        "method": "median"
+      },
+      "spread": -5.75,
+      "total": 46.0,
+      "hasOdds": true
+    },
+    {
+      "id": "401872932",
+      "key": "DET@BUF",
+      "away": {
+        "abbr": "DET",
+        "name": "Detroit Lions"
+      },
+      "home": {
+        "abbr": "BUF",
+        "name": "Buffalo Bills"
+      },
+      "kickoffIso": "2026-09-18T00:15Z",
+      "completed": true,
+      "books": [],
+      "consensus": null,
+      "spread": null,
+      "total": null,
+      "hasOdds": false
+    },
+    {
+      "id": "401872947",
+      "key": "NYG@LAR",
+      "away": {
+        "abbr": "NYG",
+        "name": "New York Giants"
+      },
+      "home": {
+        "abbr": "LAR",
+        "name": "Los Angeles Rams"
+      },
+      "kickoffIso": "2026-09-22T00:15Z",
+      "completed": false,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -6.5,
+          "total": 47.5,
+          "fetchedAt": "2026-09-20T16:44:00Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -6.5,
+          "total": 47.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -7.0,
+          "total": 47.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -7.0,
+          "total": 47.5,
+          "fetchedAt": "2026-09-20T16:44:01Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -6.75,
+        "total": 47.5,
+        "method": "median"
+      },
+      "spread": -6.75,
+      "total": 47.5,
+      "hasOdds": true
+    }
+  ]
+}

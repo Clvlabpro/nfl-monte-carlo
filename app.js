@@ -1,5 +1,6 @@
 import { MODEL } from "./data.js";
-import { fetchEspnScoreboard, formatKickoff, statusLabel } from "./espn.js";
+import { formatKickoff, statusLabel } from "./espn.js";
+import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
 
@@ -13,19 +14,32 @@ const state = {
   week: null,
   seasonYear: null,
   fetchedAt: null,
+  snapshotAt: null,
+  liveEspnAt: null,
   loading: false,
   error: null,
+  sources: null,
 };
 
 function getGame() {
   return state.games.find((g) => g.id === state.gameId) || state.games[0] || null;
 }
 
-function fmtSpread(spread) {
-  if (spread == null || !Number.isFinite(spread)) return "N/A";
-  if (spread === 0) return "PK";
-  const sign = spread > 0 ? "+" : "";
-  return `${sign}${Number(spread).toFixed(1)}`;
+/** Format home spread / any signed line (supports .25 median). */
+function fmtLine(n) {
+  if (n == null || !Number.isFinite(n)) return "—";
+  if (n === 0) return "PK";
+  const sign = n > 0 ? "+" : "";
+  const rounded = Math.round(n * 100) / 100;
+  return `${sign}${rounded}`;
+}
+const fmtSpread = fmtLine;
+
+
+function fmtTotal(n) {
+  if (n == null || !Number.isFinite(n)) return "—";
+  const rounded = Math.round(n * 100) / 100;
+  return String(rounded);
 }
 
 function fmtPct(x) {
@@ -37,18 +51,7 @@ function fmtScore(x) {
 }
 
 function fmtFetched(iso) {
-  if (!iso) return "";
-  try {
-    return new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/Chicago",
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      timeZoneName: "short",
-    }).format(new Date(iso));
-  } catch {
-    return iso;
-  }
+  return formatLinesTimestamp(iso);
 }
 
 function setLoading(on, msg) {
@@ -58,7 +61,7 @@ function setLoading(on, msg) {
   if (on) {
     el.hidden = false;
     el.className = "load-status loading";
-    el.textContent = msg || "Loading ESPN lines…";
+    el.textContent = msg || "Loading multi-book lines…";
   } else if (state.error) {
     el.hidden = false;
     el.className = "load-status error";
@@ -67,7 +70,9 @@ function setLoading(on, msg) {
     el.hidden = false;
     el.className = "load-status ok";
     const nOdds = state.games.filter((g) => g.hasOdds).length;
-    el.textContent = `Week ${state.week} · ${state.games.length} games · ${nOdds} with lines · refreshed ${fmtFetched(state.fetchedAt)} CT`;
+    const snap = state.snapshotAt ? fmtFetched(state.snapshotAt) : "n/a";
+    const live = state.liveEspnAt ? fmtFetched(state.liveEspnAt) : "n/a";
+    el.textContent = `Week ${state.week} · ${state.games.length} games · ${nOdds} with lines · snapshot ${snap} · ESPN live ${live}`;
   }
 }
 
@@ -79,12 +84,16 @@ function populateSelect() {
   }
   sel.innerHTML = state.games
     .map((g) => {
-      const tag = g.completed ? "FINAL" : g.hasOdds ? (g.book || "line") : "no line";
+      const nBooks = (g.books || []).length;
+      const tag = g.completed
+        ? "FINAL"
+        : g.hasOdds
+          ? `consensus · ${nBooks}b`
+          : "no line";
       return `<option value="${g.id}">${g.away.abbr} @ ${g.home.abbr} — ${tag}</option>`;
     })
     .join("");
   if (!state.gameId || !state.games.some((g) => g.id === state.gameId)) {
-    // Prefer first scheduled-with-odds game
     const pick =
       state.games.find((g) => g.hasOdds && !g.completed) ||
       state.games.find((g) => g.hasOdds) ||
@@ -111,6 +120,33 @@ function updateRunButton() {
   btn.textContent = "Run Simulation";
 }
 
+function renderBooksTable(g) {
+  const el = $("#books-body");
+  if (!el) return;
+  if (!g || !(g.books || []).length) {
+    el.innerHTML = `<tr><td colspan="3" class="muted">No book lines</td></tr>`;
+    return;
+  }
+  const rows = (g.books || []).map(
+    (b) =>
+      `<tr>
+        <td>${b.name}</td>
+        <td class="mono">${fmtLine(b.spread)}</td>
+        <td class="mono">${fmtTotal(b.total)}</td>
+      </tr>`
+  );
+  if (g.consensus) {
+    rows.push(
+      `<tr class="consensus-row">
+        <td>Consensus <span class="pill">median</span></td>
+        <td class="mono">${fmtLine(g.consensus.spread)}</td>
+        <td class="mono">${fmtTotal(g.consensus.total)}</td>
+      </tr>`
+    );
+  }
+  el.innerHTML = rows.join("");
+}
+
 function renderMatchupPreview() {
   const g = getGame();
   if (!g) {
@@ -127,6 +163,7 @@ function renderMatchupPreview() {
     $("#exp-away").textContent = "—";
     $("#exp-margin").textContent = "—";
     $("#meta-body").innerHTML = "";
+    renderBooksTable(null);
     $("#model-exp").textContent = "Load lines to see market-implied expected scores.";
     updateRunButton();
     return;
@@ -138,15 +175,25 @@ function renderMatchupPreview() {
   $("#chip-home-name").textContent = g.home.name;
 
   $("#line-spread").textContent = g.hasOdds
-    ? `${g.home.abbr} ${fmtSpread(g.spread)}`
+    ? `${g.home.abbr} ${fmtLine(g.spread)}`
     : "N/A";
-  $("#line-total").textContent = g.hasOdds ? Number(g.total).toFixed(1) : "N/A";
-  $("#line-book").textContent = g.book || (g.hasOdds ? "ESPN" : "—");
+  $("#line-total").textContent = g.hasOdds ? fmtTotal(g.total) : "N/A";
+  $("#line-book").textContent = g.hasOdds
+    ? `consensus · ${(g.books || []).length} books`
+    : "—";
   $("#line-kickoff").textContent = formatKickoff(g.kickoffIso);
   $("#line-status").textContent = statusLabel(g);
 
   const metaRows = [];
-  if (g.details) metaRows.push(["Line detail", g.details]);
+  metaRows.push([
+    "Lines scraped",
+    state.snapshotAt ? fmtFetched(state.snapshotAt) : "snapshot missing",
+  ]);
+  metaRows.push([
+    "ESPN DK live",
+    state.liveEspnAt ? fmtFetched(state.liveEspnAt) : "unavailable",
+  ]);
+  metaRows.push(["Consensus", "median of available books"]);
   if (g.completed && g.home.score != null && g.away.score != null) {
     metaRows.push([
       "Final score",
@@ -158,20 +205,23 @@ function renderMatchupPreview() {
     .map(([k, v]) => `<tr><td>${k}</td><td colspan="2">${v}</td></tr>`)
     .join("");
 
+  renderBooksTable(g);
+
   if (g.hasOdds) {
     const exp = expectedPoints(g);
     $("#exp-home").textContent = fmtScore(exp.homeExp);
     $("#exp-away").textContent = fmtScore(exp.awayExp);
     $("#exp-margin").textContent =
       (exp.marginExp >= 0 ? "+" : "") + fmtScore(exp.marginExp);
-    $("#model-exp").textContent = `Market-implied means (DraftKings via ESPN)
+    $("#model-exp").textContent = `Market-implied means (multi-book median consensus)
 
-spread (home) = ${fmtSpread(g.spread)}
-total         = ${Number(g.total).toFixed(1)}
+spread (home) = ${fmtLine(g.spread)}
+total         = ${fmtTotal(g.total)}
+books         = ${(g.books || []).map((b) => b.name).join(", ") || "—"}
 
 marginExp = −spread = ${(-g.spread).toFixed(2)}
-homeExp   = (total − spread) / 2 = (${Number(g.total).toFixed(1)} − ${g.spread}) / 2 = ${exp.homeExp.toFixed(2)}
-awayExp   = (total + spread) / 2 = (${Number(g.total).toFixed(1)} + ${g.spread}) / 2 = ${exp.awayExp.toFixed(2)}`;
+homeExp   = (total − spread) / 2 = ${exp.homeExp.toFixed(2)}
+awayExp   = (total + spread) / 2 = ${exp.awayExp.toFixed(2)}`;
   } else {
     $("#exp-home").textContent = "N/A";
     $("#exp-away").textContent = "N/A";
@@ -198,8 +248,8 @@ function showEmpty() {
         <strong>Final: ${g.away.abbr} ${g.away.score} @ ${g.home.abbr} ${g.home.score}</strong>
         ${
           g.hasOdds
-            ? "You can still run a counterfactual sim against the last posted line."
-            : "No DraftKings line on ESPN for this game — ATS / over-under sim unavailable."
+            ? "You can still run a counterfactual sim against the consensus line."
+            : "No consensus line for this game — ATS / over-under sim unavailable."
         }
       </div>`;
     return;
@@ -208,20 +258,23 @@ function showEmpty() {
     $("#results").innerHTML = `
       <div class="card empty-state">
         <strong>No line available</strong>
-        ESPN did not return spread/total for this matchup. Pick another game or refresh later.
+        No multi-book spread/total for this matchup. Pick another game or refresh later.
       </div>`;
     return;
   }
+  const snap = state.snapshotAt ? fmtFetched(state.snapshotAt) : "—";
   $("#results").innerHTML = `
     <div class="card empty-state">
       <strong>Ready to simulate</strong>
-      Live DraftKings lines via ESPN · market-implied expected scores · default 10,000 trials in-browser.
+      Multi-book median consensus · market-implied expected scores · default 10,000 trials.<br/>
+      <span class="muted">Lines last scraped: ${snap}. Refresh reloads snapshot + live ESPN DraftKings (other books are snapshot-only — not CORS-friendly from GitHub Pages).</span>
     </div>`;
 }
 
 function renderResults(result, ms) {
   const g = getGame();
   const el = $("#results");
+  const bookLabel = `consensus · ${(g.books || []).length} books`;
 
   el.innerHTML = `
     <div class="card results-grid">
@@ -246,36 +299,36 @@ function renderResults(result, ms) {
         <div class="stat accent">
           <div class="label">Mean total</div>
           <div class="value">${fmtScore(result.meanTotal)}</div>
-          <div class="sub">line ${result.totalLine.toFixed(1)}</div>
+          <div class="sub">line ${fmtTotal(result.totalLine)}</div>
         </div>
       </div>
       <div class="stat-row" style="margin-top:4px">
         <div class="stat">
-          <div class="label">${g.home.abbr} covers ${fmtSpread(result.spread)}</div>
+          <div class="label">${g.home.abbr} covers ${fmtLine(result.spread)}</div>
           <div class="value">${fmtPct(result.homeCoverPct)}</div>
           <div class="sub">away ${fmtPct(result.awayCoverPct)} · push ${fmtPct(result.pushSpreadPct)} · ~50% by design</div>
         </div>
         <div class="stat">
-          <div class="label">Over ${result.totalLine.toFixed(1)}</div>
+          <div class="label">Over ${fmtTotal(result.totalLine)}</div>
           <div class="value">${fmtPct(result.overPct)}</div>
           <div class="sub">under ${fmtPct(result.underPct)} · push ${fmtPct(result.pushTotalPct)}</div>
         </div>
         <div class="stat">
           <div class="label">Market E[home]</div>
           <div class="value">${fmtScore(result.homeExp)}</div>
-          <div class="sub">from spread + total</div>
+          <div class="sub">from consensus</div>
         </div>
         <div class="stat">
           <div class="label">Market E[away]</div>
           <div class="value">${fmtScore(result.awayExp)}</div>
-          <div class="sub">from spread + total</div>
+          <div class="sub">from consensus</div>
         </div>
       </div>
       <div class="charts">
         <div class="chart-card"><canvas id="chart-margin"></canvas></div>
         <div class="chart-card"><canvas id="chart-total"></canvas></div>
       </div>
-      <p class="timing">Completed in ${ms.toFixed(0)} ms · market-calibrated (${g.book || "ESPN"}) · not betting advice · lines move</p>
+      <p class="timing">Completed in ${ms.toFixed(0)} ms · ${bookLabel} · not betting advice · lines move</p>
     </div>
   `;
 
@@ -330,14 +383,17 @@ async function loadLines() {
   const btnRefresh = $("#btn-refresh");
   if (btnRefresh) btnRefresh.disabled = true;
   state.error = null;
-  setLoading(true, "Fetching ESPN Week 2 scoreboard…");
+  setLoading(true, "Fetching snapshot + live ESPN DraftKings…");
 
   try {
-    const data = await fetchEspnScoreboard({ week: 2, dates: 2026, seasontype: 2 });
+    const data = await loadMultiBookLines({ week: 2, dates: 2026 });
     state.games = data.games;
     state.week = data.week;
     state.seasonYear = data.seasonYear;
     state.fetchedAt = data.fetchedAt;
+    state.snapshotAt = data.snapshotAt;
+    state.liveEspnAt = data.liveEspnAt;
+    state.sources = data.sources;
     state.error = null;
 
     populateSelect();
@@ -346,10 +402,20 @@ async function loadLines() {
     setLoading(false);
 
     const badge = $("#badge-source");
-    if (badge) badge.textContent = `Live DK · Week ${data.week}`;
+    if (badge) {
+      const nBooks = new Set(
+        data.games.flatMap((g) => (g.books || []).map((b) => b.name))
+      ).size;
+      badge.textContent = `Multi-book · ${nBooks} sources · Week ${data.week}`;
+    }
+
+    const stamp = $("#lines-updated");
+    if (stamp) {
+      stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median · not betting advice`;
+    }
   } catch (err) {
     console.error(err);
-    state.error = `Failed to load ESPN lines: ${err.message || err}`;
+    state.error = `Failed to load lines: ${err.message || err}`;
     setLoading(false);
     $("#results").innerHTML = `
       <div class="card empty-state">
