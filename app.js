@@ -145,7 +145,7 @@ function renderResults(result, ms) {
         <div class="chart-card"><canvas id="chart-margin"></canvas></div>
         <div class="chart-card"><canvas id="chart-total"></canvas></div>
       </div>
-      <p class="timing">Completed in ${ms.toFixed(0)} ms · model estimates from sample ratings — not live market odds</p>
+      <p class="timing">Completed in ${ms.toFixed(0)} ms · model estimates from placeholder ratings — not live market odds</p>
     </div>
   `;
 

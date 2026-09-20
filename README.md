@@ -2,7 +2,7 @@
 
 Browser-side Monte Carlo NFL game simulator. Pick a sample matchup, run thousands of trials, and inspect win probabilities, mean scores, margin/total histograms, and cover/over rates against synthetic lines.
 
-**Sample data & model estimates only — not betting advice.**
+**Real Week 2 schedule; ratings/lines are model placeholders — not betting advice — not betting advice.**
 
 ## Quick start
 
@@ -21,7 +21,7 @@ Any static file server works (`npx serve`, `php -S`, etc.). No build step, no ba
 
 | Feature | Detail |
 |--------|--------|
-| Matchup picker | 12 sample NFL games with offense / defense / form ratings |
+| Matchup picker | 16 NFL Week 2 (2026) matchups with offense / defense / form ratings |
 | Home field | +2.4 pts baked into home expected score |
 | Simulation sizes | 1k / 5k / 10k / 25k (default 10k) |
 | Results | Win %, tie rate, mean scores, mean margin & total |
