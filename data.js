@@ -1,161 +1,19 @@
 /**
- * NFL Week 2 (2026) matchups — real schedule.
- * offense / defense / form ratings and spread/total are illustrative model
- * placeholders for the Monte Carlo demo, not live sportsbook lines.
- * Ratings are relative: 0 = league average.
+ * Monte Carlo model constants.
+ * Expected scores come from live market lines (spread + total), not team ratings.
+ * See expectedPoints() in sim.js.
  */
-
 export const MODEL = {
-  basePoints: 22.5,
-  homeFieldAdvantage: 2.4,
-  scoreSigma: 9.8,
+  /** Per-team score noise (points). ~10–11 matches NFL residual variance. */
+  scoreSigma: 10.5,
+  /** Corr(home score, away score); pace/weather/blowout effects. */
   scoreCorrelation: 0.18,
   minScore: 0,
 };
 
-export const GAMES = [
-  {
-    id: "det-buf",
-    label: "Detroit @ Buffalo",
-    week: "Week 2 · Thu 9/17",
-    away: { abbr: "DET", name: "Detroit Lions", offense: 5.2, defense: 0.4, form: 0.8 },
-    home: { abbr: "BUF", name: "Buffalo Bills", offense: 4.6, defense: 2.0, form: 1.0 },
-    spread: -2.5,
-    total: 49.5,
-  },
-  {
-    id: "car-atl",
-    label: "Carolina @ Atlanta",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "CAR", name: "Carolina Panthers", offense: -0.8, defense: -0.6, form: -0.5 },
-    home: { abbr: "ATL", name: "Atlanta Falcons", offense: 2.0, defense: 0.2, form: 0.3 },
-    spread: -5.5,
-    total: 44.5,
-  },
-  {
-    id: "no-bal",
-    label: "New Orleans @ Baltimore",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "NO", name: "New Orleans Saints", offense: 0.4, defense: 0.8, form: -0.4 },
-    home: { abbr: "BAL", name: "Baltimore Ravens", offense: 4.4, defense: 1.8, form: 1.2 },
-    spread: -8.5,
-    total: 46.5,
-  },
-  {
-    id: "min-chi",
-    label: "Minnesota @ Chicago",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "MIN", name: "Minnesota Vikings", offense: 2.2, defense: 2.0, form: 0.6 },
-    home: { abbr: "CHI", name: "Chicago Bears", offense: 1.0, defense: 0.4, form: 0.2 },
-    spread: -1.5,
-    total: 43.5,
-  },
-  {
-    id: "cin-hou",
-    label: "Cincinnati @ Houston",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "CIN", name: "Cincinnati Bengals", offense: 3.8, defense: -0.8, form: 0.5 },
-    home: { abbr: "HOU", name: "Houston Texans", offense: 2.6, defense: 2.2, form: 0.8 },
-    spread: -2.5,
-    total: 45.5,
-  },
-  {
-    id: "pit-ne",
-    label: "Pittsburgh @ New England",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "PIT", name: "Pittsburgh Steelers", offense: 0.8, defense: 2.4, form: 0.4 },
-    home: { abbr: "NE", name: "New England Patriots", offense: 0.2, defense: 0.6, form: -0.2 },
-    spread: 2.5,
-    total: 40.5,
-  },
-  {
-    id: "gb-nyj",
-    label: "Green Bay @ NY Jets",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "GB", name: "Green Bay Packers", offense: 2.6, defense: 0.8, form: 0.2 },
-    home: { abbr: "NYJ", name: "New York Jets", offense: 0.6, defense: 1.6, form: 0.4 },
-    spread: 3.0,
-    total: 42.5,
-  },
-  {
-    id: "cle-tb",
-    label: "Cleveland @ Tampa Bay",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "CLE", name: "Cleveland Browns", offense: -0.6, defense: 1.4, form: -0.8 },
-    home: { abbr: "TB", name: "Tampa Bay Buccaneers", offense: 2.4, defense: 0.8, form: 0.3 },
-    spread: -6.5,
-    total: 42.0,
-  },
-  {
-    id: "phi-ten",
-    label: "Philadelphia @ Tennessee",
-    week: "Week 2 · Sun 1:00 ET",
-    away: { abbr: "PHI", name: "Philadelphia Eagles", offense: 4.2, defense: 2.6, form: 1.0 },
-    home: { abbr: "TEN", name: "Tennessee Titans", offense: -0.4, defense: -0.2, form: -0.6 },
-    spread: 7.5,
-    total: 43.5,
-  },
-  {
-    id: "jax-den",
-    label: "Jacksonville @ Denver",
-    week: "Week 2 · Sun 4:05 ET",
-    away: { abbr: "JAX", name: "Jacksonville Jaguars", offense: 1.8, defense: 0.6, form: 0.5 },
-    home: { abbr: "DEN", name: "Denver Broncos", offense: 1.4, defense: 2.8, form: 1.0 },
-    spread: -3.5,
-    total: 41.5,
-  },
-  {
-    id: "lv-lac",
-    label: "Las Vegas @ LA Chargers",
-    week: "Week 2 · Sun 4:05 ET",
-    away: { abbr: "LV", name: "Las Vegas Raiders", offense: 0.4, defense: -0.8, form: 0.2 },
-    home: { abbr: "LAC", name: "Los Angeles Chargers", offense: 3.0, defense: 1.2, form: 0.6 },
-    spread: -6.0,
-    total: 44.0,
-  },
-  {
-    id: "sea-ari",
-    label: "Seattle @ Arizona",
-    week: "Week 2 · Sun 4:25 ET",
-    away: { abbr: "SEA", name: "Seattle Seahawks", offense: 2.0, defense: 0.6, form: 0.8 },
-    home: { abbr: "ARI", name: "Arizona Cardinals", offense: 1.4, defense: -0.2, form: 0.4 },
-    spread: -1.0,
-    total: 45.5,
-  },
-  {
-    id: "wsh-dal",
-    label: "Washington @ Dallas",
-    week: "Week 2 · Sun 4:25 ET",
-    away: { abbr: "WSH", name: "Washington Commanders", offense: 2.8, defense: 0.4, form: 0.6 },
-    home: { abbr: "DAL", name: "Dallas Cowboys", offense: 3.2, defense: -0.4, form: 0.2 },
-    spread: -3.0,
-    total: 48.5,
-  },
-  {
-    id: "mia-sf",
-    label: "Miami @ San Francisco",
-    week: "Week 2 · Sun 4:25 ET",
-    away: { abbr: "MIA", name: "Miami Dolphins", offense: 1.6, defense: -0.6, form: -0.4 },
-    home: { abbr: "SF", name: "San Francisco 49ers", offense: 3.4, defense: 3.0, form: 0.8 },
-    spread: -7.5,
-    total: 44.5,
-  },
-  {
-    id: "ind-kc",
-    label: "Indianapolis @ Kansas City",
-    week: "Week 2 · Sun 8:20 ET",
-    away: { abbr: "IND", name: "Indianapolis Colts", offense: 1.4, defense: -0.4, form: 0.0 },
-    home: { abbr: "KC", name: "Kansas City Chiefs", offense: 4.8, defense: 1.2, form: 0.9 },
-    spread: -7.0,
-    total: 47.5,
-  },
-  {
-    id: "nyg-lar",
-    label: "NY Giants @ LA Rams",
-    week: "Week 2 · Mon 8:15 ET",
-    away: { abbr: "NYG", name: "New York Giants", offense: 1.2, defense: 0.2, form: 0.6 },
-    home: { abbr: "LAR", name: "Los Angeles Rams", offense: 2.8, defense: 1.4, form: 0.2 },
-    spread: -4.5,
-    total: 44.0,
-  },
-];
+/** Default ESPN scoreboard query (regular season Week 2, 2026). */
+export const ESPN_DEFAULTS = {
+  seasontype: 2,
+  week: 2,
+  dates: 2026,
+};

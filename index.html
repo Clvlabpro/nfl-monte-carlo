@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NFL Monte Carlo — Game Simulator</title>
+    <title>NFL Monte Carlo — Live Lines Simulator</title>
     <meta
       name="description"
-      content="Browser-side Monte Carlo NFL game simulator. Sample ratings only — model estimates, not betting advice."
+      content="Browser Monte Carlo NFL simulator calibrated to live DraftKings lines via ESPN. Not betting advice."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,15 +22,17 @@
         <div class="brand">
           <h1>NFL <span>Monte Carlo</span></h1>
           <p class="tagline">
-            Pick a matchup · simulate thousands of games · inspect win rates &amp; score distributions
+            Live DraftKings lines · market-implied scores · thousands of sims in your browser
           </p>
         </div>
         <div class="badge-row">
-          <span class="badge ok">Sample data</span>
-          <span class="badge">Model estimates</span>
+          <span class="badge ok" id="badge-source">Live DK lines</span>
+          <span class="badge">Market-calibrated</span>
           <span class="badge">Runs in browser</span>
         </div>
       </header>
+
+      <div id="load-status" class="load-status loading" hidden>Loading…</div>
 
       <div class="layout">
         <aside>
@@ -49,44 +51,55 @@
                 <button type="button" data-n="25000">25k</button>
               </div>
             </div>
-            <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
-            <p class="timing" id="hint">Uses correlated Gaussian scores · no server required</p>
+            <div class="btn-row">
+              <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
+              <button type="button" class="btn-secondary" id="btn-refresh">Refresh lines</button>
+            </div>
+            <p class="timing" id="hint">Correlated Gaussian around market means · ESPN free API</p>
 
             <div class="matchup-preview">
               <div class="teams-row">
                 <div class="team-chip away">
-                  <div class="abbr" id="chip-away-abbr">BUF</div>
+                  <div class="abbr" id="chip-away-abbr">—</div>
                   <div class="name" id="chip-away-name">Away</div>
                 </div>
                 <div class="vs">@</div>
                 <div class="team-chip home">
-                  <div class="abbr" id="chip-home-abbr">KC</div>
+                  <div class="abbr" id="chip-home-abbr">—</div>
                   <div class="name" id="chip-home-name">Home</div>
                 </div>
               </div>
-              <div class="lines">
+              <div class="lines lines-4">
                 <div class="line-box">
-                  <div class="k">Sample spread</div>
+                  <div class="k">Spread (home)</div>
                   <div class="v" id="line-spread">—</div>
                 </div>
                 <div class="line-box">
-                  <div class="k">Sample total</div>
+                  <div class="k">Total</div>
                   <div class="v" id="line-total">—</div>
                 </div>
+                <div class="line-box">
+                  <div class="k">Book</div>
+                  <div class="v" id="line-book">—</div>
+                </div>
+                <div class="line-box">
+                  <div class="k">Status</div>
+                  <div class="v" id="line-status">—</div>
+                </div>
               </div>
+              <p class="kickoff-line">Kickoff: <span id="line-kickoff">—</span></p>
               <div class="ratings-mini">
                 <table>
                   <thead>
                     <tr>
-                      <th>Rating</th>
-                      <th>Away</th>
-                      <th>Home</th>
+                      <th>Info</th>
+                      <th colspan="2">Detail</th>
                     </tr>
                   </thead>
-                  <tbody id="ratings-body"></tbody>
+                  <tbody id="meta-body"></tbody>
                 </table>
                 <p style="margin: 10px 0 0">
-                  Model expected:
+                  Market expected:
                   <span style="color: var(--away)" id="exp-away">—</span>
                   –
                   <span style="color: var(--home)" id="exp-home">—</span>
@@ -104,36 +117,40 @@
           <div class="card model-panel" style="margin-top: 18px">
             <h2>Transparent model</h2>
             <p>
-              Each trial draws correlated home/away scores from a bivariate normal centered on
-              expected points derived from offensive, defensive, and recent-form ratings, plus
-              home-field advantage. Scores are rounded to integers and floored at zero.
+              Expected points are <strong>market-implied</strong> from the live home spread and
+              total (DraftKings via ESPN). Noise is a bivariate normal around those means; scores
+              are rounded to integers and floored at zero. ATS cover rates sit near 50% by design;
+              win probability is driven by the spread.
             </p>
             <div class="model-eq" id="model-exp"></div>
-            <div class="model-eq">score_away = E[away] + σ · Z₁
+            <div class="model-eq">marginExp = −spread
+homeExp   = (total − spread) / 2
+awayExp   = (total + spread) / 2
+
+score_away = E[away] + σ · Z₁
 score_home = E[home] + σ · (ρ·Z₁ + √(1−ρ²)·Z₂)
 Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
             <div class="model-params">
               <div class="param">
-                <div class="k">Base points</div>
-                <div class="v">22.5</div>
-              </div>
-              <div class="param">
-                <div class="k">Home field (HFA)</div>
-                <div class="v">+2.4</div>
+                <div class="k">Means</div>
+                <div class="v">spread + total</div>
               </div>
               <div class="param">
                 <div class="k">σ (score noise)</div>
-                <div class="v">9.8</div>
+                <div class="v" id="model-sigma">10.5</div>
               </div>
               <div class="param">
                 <div class="k">ρ (correlation)</div>
-                <div class="v">0.18</div>
+                <div class="v" id="model-rho">0.18</div>
+              </div>
+              <div class="param">
+                <div class="k">Source</div>
+                <div class="v">ESPN / DK</div>
               </div>
             </div>
             <p style="margin-top: 12px">
-              Win probability is the share of trials where one team outscores the other. Cover /
-              over probabilities use placeholder spreads/totals on each Week 2 matchup
-              game.
+              Lines move — use <em>Refresh lines</em>. Finals without odds show the score only;
+              ATS / totals sim is skipped when no line is posted.
             </p>
           </div>
         </main>
@@ -141,13 +158,14 @@ Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
 
       <div class="disclaimer">
         <strong>Not betting advice.</strong>
-        Matchups are the real 2026 Week 2 slate. Team ratings and lines are model placeholders for demonstration — not live sportsbook odds or betting advice.
-        Outputs are model estimates from a simplified generative process — not predictions of real
-        games, not edges against live markets, and not a recommendation to wager.
+        Spreads and totals are live DraftKings lines surfaced by ESPN’s public scoreboard API.
+        This tool samples outcomes around those market means for education and critique — not an
+        edge finder, not a tip service, and not a recommendation to wager. Lines change; always
+        refresh before interpreting results.
       </div>
 
       <footer class="app-footer">
-        NFL Monte Carlo · offline-capable after first load · static HTML / CSS / JS
+        NFL Monte Carlo · static HTML / CSS / JS · data from ESPN site API
       </footer>
     </div>
     <script type="module" src="./app.js"></script>

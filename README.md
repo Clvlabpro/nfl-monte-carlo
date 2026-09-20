@@ -1,12 +1,12 @@
 # NFL Monte Carlo
 
-Browser-side Monte Carlo NFL game simulator. Pick a sample matchup, run thousands of trials, and inspect win probabilities, mean scores, margin/total histograms, and cover/over rates against synthetic lines.
+Browser-side Monte Carlo NFL game simulator calibrated to **live DraftKings lines** from ESPN’s free, CORS-enabled scoreboard API. Pick a Week 2 matchup, run thousands of trials, and inspect win probabilities, mean scores, and margin/total histograms.
 
-**Real Week 2 schedule; ratings/lines are model placeholders — not betting advice — not betting advice.**
+**Not betting advice.** Lines move — hit Refresh.
+
+Live site: [https://clvlabpro.github.io/nfl-monte-carlo/](https://clvlabpro.github.io/nfl-monte-carlo/)
 
 ## Quick start
-
-From this directory, serve the static files (ES modules require HTTP):
 
 ```bash
 cd /workspace/nfl-monte-carlo
@@ -15,41 +15,54 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 Open: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
-Any static file server works (`npx serve`, `php -S`, etc.). No build step, no backend, no paid APIs.
+No build step, no backend, no paid odds APIs.
+
+## Data source
+
+```
+https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=2&dates=2026
+```
+
+- `odds[0].spread` — **home** point spread (negative = home favored)
+- `odds[0].overUnder` — total
+- `odds[0].provider.name` — e.g. DraftKings
+- Finals without odds (e.g. DET @ BUF) are listed with actual scores; ATS sim is disabled
+
+## Generative model
+
+Market-implied means, then correlated Gaussian noise:
+
+```
+marginExp = −spread
+homeExp   = (total − spread) / 2
+awayExp   = (total + spread) / 2
+scores    ~ bivariate normal (σ ≈ 10.5, ρ ≈ 0.18), round ≥ 0
+```
+
+ATS cover ≈ 50% by construction; win% comes from the spread. Implemented in `sim.js`.
 
 ## What’s included
 
 | Feature | Detail |
 |--------|--------|
-| Matchup picker | 16 NFL Week 2 (2026) matchups with offense / defense / form ratings |
-| Home field | +2.4 pts baked into home expected score |
+| Live lines | ESPN fetch on load + Refresh button |
+| Matchup picker | All Week 2 games (scheduled + final) |
 | Simulation sizes | 1k / 5k / 10k / 25k (default 10k) |
-| Results | Win %, tie rate, mean scores, mean margin & total |
-| Distributions | Canvas histograms for margin and total points |
-| ATS / totals | P(cover) vs sample spread, P(over) vs sample total |
-| Model panel | Equations + live E[home]/E[away] from selected game |
-
-## Generative model (short)
-
-```
-E[away] = 22.5 + off_away − def_home + form_away
-E[home] = 22.5 + off_home − def_away + form_home + 2.4
-scores  ~ bivariate normal (σ = 9.8, ρ = 0.18), then round ≥ 0
-```
-
-Implemented in `sim.js` with typed arrays for speed.
+| Results | Win %, means, margin & total histograms |
+| ATS / totals | vs live spread & O/U when posted |
+| Finals | Score shown; no-odds games skip ATS |
 
 ## Files
 
-- `index.html` — UI shell
-- `styles.css` — dark sports-analytics theme
-- `data.js` — sample games + model constants
-- `sim.js` — Monte Carlo engine + histogram helper
-- `charts.js` — canvas charts (no chart library)
-- `app.js` — wiring / interactions
+- `index.html` / `styles.css` — UI
+- `data.js` — model constants only
+- `espn.js` — fetch + normalize scoreboard/odds
+- `sim.js` — Monte Carlo engine
+- `charts.js` — canvas charts
+- `app.js` — wiring / loading states
 
 ## Caveats
 
-- Ratings and lines are **synthetic** for critique/demo.
-- Fonts load from Google Fonts when online; layout still works offline after cache or without them (system fonts).
-- Not calibrated to real NFL scoring distributions; useful as an explainable mockup, not a production pricing model.
+- Market-calibrated ≠ predictive edge; the sim *embeds* the line.
+- ESPN may omit odds for completed games or early in the week.
+- Not calibrated beyond a simple Gaussian residual model.

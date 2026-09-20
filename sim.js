@@ -1,30 +1,37 @@
 /**
  * Monte Carlo NFL score generator.
- * Model: correlated Gaussian scores around expected points,
- * then floored/rounded to integer points.
+ *
+ * Market-calibrated means from spread + total:
+ *   marginExp = −spread          // expected home − away
+ *   homeExp   = (total − spread) / 2
+ *   awayExp   = (total + spread) / 2
+ *
+ * Correlated Gaussian noise around those means → integer scores ≥ 0.
+ * By construction ATS cover ≈ 50% (before push / rounding); win% comes from the spread.
  */
 
 import { MODEL } from "./data.js";
 
 /**
- * Expected points for each side from ratings.
- * homeExp = base + off_home - def_away + form_home + HFA
- * awayExp = base + off_away - def_home + form_away
+ * Expected points implied by the sportsbook line.
+ * @param {{ spread: number, total: number }} game
  */
 export function expectedPoints(game, model = MODEL) {
-  const hfa = model.homeFieldAdvantage;
-  const homeExp =
-    model.basePoints +
-    game.home.offense -
-    game.away.defense +
-    game.home.form +
-    hfa;
-  const awayExp =
-    model.basePoints +
-    game.away.offense -
-    game.home.defense +
-    game.away.form;
-  return { homeExp, awayExp, marginExp: homeExp - awayExp, totalExp: homeExp + awayExp };
+  void model; // noise params live on MODEL; means are market-only
+  const spread = Number(game.spread);
+  const total = Number(game.total);
+  if (!Number.isFinite(spread) || !Number.isFinite(total)) {
+    throw new Error("expectedPoints requires finite spread and total");
+  }
+  const marginExp = -spread;
+  const homeExp = (total + marginExp) / 2; // (total - spread) / 2
+  const awayExp = (total - marginExp) / 2; // (total + spread) / 2
+  return {
+    homeExp,
+    awayExp,
+    marginExp,
+    totalExp: homeExp + awayExp,
+  };
 }
 
 /** Box-Muller → two independent N(0,1) samples */
@@ -51,9 +58,12 @@ export function mulberry32(seed) {
 
 /**
  * Run N simulations. Returns typed arrays + aggregates.
- * Optimized for browser: Float64Array buffers, tight loop.
+ * Requires game.hasOdds / finite spread+total.
  */
 export function runSimulation(game, n, opts = {}) {
+  if (game.spread == null || game.total == null) {
+    throw new Error("Cannot simulate without spread and total");
+  }
   const model = { ...MODEL, ...(opts.model || {}) };
   const rng = opts.seed != null ? mulberry32(opts.seed) : Math.random;
   const { homeExp, awayExp } = expectedPoints(game, model);
@@ -64,19 +74,15 @@ export function runSimulation(game, n, opts = {}) {
 
   const homeScores = new Int16Array(n);
   const awayScores = new Int16Array(n);
-  const margins = new Int16Array(n); // home - away
+  const margins = new Int16Array(n);
   const totals = new Int16Array(n);
 
   let homeWins = 0;
   let awayWins = 0;
   let ties = 0;
-  let homeCover = 0; // home covers spread (home - away > -spread? wait)
-  // Convention: spread is from home perspective (negative = home favored).
-  // Home covers if (homeScore - awayScore) + spread > 0
-  // e.g. KC -2.5: home covers if margin > 2.5 i.e. margin + (-2.5)? 
-  // Standard: bettor takes home at -2.5 → home must win by 3+.
-  // Home covers when homeScore + spread > awayScore, i.e. margin > -spread when spread negative...
-  // homeScore - awayScore + spread > 0  →  margin + spread > 0
+  // Convention: spread is home perspective (negative = home favored).
+  // Home covers when margin + spread > 0.
+  let homeCover = 0;
   let awayCover = 0;
   let pushesSpread = 0;
   let overs = 0;
@@ -90,7 +96,6 @@ export function runSimulation(game, n, opts = {}) {
 
   for (let i = 0; i < n; i++) {
     const [z1, z2] = gauss2(rng);
-    // Correlated: away uses z1, home uses rho*z1 + sqrt(1-rho^2)*z2
     const awayRaw = awayExp + sigma * z1;
     const homeRaw = homeExp + sigma * (rho * z1 + sqrt1r2 * z2);
 
@@ -165,7 +170,6 @@ export function histogram(values, binWidth = 1, minOverride, maxOverride) {
       if (v > max) max = v;
     }
   }
-  // Align to binWidth
   const start = Math.floor(min / binWidth) * binWidth;
   const end = Math.ceil(max / binWidth) * binWidth;
   const count = Math.max(1, Math.round((end - start) / binWidth) + 1);
