@@ -1,6 +1,6 @@
 # clvpro
 
-Browser-side **Pick Board** + Monte Carlo NFL simulator calibrated to a **multi-book median consensus** of spread + total.
+Browser-side **Pick Board** + NFL simulator calibrated to a **multi-book median consensus** of spread + total.
 
 **Not betting advice.** Lines move — hit Refresh.
 

@@ -1,5 +1,5 @@
 /**
- * Monte Carlo model constants.
+ * Simulation model constants.
  * Expected scores come from live market lines (spread + total), not team ratings.
  * See expectedPoints() in sim.js.
  */

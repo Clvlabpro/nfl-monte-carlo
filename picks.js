@@ -6,7 +6,7 @@
  *   Best away ATS number = algebraically smallest home spread (= largest away points).
  * Shop edge ≥ 0.5 pts vs consensus → ATS lean for that side.
  *
- * ML lean: market-calibrated Monte Carlo win% ≥ 58% home / ≤ 42% away.
+ * ML lean: market-calibrated sim win% ≥ 58% home / ≤ 42% away.
  */
 
 export const SHOP_EDGE_PTS = 0.5;

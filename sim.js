@@ -1,5 +1,5 @@
 /**
- * Monte Carlo NFL score generator.
+ * NFL score generator (Gaussian market-calibrated sims).
  *
  * Market-calibrated means from spread + total:
  *   marginExp = −spread          // expected home − away
