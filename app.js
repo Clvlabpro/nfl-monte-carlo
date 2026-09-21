@@ -93,11 +93,13 @@ function populateSelect() {
     .map((g) => {
       const nBooks = (g.books || []).length;
       const tag = g.completed
-        ? "FINAL"
+        ? " (final)"
         : g.hasOdds
-          ? `consensus · ${nBooks}b`
-          : "no line";
-      return `<option value="${g.id}">${g.away.abbr} @ ${g.home.abbr} — ${tag}</option>`;
+          ? g.featuredRemaining
+            ? ` (W${g.sourceWeek ?? "?"} rem)`
+            : ""
+          : " (no line)";
+      return `<option value="${g.id}">${g.away.abbr} @ ${g.home.abbr}${tag}</option>`;
     })
     .join("");
   if (!state.gameId || !state.games.some((g) => g.id === state.gameId)) {
@@ -440,7 +442,9 @@ async function runPickBoardSims({ force = false } = {}) {
     btn.textContent = "Re-run sims";
   }
   if (status) {
-    status.textContent = `Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials · Week ${state.week}`;
+    const nFeat = candidates.filter((g) => g.featuredRemaining).length;
+    const featNote = nFeat ? ` · +${nFeat} prior-week remaining` : "";
+    status.textContent = `Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials · Week ${state.week}${featNote}`;
   }
   renderPickBoard();
 }
@@ -461,7 +465,7 @@ function renderPickCard(g) {
 
   if (!g.hasOdds) {
     return `
-      <article class="pick-card waiting" data-id="${g.id}">
+      <article class="pick-card waiting${g.featuredRemaining ? " featured-remaining" : ""}" data-id="${g.id}">
         <div class="pick-card-head">
           <div class="pick-matchup">
             <span class="away">${g.away.abbr}</span>
@@ -470,6 +474,11 @@ function renderPickCard(g) {
           </div>
           <div class="pick-meta">
             <span>${formatKickoff(g.kickoffIso)}</span>
+            ${
+              g.featuredRemaining
+                ? `<span class="featured-pill">Week ${g.sourceWeek ?? "?"} remaining</span>`
+                : ""
+            }
             <span class="status-pill">${statusLabel(g)}</span>
           </div>
         </div>
@@ -506,7 +515,7 @@ function renderPickCard(g) {
   const winAway = sim ? fmtPct(sim.awayWinPct) : "…";
 
   return `
-    <article class="pick-card ${leanClass}" data-id="${g.id}">
+    <article class="pick-card ${leanClass}${g.featuredRemaining ? " featured-remaining" : ""}" data-id="${g.id}">
       <div class="pick-card-head">
         <div class="pick-matchup">
           <span class="away">${g.away.abbr}</span>
@@ -515,6 +524,11 @@ function renderPickCard(g) {
         </div>
         <div class="pick-meta">
           <span>${formatKickoff(g.kickoffIso)}</span>
+          ${
+            g.featuredRemaining
+              ? `<span class="featured-pill">Week ${g.sourceWeek ?? "?"} remaining</span>`
+              : ""
+          }
           <span class="status-pill">${statusLabel(g)}</span>
         </div>
       </div>

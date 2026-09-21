@@ -80,6 +80,23 @@ export async function loadMultiBookLines(opts = {}) {
     espnError = err.message || String(err);
   }
 
+  // Also pull remaining (non-final) games from the prior week — e.g. Week 2 MNF
+  // NYG@LAR — so they appear on the Week 3 Pick Board / Sim with live DK lines.
+  let espnPrior = null;
+  let espnPriorError = null;
+  const priorWeek = week > 1 ? week - 1 : null;
+  if (priorWeek != null) {
+    try {
+      espnPrior = await fetchEspnScoreboard({
+        week: priorWeek,
+        dates,
+        seasontype: 2,
+      });
+    } catch (err) {
+      espnPriorError = err.message || String(err);
+    }
+  }
+
   if (!snapshot && !espn) {
     throw new Error(
       `No lines available (snapshot: ${snapshotError}; ESPN: ${espnError})`
@@ -87,6 +104,56 @@ export async function loadMultiBookLines(opts = {}) {
   }
 
   const byKey = new Map();
+
+  function mergeEspnGame(eg, { featuredRemaining = false, sourceWeek = week, fetchedAt = null } = {}) {
+    const key = gameKey(eg.away.abbr, eg.home.abbr);
+    let g = byKey.get(key);
+    if (!g) {
+      g = {
+        id: eg.id,
+        key,
+        away: eg.away,
+        home: eg.home,
+        kickoffIso: eg.kickoffIso,
+        kickoffMs: eg.kickoffMs,
+        completed: eg.completed,
+        status: eg.status,
+        statusState: eg.statusState,
+        statusDetail: eg.statusDetail,
+        books: [],
+        label: eg.label,
+        sourceWeek,
+        featuredRemaining: Boolean(featuredRemaining),
+      };
+      byKey.set(key, g);
+    } else {
+      g.id = eg.id || g.id;
+      g.kickoffIso = eg.kickoffIso || g.kickoffIso;
+      g.kickoffMs = eg.kickoffMs || g.kickoffMs;
+      g.completed = eg.completed;
+      g.status = eg.status;
+      g.statusState = eg.statusState;
+      g.statusDetail = eg.statusDetail;
+      g.away = { ...g.away, ...eg.away };
+      g.home = { ...g.home, ...eg.home };
+      g.label = eg.label || g.label;
+      if (featuredRemaining) g.featuredRemaining = true;
+      if (sourceWeek != null) g.sourceWeek = sourceWeek;
+    }
+
+    if (eg.hasOdds && eg.spread != null && eg.total != null) {
+      g.books = g.books.filter(
+        (b) => b.name !== "DraftKings" && b.name !== "ESPN"
+      );
+      g.books.unshift({
+        name: eg.book || "DraftKings",
+        spread: eg.spread,
+        total: eg.total,
+        fetchedAt: fetchedAt,
+        source: "espn-live",
+      });
+    }
+  }
 
   // Seed from snapshot
   if (snapshot?.games) {
@@ -105,57 +172,36 @@ export async function loadMultiBookLines(opts = {}) {
         statusDetail: g.completed ? "Final" : "",
         books: [...(g.books || [])],
         label: `${g.away.name} @ ${g.home.name}`,
+        sourceWeek: g.sourceWeek ?? week,
+        featuredRemaining: Boolean(g.featuredRemaining),
       });
     }
   }
 
-  // Overlay / merge ESPN live (status, scores, DraftKings book)
+  // Overlay / merge primary-week ESPN live (status, scores, DraftKings book)
   if (espn?.games) {
     for (const eg of espn.games) {
-      const key = gameKey(eg.away.abbr, eg.home.abbr);
-      let g = byKey.get(key);
-      if (!g) {
-        g = {
-          id: eg.id,
-          key,
-          away: eg.away,
-          home: eg.home,
-          kickoffIso: eg.kickoffIso,
-          kickoffMs: eg.kickoffMs,
-          completed: eg.completed,
-          status: eg.status,
-          statusState: eg.statusState,
-          statusDetail: eg.statusDetail,
-          books: [],
-          label: eg.label,
-        };
-        byKey.set(key, g);
-      } else {
-        g.id = eg.id || g.id;
-        g.kickoffIso = eg.kickoffIso || g.kickoffIso;
-        g.kickoffMs = eg.kickoffMs || g.kickoffMs;
-        g.completed = eg.completed;
-        g.status = eg.status;
-        g.statusState = eg.statusState;
-        g.statusDetail = eg.statusDetail;
-        g.away = { ...g.away, ...eg.away };
-        g.home = { ...g.home, ...eg.home };
-        g.label = eg.label || g.label;
-      }
+      mergeEspnGame(eg, {
+        featuredRemaining: false,
+        sourceWeek: espn.week ?? week,
+        fetchedAt: espn.fetchedAt,
+      });
+    }
+  }
 
-      if (eg.hasOdds && eg.spread != null && eg.total != null) {
-        // Replace any existing DraftKings / ESPN book with live DK
-        g.books = g.books.filter(
-          (b) => b.name !== "DraftKings" && b.name !== "ESPN"
-        );
-        g.books.unshift({
-          name: eg.book || "DraftKings",
-          spread: eg.spread,
-          total: eg.total,
-          fetchedAt: espn.fetchedAt,
-          source: "espn-live",
-        });
-      }
+  // Merge prior-week leftovers that are not final (featured remaining MNF etc.)
+  if (espnPrior?.games) {
+    for (const eg of espnPrior.games) {
+      if (eg.completed || eg.statusState === "post") continue;
+      // Skip odds-less leftovers unless already in snapshot with books
+      const key = gameKey(eg.away.abbr, eg.home.abbr);
+      const existing = byKey.get(key);
+      if (!eg.hasOdds && !(existing?.books?.length)) continue;
+      mergeEspnGame(eg, {
+        featuredRemaining: true,
+        sourceWeek: espnPrior.week ?? priorWeek,
+        fetchedAt: espnPrior.fetchedAt,
+      });
     }
   }
 
@@ -181,6 +227,18 @@ export async function loadMultiBookLines(opts = {}) {
       espnLive: espn
         ? { ok: true, fetchedAt: liveAt }
         : { ok: false, error: espnError },
+      espnPriorRemaining: espnPrior
+        ? {
+            ok: true,
+            week: espnPrior.week ?? priorWeek,
+            fetchedAt: espnPrior.fetchedAt,
+            remaining: espnPrior.games.filter(
+              (g) => !g.completed && g.statusState !== "post"
+            ).length,
+          }
+        : priorWeek != null
+          ? { ok: false, error: espnPriorError }
+          : null,
     },
     disclaimer:
       snapshot?.disclaimer ||

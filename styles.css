@@ -886,6 +886,23 @@ code {
   letter-spacing: 0.04em;
 }
 
+.featured-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #0b1220;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+}
+.pick-card.featured-remaining {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.15);
+}
+
 .pick-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

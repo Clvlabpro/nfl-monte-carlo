@@ -1,7 +1,7 @@
 {
   "week": 3,
   "seasonYear": 2026,
-  "fetchedAt": "2026-09-21T01:23:24Z",
+  "fetchedAt": "2026-09-21T01:25:38Z",
   "consensusMethod": "median",
   "sources": {
     "espn_draftkings": {
@@ -9,11 +9,20 @@
       "seasonYear": 2026,
       "ok": true,
       "count": 16,
+      "remainingOnly": false,
+      "error": null
+    },
+    "espn_draftkings_week2_remaining": {
+      "week": 2,
+      "seasonYear": 2026,
+      "ok": true,
+      "count": 1,
+      "remainingOnly": true,
       "error": null
     },
     "fanduel": {
       "ok": true,
-      "count": 14,
+      "count": 16,
       "error": null
     },
     "betmgm": {
@@ -35,6 +44,60 @@
   "disclaimer": "Multi-book lines scraped from public book endpoints for education only. Not betting advice. Lines move; consensus is the median of available books.",
   "games": [
     {
+      "id": "401872947",
+      "key": "NYG@LAR",
+      "away": {
+        "abbr": "NYG",
+        "name": "New York Giants"
+      },
+      "home": {
+        "abbr": "LAR",
+        "name": "Los Angeles Rams"
+      },
+      "kickoffIso": "2026-09-22T00:15Z",
+      "completed": false,
+      "sourceWeek": 2,
+      "featuredRemaining": true,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -7.0,
+          "total": 47.5,
+          "fetchedAt": "2026-09-21T01:25:36Z",
+          "source": "espn"
+        },
+        {
+          "name": "FanDuel",
+          "spread": -6.5,
+          "total": 47.5,
+          "fetchedAt": "2026-09-21T01:25:36Z",
+          "source": "fanduel"
+        },
+        {
+          "name": "BetMGM",
+          "spread": -7.0,
+          "total": 47.5,
+          "fetchedAt": "2026-09-21T01:25:36Z",
+          "source": "betmgm"
+        },
+        {
+          "name": "Bovada",
+          "spread": -7.0,
+          "total": 47.5,
+          "fetchedAt": "2026-09-21T01:25:38Z",
+          "source": "bovada"
+        }
+      ],
+      "consensus": {
+        "spread": -7.0,
+        "total": 47.5,
+        "method": "median"
+      },
+      "spread": -7.0,
+      "total": 47.5,
+      "hasOdds": true
+    },
+    {
       "id": "401872948",
       "key": "ATL@GB",
       "away": {
@@ -47,33 +110,35 @@
       },
       "kickoffIso": "2026-09-25T00:15Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -7.0,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -6.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -7.0,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         },
         {
           "name": "Bovada",
           "spread": -7.0,
           "total": 44.0,
-          "fetchedAt": "2026-09-21T01:23:24Z",
+          "fetchedAt": "2026-09-21T01:25:38Z",
           "source": "bovada"
         }
       ],
@@ -99,26 +164,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -7.0,
           "total": 50.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -7.0,
           "total": 50.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -7.0,
           "total": 50.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -144,26 +211,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 3.0,
           "total": 40.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 2.5,
           "total": 40.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 3.0,
           "total": 41.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -189,26 +258,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -6.5,
           "total": 48.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -6.5,
           "total": 47.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -6.5,
           "total": 48.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -234,12 +305,14 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 1.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         }
       ],
@@ -265,12 +338,14 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 10.0,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         }
       ],
@@ -296,26 +371,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -6.0,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -6.5,
           "total": 42.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -6.0,
           "total": 43.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -341,26 +418,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 3.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 3.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 3.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -386,26 +465,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 6.0,
           "total": 40.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 6.5,
           "total": 41.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 6.0,
           "total": 41.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -431,26 +512,28 @@
       },
       "kickoffIso": "2026-09-27T17:00Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -2.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -2.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -2.5,
           "total": 45.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -476,26 +559,28 @@
       },
       "kickoffIso": "2026-09-27T20:05Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -8.5,
           "total": 47.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -8.5,
           "total": 47.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -8.5,
           "total": 47.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -521,26 +606,28 @@
       },
       "kickoffIso": "2026-09-27T20:05Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 2.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 2.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 2.5,
           "total": 43.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -566,26 +653,28 @@
       },
       "kickoffIso": "2026-09-27T20:25Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 3.0,
           "total": 51.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 3.0,
           "total": 51.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 3.0,
           "total": 52.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -611,26 +700,28 @@
       },
       "kickoffIso": "2026-09-27T20:25Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": -3.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": -3.0,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": -3.0,
           "total": 44.0,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -656,26 +747,28 @@
       },
       "kickoffIso": "2026-09-28T00:20Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 2.5,
           "total": 45.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 2.5,
           "total": 44.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 2.5,
           "total": 45.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],
@@ -701,26 +794,28 @@
       },
       "kickoffIso": "2026-09-29T00:15Z",
       "completed": false,
+      "sourceWeek": 3,
+      "featuredRemaining": false,
       "books": [
         {
           "name": "DraftKings",
           "spread": 4.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:22Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "espn"
         },
         {
           "name": "FanDuel",
           "spread": 3.5,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "fanduel"
         },
         {
           "name": "BetMGM",
           "spread": 4.0,
           "total": 43.5,
-          "fetchedAt": "2026-09-21T01:23:23Z",
+          "fetchedAt": "2026-09-21T01:25:36Z",
           "source": "betmgm"
         }
       ],

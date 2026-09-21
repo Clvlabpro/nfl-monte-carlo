@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
 Fetch NFL Week 3 (2026) spread + total lines from free public book endpoints.
+Also merges any remaining (not final) Week 2 games with live odds — e.g. MNF
+NYG@LAR — as featuredRemaining onto the Week 3 board.
 Writes ../lines.json for the static site (GitHub Pages cannot CORS most books).
 
 Books attempted:
@@ -148,10 +150,11 @@ def median(vals: list[float]) -> float | None:
 
 # ── ESPN (DraftKings) ────────────────────────────────────────────────────────
 
-def fetch_espn() -> tuple[list[dict], dict]:
+def fetch_espn(week: int = WEEK, *, remaining_only: bool = False) -> tuple[list[dict], dict]:
+    """Fetch ESPN scoreboard for a week. If remaining_only, keep non-final games."""
     url = (
         "https://site.web.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
-        f"?seasontype=2&week={WEEK}&dates={SEASON}"
+        f"?seasontype=2&week={week}&dates={SEASON}"
     )
     data = fetch_json(url)
     fetched_at = now_iso()
@@ -182,6 +185,8 @@ def fetch_espn() -> tuple[list[dict], dict]:
             )
         status = (event.get("status") or {}).get("type") or {}
         completed = bool(status.get("completed")) or status.get("name") == "STATUS_FINAL"
+        if remaining_only and completed:
+            continue
         games.append(
             {
                 "id": str(event.get("id") or f"{away_abbr}-{home_abbr}".lower()),
@@ -190,6 +195,8 @@ def fetch_espn() -> tuple[list[dict], dict]:
                 "home": {"abbr": home_abbr, "name": home_name},
                 "kickoffIso": event.get("date") or comp.get("date"),
                 "completed": completed,
+                "sourceWeek": week,
+                "featuredRemaining": bool(remaining_only),
                 "books": (
                     [
                         {
@@ -206,10 +213,11 @@ def fetch_espn() -> tuple[list[dict], dict]:
             }
         )
     meta = {
-        "week": (data.get("week") or {}).get("number", WEEK),
+        "week": (data.get("week") or {}).get("number", week),
         "seasonYear": (data.get("season") or {}).get("year", SEASON),
         "ok": True,
         "count": sum(1 for g in games if g["books"]),
+        "remainingOnly": remaining_only,
     }
     return games, meta
 
@@ -246,10 +254,9 @@ def fetch_fanduel() -> tuple[dict[str, dict], dict]:
         home = abbr_from_name(home_name)
         if not away or not home:
             continue
-        # Week 3 window: kickoffs roughly 2026-09-24 .. 2026-09-30
-        # (TNF ATL@GB ~2026-09-25; MNF PHI@CHI ~2026-09-29)
+        # Include remaining Week 2 MNF (~2026-09-21/22) through Week 3 (~2026-09-30)
         open_date = (ev.get("openDate") or "")[:10]
-        if open_date and (open_date < "2026-09-24" or open_date > "2026-09-30"):
+        if open_date and (open_date < "2026-09-21" or open_date > "2026-09-30"):
             continue
 
         spread = total = None
@@ -473,6 +480,33 @@ def main() -> int:
         return 1
     sources["espn_draftkings"] = espn_meta
 
+    # Featured remaining from prior week (e.g. Week 2 MNF NYG@LAR) on the Week 3 board
+    prior_week = WEEK - 1
+    featured: list[dict] = []
+    if prior_week >= 1:
+        prior_games, prior_meta = try_book(
+            f"ESPN/DraftKings Week {prior_week} remaining",
+            lambda: fetch_espn(prior_week, remaining_only=True),
+        )
+        sources[f"espn_draftkings_week{prior_week}_remaining"] = prior_meta
+        if prior_games:
+            week3_keys = {g["key"] for g in espn_games}
+            for g in prior_games:
+                if g["key"] in week3_keys:
+                    continue
+                # Prefer games that still have a market; skip odds-less leftovers
+                if not g.get("books"):
+                    print(f"  skip remaining {g['key']}: no odds yet", file=sys.stderr)
+                    continue
+                featured.append(g)
+            print(
+                f"[ok] featured remaining Week {prior_week}: "
+                f"{len(featured)} games → {[g['key'] for g in featured]}",
+                file=sys.stderr,
+            )
+
+    espn_games = featured + espn_games
+
     fd_map, fd_meta = try_book("FanDuel", fetch_fanduel)
     sources["fanduel"] = fd_meta
 
@@ -518,6 +552,8 @@ def main() -> int:
                 "home": g["home"],
                 "kickoffIso": g.get("kickoffIso"),
                 "completed": g.get("completed", False),
+                "sourceWeek": g.get("sourceWeek", WEEK),
+                "featuredRemaining": bool(g.get("featuredRemaining")),
                 "books": books,
                 "consensus": (
                     {"spread": cons_spread, "total": cons_total, "method": "median"}
