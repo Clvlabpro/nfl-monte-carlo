@@ -1,5 +1,5 @@
 import { MODEL, ESPN_DEFAULTS } from "./data.js";
-import { formatKickoff, statusLabel } from "./espn.js";
+import { formatKickoff, statusLabel, teamLogoUrl } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
@@ -13,6 +13,38 @@ import {
 } from "./picks.js";
 
 const $ = (sel) => document.querySelector(sel);
+
+function logoUrl(team) {
+  if (!team) return "";
+  if (team.logo) return team.logo;
+  return teamLogoUrl(null, team.abbr);
+}
+
+function teamMark(team, side = "") {
+  const url = logoUrl(team);
+  const abbr = team?.abbr || "?";
+  const name = team?.name || abbr;
+  if (url) {
+    return `<span class="team-mark ${side}"><img class="team-logo" src="${url}" alt="${abbr}" title="${name}" width="36" height="36" loading="lazy" /><span class="abbr-sm">${abbr}</span></span>`;
+  }
+  return `<span class="team-mark ${side}"><span class="abbr">${abbr}</span></span>`;
+}
+
+function setChipLogo(imgEl, team) {
+  if (!imgEl) return;
+  const url = logoUrl(team);
+  if (url) {
+    imgEl.src = url;
+    imgEl.alt = team?.abbr || "";
+    imgEl.hidden = false;
+  } else {
+    imgEl.removeAttribute("src");
+    imgEl.alt = "";
+    imgEl.hidden = true;
+  }
+}
+
+
 
 const state = {
   games: [],
@@ -164,6 +196,8 @@ function renderMatchupPreview() {
     $("#chip-away-name").textContent = "Away";
     $("#chip-home-abbr").textContent = "—";
     $("#chip-home-name").textContent = "Home";
+    setChipLogo($("#chip-away-logo"), null);
+    setChipLogo($("#chip-home-logo"), null);
     $("#line-spread").textContent = "—";
     $("#line-total").textContent = "—";
     $("#line-book").textContent = "—";
@@ -183,6 +217,8 @@ function renderMatchupPreview() {
   $("#chip-away-name").textContent = g.away.name;
   $("#chip-home-abbr").textContent = g.home.abbr;
   $("#chip-home-name").textContent = g.home.name;
+  setChipLogo($("#chip-away-logo"), g.away);
+  setChipLogo($("#chip-home-logo"), g.home);
 
   $("#line-spread").textContent = g.hasOdds
     ? `${g.home.abbr} ${fmtLine(g.spread)}`
@@ -468,9 +504,9 @@ function renderPickCard(g) {
       <article class="pick-card waiting${g.featuredRemaining ? " featured-remaining" : ""}" data-id="${g.id}">
         <div class="pick-card-head">
           <div class="pick-matchup">
-            <span class="away">${g.away.abbr}</span>
+            ${teamMark(g.away, "away")}
             <span class="at">@</span>
-            <span class="home">${g.home.abbr}</span>
+            ${teamMark(g.home, "home")}
           </div>
           <div class="pick-meta">
             <span>${formatKickoff(g.kickoffIso)}</span>
@@ -518,9 +554,9 @@ function renderPickCard(g) {
     <article class="pick-card ${leanClass}${g.featuredRemaining ? " featured-remaining" : ""}" data-id="${g.id}">
       <div class="pick-card-head">
         <div class="pick-matchup">
-          <span class="away">${g.away.abbr}</span>
+          ${teamMark(g.away, "away")}
           <span class="at">@</span>
-          <span class="home">${g.home.abbr}</span>
+          ${teamMark(g.home, "home")}
         </div>
         <div class="pick-meta">
           <span>${formatKickoff(g.kickoffIso)}</span>

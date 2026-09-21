@@ -57,6 +57,16 @@ export async function fetchEspnScoreboard(opts = {}) {
   };
 }
 
+
+/** ESPN CDN team logo (scoreboard size). */
+export function teamLogoUrl(team, abbr) {
+  const fromApi = team?.logo || team?.logos?.[0]?.href;
+  if (fromApi) return fromApi;
+  const a = String(abbr || "").toLowerCase();
+  if (!a || a === "?") return "";
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/${a}.png`;
+}
+
 function normalizeEvent(event) {
   const comp = event?.competitions?.[0];
   if (!comp) return null;
@@ -115,11 +125,13 @@ function normalizeEvent(event) {
       abbr: awayAbbr,
       name: awayC.team?.displayName || awayAbbr,
       score: Number.isFinite(awayScore) ? awayScore : null,
+      logo: teamLogoUrl(awayC.team, awayAbbr),
     },
     home: {
       abbr: homeAbbr,
       name: homeC.team?.displayName || homeAbbr,
       score: Number.isFinite(homeScore) ? homeScore : null,
+      logo: teamLogoUrl(homeC.team, homeAbbr),
     },
     /** Home-team point spread (negative = home favored). Null if no line. */
     spread: hasOdds ? spread : null,

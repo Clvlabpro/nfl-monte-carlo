@@ -1082,3 +1082,44 @@ code {
 .pickboard-disclaimer {
   margin-top: 18px;
 }
+
+
+.team-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 4px;
+}
+
+.team-chip .abbr {
+  font-size: 0.85rem;
+}
+
+.pick-matchup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.team-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.team-mark .team-logo {
+  width: 36px;
+  height: 36px;
+  margin: 0;
+}
+
+.team-mark .abbr-sm {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.team-mark.away .abbr-sm { color: var(--away); }
+.team-mark.home .abbr-sm { color: var(--home); }
