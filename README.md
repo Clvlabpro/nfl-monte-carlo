@@ -1,4 +1,4 @@
-# NFL Monte Carlo (clvpro)
+# clvpro
 
 Browser-side **Pick Board** + Monte Carlo NFL simulator calibrated to a **multi-book median consensus** of spread + total.
 
