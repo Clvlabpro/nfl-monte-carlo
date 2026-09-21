@@ -22,7 +22,7 @@
         <div class="brand">
           <h1>clvpro</h1>
           <p class="tagline">
-            Pick Board · multi-book consensus · market-implied sims
+            Pick Board · multi-book consensus · public splits · market-implied sims
           </p>
         </div>
         <div class="badge-row">
@@ -76,7 +76,9 @@
           <strong>Research tool — not betting advice.</strong>
           Leans are transparent heuristics (line shop ≥0.5 pts vs consensus; market-implied MC win% ≥58%/≤42%)
           plus sims around consensus means — <em>not</em> a proprietary edge model and not a recommendation to wager.
-          Lines move; always refresh. Branding: clvpro.
+          <strong>Bets vs Money</strong> is an Action Network public-betting snapshot (tickets % vs money %);
+          a money−tickets gap is often read as a sharper lean but is not a guarantee of sharp action.
+          Splits refresh only when <code>scripts/fetch-splits.py</code> is re-run and redeployed. Branding: clvpro.
         </div>
       </section>
 
@@ -153,6 +155,8 @@
                     <tbody id="books-body"></tbody>
                   </table>
                 </div>
+
+                <div id="sim-splits" class="sim-splits"></div>
 
                 <div class="ratings-mini">
                   <table>

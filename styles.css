@@ -1123,3 +1123,156 @@ code {
 }
 
 .team-mark .abbr-sm { color: inherit; font-weight: 800; }
+
+/* ── Bets vs Money (public splits) ───────────────────────────────────────── */
+
+.splits-section {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+}
+
+.splits-section.empty {
+  opacity: 0.85;
+}
+
+.splits-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.splits-head .k {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.splits-bets {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.splits-empty {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.split-market {
+  padding: 8px 0;
+  border-top: 1px solid rgba(36, 48, 68, 0.85);
+}
+
+.split-market:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.split-market-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: 6px;
+}
+
+.split-market-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.split-line {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.sharp-lean {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--warn);
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.split-sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.split-side-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.split-bar-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 36px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.split-bar-label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.split-bar-track {
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.split-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.split-bar-fill.tickets {
+  background: linear-gradient(90deg, #7c8db5, #a8b4d4);
+}
+
+.split-bar-fill.money {
+  background: linear-gradient(90deg, var(--accent), #7dffb2);
+}
+
+.split-bar-pct {
+  font-size: 0.68rem;
+  text-align: right;
+  color: var(--muted);
+}
+
+.splits-foot {
+  margin: 8px 0 0;
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.sim-splits {
+  margin-top: 12px;
+}
+
+.sim-splits .splits-section {
+  margin-top: 0;
+}
+
+@media (max-width: 520px) {
+  .split-sides {
+    grid-template-columns: 1fr;
+  }
+}

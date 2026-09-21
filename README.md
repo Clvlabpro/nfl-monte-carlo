@@ -8,14 +8,15 @@ Live site: [https://clvlabpro.github.io/nfl-monte-carlo/](https://clvlabpro.gith
 
 ## Views
 
-- **Pick Board** (default) — upcoming Week 3 games (plus any featured remaining Week 2 games, e.g. MNF NYG@LAR) with consensus lines, best book numbers, quick MC win%, and transparent lean heuristics (line shop ≥0.5 pts; market-implied ML ≥58%/≤42%).
+- **Pick Board** (default) — upcoming Week 3 games (plus any featured remaining Week 2 games, e.g. MNF NYG@LAR) with consensus lines, best book numbers, Action Network bets-vs-money splits, quick MC win%, and transparent lean heuristics (line shop ≥0.5 pts; market-implied ML ≥58%/≤42%).
 - **Sim** — deep dive one matchup with histograms (existing simulator).
 
 ## Quick start
 
 ```bash
 cd /workspace/nfl-monte-carlo
-python3 scripts/fetch-lines.py   # optional: refresh lines.json
+python3 scripts/fetch-lines.py    # optional: refresh lines.json
+python3 scripts/fetch-splits.py   # optional: refresh splits.json (Action Network)
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
@@ -33,10 +34,14 @@ Open: [http://127.0.0.1:8080](http://127.0.0.1:8080)
 |------|-----|---------------|
 | **DraftKings** | ESPN scoreboard `odds[0]` | Yes (CORS OK) |
 | **FanDuel / BetMGM / Bovada** | `lines.json` snapshot | Snapshot only |
+| **Action Network public betting** | `splits.json` (tickets % vs money %) | Snapshot only |
 
 Home-team spread: **negative = home favored**. Consensus = **median**.
 
 ## Files
+
+- `splits.json` / `scripts/fetch-splits.py` — public betting tickets vs money (+ sharp lean when |money−tickets| ≥ 10)
+- `splits.js` — load/merge splits onto pick-board games
 
 - `index.html` / `styles.css` — UI (Pick Board + Sim tabs)
 - `picks.js` — lean heuristics + line shop

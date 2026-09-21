@@ -1,6 +1,12 @@
 import { MODEL, ESPN_DEFAULTS } from "./data.js";
 import { formatKickoff, statusLabel, teamLogoUrl, readableTeamColor, teamColorHex } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
+import {
+  fetchSplitsSnapshot,
+  mergeSplitsOntoGames,
+  formatSplitsTimestamp,
+  sharpLeanFor,
+} from "./splits.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
 import {
@@ -66,6 +72,8 @@ const state = {
   /** @type {Map<string, {homeWinPct:number,awayWinPct:number,n:number}>} */
   pickSims: new Map(),
   pickBoardRunning: false,
+  /** @type {null | {ok:boolean,matched:number,fetchedAt:string|null,source:string,week:number|null,note:string|null}} */
+  splitsMeta: null,
 };
 
 function getGame() {
@@ -214,6 +222,8 @@ function renderMatchupPreview() {
     $("#exp-margin").textContent = "—";
     $("#meta-body").innerHTML = "";
     renderBooksTable(null);
+    const splitsHost = $("#sim-splits");
+    if (splitsHost) splitsHost.innerHTML = "";
     $("#model-exp").textContent = "Load lines to see market-implied expected scores.";
     updateRunButton();
     return;
@@ -262,6 +272,11 @@ function renderMatchupPreview() {
     .join("");
 
   renderBooksTable(g);
+
+  const splitsHost = $("#sim-splits");
+  if (splitsHost) {
+    splitsHost.innerHTML = renderSplitsSection(g);
+  }
 
   if (g.hasOdds) {
     const exp = expectedPoints(g);
@@ -504,6 +519,129 @@ function openInSim(gameId) {
   setView("sim");
 }
 
+function pctLabel(n) {
+  return n == null || !Number.isFinite(n) ? "—" : `${Math.round(n)}%`;
+}
+
+function sideLabel(g, side) {
+  if (side === "home") return g?.home?.abbr || "Home";
+  if (side === "away") return g?.away?.abbr || "Away";
+  if (side === "over") return "Over";
+  if (side === "under") return "Under";
+  return side || "?";
+}
+
+/**
+ * Dual tickets/money bars for one market.
+ */
+function renderSplitMarketRow(g, title, mkt, kind) {
+  if (!mkt) return "";
+  const isTotal = kind === "total";
+  const leftSide = isTotal ? "over" : "away";
+  const rightSide = isTotal ? "under" : "home";
+  const leftTickets = isTotal ? mkt.overTickets : mkt.awayTickets;
+  const leftMoney = isTotal ? mkt.overMoney : mkt.awayMoney;
+  const rightTickets = isTotal ? mkt.underTickets : mkt.homeTickets;
+  const rightMoney = isTotal ? mkt.underMoney : mkt.homeMoney;
+  const leftName = sideLabel(g, leftSide);
+  const rightName = sideLabel(g, rightSide);
+
+  const lean = sharpLeanFor(mkt, kind);
+  let leanHtml = "";
+  if (lean?.side) {
+    const gap = lean.gap != null ? ` · money ${lean.gap > 0 ? "+" : ""}${lean.gap} vs tickets` : "";
+    leanHtml = `<span class="sharp-lean">Sharp lean · ${escapeHtml(sideLabel(g, lean.side))}${gap}</span>`;
+  }
+
+  let lineBit = "";
+  if (kind === "spread" && mkt.line != null) {
+    lineBit = `<span class="split-line mono">${escapeHtml(g.home?.abbr || "Home")} ${fmtLine(mkt.line)}</span>`;
+  } else if (kind === "total" && mkt.line != null) {
+    lineBit = `<span class="split-line mono">O/U ${fmtTotal(mkt.line)}</span>`;
+  }
+
+  const bar = (tickets, money, sideCls) => {
+    const t = Math.max(0, Math.min(100, Number(tickets) || 0));
+    const m = Math.max(0, Math.min(100, Number(money) || 0));
+    return `
+      <div class="split-bars ${sideCls}">
+        <div class="split-bar-row" title="Tickets ${pctLabel(tickets)}">
+          <span class="split-bar-label">Tix</span>
+          <div class="split-bar-track"><div class="split-bar-fill tickets" style="width:${t}%"></div></div>
+          <span class="split-bar-pct mono">${pctLabel(tickets)}</span>
+        </div>
+        <div class="split-bar-row" title="Money ${pctLabel(money)}">
+          <span class="split-bar-label">$</span>
+          <div class="split-bar-track"><div class="split-bar-fill money" style="width:${m}%"></div></div>
+          <span class="split-bar-pct mono">${pctLabel(money)}</span>
+        </div>
+      </div>`;
+  };
+
+  return `
+    <div class="split-market">
+      <div class="split-market-head">
+        <span class="split-market-title">${escapeHtml(title)}</span>
+        ${lineBit}
+        ${leanHtml}
+      </div>
+      <div class="split-sides">
+        <div class="split-side">
+          <div class="split-side-name">${escapeHtml(leftName)}</div>
+          ${bar(leftTickets, leftMoney, leftSide)}
+        </div>
+        <div class="split-side">
+          <div class="split-side-name">${escapeHtml(rightName)}</div>
+          ${bar(rightTickets, rightMoney, rightSide)}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderSplitsSection(g, { compact = false } = {}) {
+  const split = g?.splits;
+  const meta = state.splitsMeta;
+  if (!split) {
+    if (compact) return "";
+    return `
+      <div class="splits-section empty">
+        <div class="splits-head">
+          <span class="k">Bets vs Money</span>
+        </div>
+        <p class="splits-empty muted">No public splits matched for this game (snapshot may still be prior week).</p>
+      </div>`;
+  }
+
+  const stamp = meta?.fetchedAt
+    ? formatSplitsTimestamp(meta.fetchedAt)
+    : "—";
+  const rows = [
+    renderSplitMarketRow(g, "Spread", split.spread, "spread"),
+    renderSplitMarketRow(g, "ML", split.moneyline, "moneyline"),
+    renderSplitMarketRow(g, "Total", split.total, "total"),
+  ]
+    .filter(Boolean)
+    .join("");
+
+  const numBets =
+    split.numBets != null
+      ? `<span class="splits-bets">${Number(split.numBets).toLocaleString()} bets</span>`
+      : "";
+
+  return `
+    <div class="splits-section">
+      <div class="splits-head">
+        <span class="k">Bets vs Money</span>
+        ${numBets}
+      </div>
+      ${rows}
+      <p class="splits-foot muted">
+        Splits: Action Network · updated ${escapeHtml(stamp)}.
+        Public sample (tickets % vs money %); money−tickets gap ≥10 often read as sharper lean — not a guarantee of sharp action · not betting advice.
+      </p>
+    </div>`;
+}
+
 function renderPickCard(g) {
   const sim = state.pickSims.get(g.id) || null;
   const leans = g.hasOdds ? computeLeans(g, sim) : null;
@@ -529,6 +667,7 @@ function renderPickCard(g) {
           </div>
         </div>
         <p class="waiting-msg">Waiting on lines — no consensus yet.</p>
+        ${renderSplitsSection(g, { compact: true })}
       </article>`;
   }
 
@@ -616,6 +755,8 @@ function renderPickCard(g) {
         <ul>${whyList}</ul>
       </div>
 
+      ${renderSplitsSection(g, { compact: true })}
+
       <div class="pick-card-foot">
         <button type="button" class="btn-link" data-open-sim="${g.id}">Open in Sim →</button>
       </div>
@@ -685,6 +826,28 @@ async function loadLines() {
       week: ESPN_DEFAULTS.week,
       dates: ESPN_DEFAULTS.dates,
     });
+
+    let splitsSnap = null;
+    let splitsErr = null;
+    try {
+      splitsSnap = await fetchSplitsSnapshot();
+    } catch (err) {
+      splitsErr = err.message || String(err);
+      console.warn("splits.json:", splitsErr);
+    }
+    state.splitsMeta = mergeSplitsOntoGames(data.games, splitsSnap);
+    if (!splitsSnap) {
+      state.splitsMeta = {
+        ok: false,
+        matched: 0,
+        total: data.games.length,
+        fetchedAt: null,
+        source: "Action Network public betting",
+        week: null,
+        note: splitsErr || "splits.json missing",
+      };
+    }
+
     state.games = data.games;
     state.week = data.week;
     state.seasonYear = data.seasonYear;
@@ -710,7 +873,11 @@ async function loadLines() {
 
     const stamp = $("#lines-updated");
     if (stamp) {
-      stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median · not betting advice`;
+      const sm = state.splitsMeta;
+      const splitsBit = sm?.ok
+        ? ` · Splits: Action Network · ${fmtFetched(sm.fetchedAt)} (${sm.matched}/${sm.total} matched)`
+        : " · Splits: unavailable";
+      stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median${splitsBit} · not betting advice`;
     }
 
     renderPickBoard();
