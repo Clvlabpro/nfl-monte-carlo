@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hayden clvpro Monte Carlo</title>
+    <title>clvpro Monte Carlo</title>
     <meta
       name="description"
-      content="Browser Monte Carlo NFL simulator calibrated to multi-book median consensus lines. Not betting advice."
+      content="NFL Pick Board + Monte Carlo simulator calibrated to multi-book median consensus. Research tool — not betting advice."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,9 +20,9 @@
     <div class="wrap">
       <header class="app-header">
         <div class="brand">
-          <h1>Hayden clvpro <span>Monte Carlo</span></h1>
+          <h1>clvpro <span>Monte Carlo</span></h1>
           <p class="tagline">
-            Multi-book consensus lines · market-implied scores · thousands of sims in your browser
+            Pick Board · multi-book consensus · market-implied Monte Carlo
           </p>
         </div>
         <div class="badge-row">
@@ -32,160 +32,208 @@
         </div>
       </header>
 
+      <nav class="view-tabs" aria-label="Primary views">
+        <button type="button" class="view-tab active" data-view="pickboard" id="tab-pickboard">
+          Pick Board
+        </button>
+        <button type="button" class="view-tab" data-view="sim" id="tab-sim">
+          Sim
+        </button>
+      </nav>
+
       <div id="load-status" class="load-status loading" hidden>Loading…</div>
       <p class="lines-updated" id="lines-updated">Lines updated: —</p>
 
-      <div class="layout">
-        <aside>
-          <div class="card">
-            <h2>Matchup</h2>
-            <div class="field">
-              <label for="game-select">Game</label>
-              <select id="game-select"></select>
+      <!-- ===== Pick Board view ===== -->
+      <section id="view-pickboard" class="view-panel" aria-labelledby="tab-pickboard">
+        <div class="pickboard-toolbar card">
+          <div class="pickboard-toolbar-row">
+            <div>
+              <h2>Week 2 Pick Board</h2>
+              <p class="muted" style="margin:0;font-size:0.82rem">
+                Upcoming games with consensus lines · quick MC (8k) · transparent lean heuristics
+              </p>
             </div>
-            <div class="field">
-              <label>Simulations (N)</label>
-              <div class="n-pills">
-                <button type="button" data-n="1000">1k</button>
-                <button type="button" data-n="5000">5k</button>
-                <button type="button" data-n="10000" class="active">10k</button>
-                <button type="button" data-n="25000">25k</button>
-              </div>
-            </div>
-            <div class="btn-row">
-              <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
-              <button type="button" class="btn-secondary" id="btn-refresh">Refresh lines</button>
-            </div>
-            <p class="timing" id="hint">
-              Correlated Gaussian around consensus means · snapshot + live ESPN DK
-            </p>
-
-            <div class="matchup-preview">
-              <div class="teams-row">
-                <div class="team-chip away">
-                  <div class="abbr" id="chip-away-abbr">—</div>
-                  <div class="name" id="chip-away-name">Away</div>
-                </div>
-                <div class="vs">@</div>
-                <div class="team-chip home">
-                  <div class="abbr" id="chip-home-abbr">—</div>
-                  <div class="name" id="chip-home-name">Home</div>
-                </div>
-              </div>
-              <div class="lines lines-4">
-                <div class="line-box">
-                  <div class="k">Consensus spread</div>
-                  <div class="v" id="line-spread">—</div>
-                </div>
-                <div class="line-box">
-                  <div class="k">Consensus total</div>
-                  <div class="v" id="line-total">—</div>
-                </div>
-                <div class="line-box">
-                  <div class="k">Source</div>
-                  <div class="v" id="line-book">—</div>
-                </div>
-                <div class="line-box">
-                  <div class="k">Status</div>
-                  <div class="v" id="line-status">—</div>
-                </div>
-              </div>
-              <p class="kickoff-line">Kickoff: <span id="line-kickoff">—</span></p>
-
-              <div class="books-table-wrap">
-                <table class="books-table">
-                  <thead>
-                    <tr>
-                      <th>Book</th>
-                      <th>Spread (home)</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody id="books-body"></tbody>
-                </table>
-              </div>
-
-              <div class="ratings-mini">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Info</th>
-                      <th colspan="2">Detail</th>
-                    </tr>
-                  </thead>
-                  <tbody id="meta-body"></tbody>
-                </table>
-                <p style="margin: 10px 0 0">
-                  Market expected:
-                  <span style="color: var(--away)" id="exp-away">—</span>
-                  –
-                  <span style="color: var(--home)" id="exp-home">—</span>
-                  (margin
-                  <span id="exp-margin">—</span>)
-                </p>
-              </div>
+            <div class="btn-row pickboard-actions">
+              <button type="button" class="btn-secondary" id="btn-refresh-pb">Refresh lines</button>
+              <button type="button" class="btn-primary" id="btn-resim-pb" style="flex:0 0 auto;width:auto;min-width:140px">
+                Re-run sims
+              </button>
             </div>
           </div>
-        </aside>
+          <div class="filter-pills" id="pick-filters" role="group" aria-label="Pick filters">
+            <button type="button" data-filter="all" class="active">All</button>
+            <button type="button" data-filter="lean">Has lean</button>
+            <button type="button" data-filter="spread">Spread leans</button>
+            <button type="button" data-filter="ml">ML leans</button>
+          </div>
+        </div>
 
-        <main>
-          <div id="results"></div>
+        <div id="pickboard-status" class="pickboard-status muted"></div>
+        <div id="pickboard" class="pickboard-grid"></div>
 
-          <div class="card model-panel" style="margin-top: 18px">
-            <h2>Transparent model</h2>
-            <p>
-              Expected points are <strong>market-implied</strong> from the
-              <strong>median consensus</strong> home spread and total across DraftKings (via ESPN),
-              FanDuel, BetMGM, and Bovada when available. Noise is a bivariate normal around those
-              means; scores are rounded to integers and floored at zero. ATS cover rates sit near
-              50% by design; win probability is driven by the spread.
-            </p>
-            <div class="model-eq" id="model-exp"></div>
-            <div class="model-eq">marginExp = −spread
+        <div class="disclaimer pickboard-disclaimer">
+          <strong>Research tool — not betting advice.</strong>
+          Leans are transparent heuristics (line shop ≥0.5 pts vs consensus; market-implied MC win% ≥58%/≤42%)
+          plus sims around consensus means — <em>not</em> a proprietary edge model and not a recommendation to wager.
+          Lines move; always refresh. Branding: clvpro Monte Carlo.
+        </div>
+      </section>
+
+      <!-- ===== Sim view (existing) ===== -->
+      <section id="view-sim" class="view-panel" hidden aria-labelledby="tab-sim">
+        <div class="layout">
+          <aside>
+            <div class="card">
+              <h2>Matchup</h2>
+              <div class="field">
+                <label for="game-select">Game</label>
+                <select id="game-select"></select>
+              </div>
+              <div class="field">
+                <label>Simulations (N)</label>
+                <div class="n-pills">
+                  <button type="button" data-n="1000">1k</button>
+                  <button type="button" data-n="5000">5k</button>
+                  <button type="button" data-n="10000" class="active">10k</button>
+                  <button type="button" data-n="25000">25k</button>
+                </div>
+              </div>
+              <div class="btn-row">
+                <button type="button" class="btn-primary" id="btn-run">Run Simulation</button>
+                <button type="button" class="btn-secondary" id="btn-refresh">Refresh lines</button>
+              </div>
+              <p class="timing" id="hint">
+                Correlated Gaussian around consensus means · snapshot + live ESPN DK
+              </p>
+
+              <div class="matchup-preview">
+                <div class="teams-row">
+                  <div class="team-chip away">
+                    <div class="abbr" id="chip-away-abbr">—</div>
+                    <div class="name" id="chip-away-name">Away</div>
+                  </div>
+                  <div class="vs">@</div>
+                  <div class="team-chip home">
+                    <div class="abbr" id="chip-home-abbr">—</div>
+                    <div class="name" id="chip-home-name">Home</div>
+                  </div>
+                </div>
+                <div class="lines lines-4">
+                  <div class="line-box">
+                    <div class="k">Consensus spread</div>
+                    <div class="v" id="line-spread">—</div>
+                  </div>
+                  <div class="line-box">
+                    <div class="k">Consensus total</div>
+                    <div class="v" id="line-total">—</div>
+                  </div>
+                  <div class="line-box">
+                    <div class="k">Source</div>
+                    <div class="v" id="line-book">—</div>
+                  </div>
+                  <div class="line-box">
+                    <div class="k">Status</div>
+                    <div class="v" id="line-status">—</div>
+                  </div>
+                </div>
+                <p class="kickoff-line">Kickoff: <span id="line-kickoff">—</span></p>
+
+                <div class="books-table-wrap">
+                  <table class="books-table">
+                    <thead>
+                      <tr>
+                        <th>Book</th>
+                        <th>Spread (home)</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody id="books-body"></tbody>
+                  </table>
+                </div>
+
+                <div class="ratings-mini">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Info</th>
+                        <th colspan="2">Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody id="meta-body"></tbody>
+                  </table>
+                  <p style="margin: 10px 0 0">
+                    Market expected:
+                    <span style="color: var(--away)" id="exp-away">—</span>
+                    –
+                    <span style="color: var(--home)" id="exp-home">—</span>
+                    (margin
+                    <span id="exp-margin">—</span>)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <main>
+            <div id="results"></div>
+
+            <div class="card model-panel" style="margin-top: 18px">
+              <h2>Transparent model</h2>
+              <p>
+                Expected points are <strong>market-implied</strong> from the
+                <strong>median consensus</strong> home spread and total across DraftKings (via ESPN),
+                FanDuel, BetMGM, and Bovada when available. Noise is a bivariate normal around those
+                means; scores are rounded to integers and floored at zero. ATS cover rates sit near
+                50% by design; win probability is driven by the spread.
+              </p>
+              <div class="model-eq" id="model-exp"></div>
+              <div class="model-eq">marginExp = −spread
 homeExp   = (total − spread) / 2
 awayExp   = (total + spread) / 2
 
 score_away = E[away] + σ · Z₁
 score_home = E[home] + σ · (ρ·Z₁ + √(1−ρ²)·Z₂)
 Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
-            <div class="model-params">
-              <div class="param">
-                <div class="k">Means</div>
-                <div class="v">median consensus</div>
+              <div class="model-params">
+                <div class="param">
+                  <div class="k">Means</div>
+                  <div class="v">median consensus</div>
+                </div>
+                <div class="param">
+                  <div class="k">σ (score noise)</div>
+                  <div class="v" id="model-sigma">10.5</div>
+                </div>
+                <div class="param">
+                  <div class="k">ρ (correlation)</div>
+                  <div class="v" id="model-rho">0.18</div>
+                </div>
+                <div class="param">
+                  <div class="k">Source</div>
+                  <div class="v">multi-book</div>
+                </div>
               </div>
-              <div class="param">
-                <div class="k">σ (score noise)</div>
-                <div class="v" id="model-sigma">10.5</div>
-              </div>
-              <div class="param">
-                <div class="k">ρ (correlation)</div>
-                <div class="v" id="model-rho">0.18</div>
-              </div>
-              <div class="param">
-                <div class="k">Source</div>
-                <div class="v">multi-book</div>
-              </div>
+              <p style="margin-top: 12px">
+                FanDuel / BetMGM / Bovada are baked into <code>lines.json</code> (scraped on the box)
+                because their APIs are not CORS-friendly from GitHub Pages. Refresh reloads that
+                snapshot and merges live ESPN DraftKings. Re-run
+                <code>scripts/fetch-lines.py</code> to refresh the snapshot.
+              </p>
             </div>
-            <p style="margin-top: 12px">
-              FanDuel / BetMGM / Bovada are baked into <code>lines.json</code> (scraped on the box)
-              because their APIs are not CORS-friendly from GitHub Pages. Refresh reloads that
-              snapshot and merges live ESPN DraftKings. Re-run
-              <code>scripts/fetch-lines.py</code> to refresh the snapshot.
-            </p>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
 
-      <div class="disclaimer">
-        <strong>Not betting advice.</strong>
-        Multi-book spreads and totals were last scraped at the timestamp above; consensus is the
-        <em>median</em> of available books. This tool samples outcomes around those market means for
-        education and critique — not an edge finder, not a tip service, and not a recommendation to
-        wager. Lines change; always refresh before interpreting results.
-      </div>
+        <div class="disclaimer">
+          <strong>Not betting advice.</strong>
+          Multi-book spreads and totals were last scraped at the timestamp above; consensus is the
+          <em>median</em> of available books. This tool samples outcomes around those market means for
+          education and critique — not an edge finder, not a tip service, and not a recommendation to
+          wager. Lines change; always refresh before interpreting results.
+        </div>
+      </section>
 
       <footer class="app-footer">
-        NFL Monte Carlo · static HTML / CSS / JS · multi-book snapshot + ESPN live
+        clvpro Monte Carlo · Pick Board + Sim · multi-book snapshot + ESPN live
       </footer>
     </div>
     <script type="module" src="./app.js"></script>
