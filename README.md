@@ -8,7 +8,7 @@ Live site: [https://clvlabpro.github.io/nfl-monte-carlo/](https://clvlabpro.gith
 
 ## Views
 
-- **Pick Board** (default) — upcoming Week 2 games with consensus lines, best book numbers, quick MC win%, and transparent lean heuristics (line shop ≥0.5 pts; market-implied ML ≥58%/≤42%).
+- **Pick Board** (default) — upcoming Week 3 games with consensus lines, best book numbers, quick MC win%, and transparent lean heuristics (line shop ≥0.5 pts; market-implied ML ≥58%/≤42%).
 - **Sim** — deep dive one matchup with histograms (existing simulator).
 
 ## Quick start

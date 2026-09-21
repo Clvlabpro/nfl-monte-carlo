@@ -4,6 +4,7 @@
  * from github.io, so Refresh reloads the snapshot and re-fetches ESPN only.
  */
 
+import { ESPN_DEFAULTS } from "./data.js";
 import { fetchEspnScoreboard } from "./espn.js";
 
 function median(vals) {
@@ -60,8 +61,8 @@ export async function fetchLinesSnapshot() {
  * Merge live ESPN DraftKings into snapshot books; recompute median consensus.
  */
 export async function loadMultiBookLines(opts = {}) {
-  const week = opts.week ?? 2;
-  const dates = opts.dates ?? 2026;
+  const week = opts.week ?? ESPN_DEFAULTS.week;
+  const dates = opts.dates ?? ESPN_DEFAULTS.dates;
 
   let snapshot = null;
   let snapshotError = null;

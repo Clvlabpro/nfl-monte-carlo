@@ -11,9 +11,9 @@ export const MODEL = {
   minScore: 0,
 };
 
-/** Default ESPN scoreboard query (regular season Week 2, 2026). */
+/** Default ESPN scoreboard query (regular season Week 3, 2026). */
 export const ESPN_DEFAULTS = {
   seasontype: 2,
-  week: 2,
+  week: 3,
   dates: 2026,
 };

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetch NFL Week 2 (2026) spread + total lines from free public book endpoints.
+Fetch NFL Week 3 (2026) spread + total lines from free public book endpoints.
 Writes ../lines.json for the static site (GitHub Pages cannot CORS most books).
 
 Books attempted:
@@ -103,7 +103,7 @@ TEAM_ALIASES: dict[str, str] = {
     "commanders": "WSH",
 }
 
-WEEK = 2
+WEEK = 3
 SEASON = 2026
 OUT = Path(__file__).resolve().parent.parent / "lines.json"
 
@@ -246,12 +246,11 @@ def fetch_fanduel() -> tuple[dict[str, dict], dict]:
         home = abbr_from_name(home_name)
         if not away or not home:
             continue
-        # Week 2 window: kickoffs around 2026-09-18 .. 2026-09-23
-        open_date = ev.get("openDate") or ""
-        if not open_date.startswith("2026-09-1") and not open_date.startswith("2026-09-2"):
-            # still include if week-2-ish; skip week 3 (09-25+)
-            if open_date >= "2026-09-24":
-                continue
+        # Week 3 window: kickoffs roughly 2026-09-24 .. 2026-09-30
+        # (TNF ATL@GB ~2026-09-25; MNF PHI@CHI ~2026-09-29)
+        open_date = (ev.get("openDate") or "")[:10]
+        if open_date and (open_date < "2026-09-24" or open_date > "2026-09-30"):
+            continue
 
         spread = total = None
         for m in ms:

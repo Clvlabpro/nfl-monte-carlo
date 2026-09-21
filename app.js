@@ -1,4 +1,4 @@
-import { MODEL } from "./data.js";
+import { MODEL, ESPN_DEFAULTS } from "./data.js";
 import { formatKickoff, statusLabel } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
@@ -621,7 +621,10 @@ async function loadLines() {
   setLoading(true, "Fetching snapshot + live ESPN DraftKings…");
 
   try {
-    const data = await loadMultiBookLines({ week: 2, dates: 2026 });
+    const data = await loadMultiBookLines({
+      week: ESPN_DEFAULTS.week,
+      dates: ESPN_DEFAULTS.dates,
+    });
     state.games = data.games;
     state.week = data.week;
     state.seasonYear = data.seasonYear;
