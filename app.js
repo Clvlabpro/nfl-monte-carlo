@@ -3,6 +3,14 @@ import { formatKickoff, statusLabel } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
+import {
+  computeLeans,
+  lineShop,
+  fmtLine,
+  fmtTotal,
+  fmtPct,
+  PICK_BOARD_N,
+} from "./picks.js";
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -19,32 +27,18 @@ const state = {
   loading: false,
   error: null,
   sources: null,
+  view: "pickboard",
+  pickFilter: "all",
+  /** @type {Map<string, {homeWinPct:number,awayWinPct:number,n:number}>} */
+  pickSims: new Map(),
+  pickBoardRunning: false,
 };
 
 function getGame() {
   return state.games.find((g) => g.id === state.gameId) || state.games[0] || null;
 }
 
-/** Format home spread / any signed line (supports .25 median). */
-function fmtLine(n) {
-  if (n == null || !Number.isFinite(n)) return "—";
-  if (n === 0) return "PK";
-  const sign = n > 0 ? "+" : "";
-  const rounded = Math.round(n * 100) / 100;
-  return `${sign}${rounded}`;
-}
 const fmtSpread = fmtLine;
-
-
-function fmtTotal(n) {
-  if (n == null || !Number.isFinite(n)) return "—";
-  const rounded = Math.round(n * 100) / 100;
-  return String(rounded);
-}
-
-function fmtPct(x) {
-  return (x * 100).toFixed(1) + "%";
-}
 
 function fmtScore(x) {
   return x.toFixed(1);
@@ -52,6 +46,18 @@ function fmtScore(x) {
 
 function fmtFetched(iso) {
   return formatLinesTimestamp(iso);
+}
+
+function setView(view) {
+  state.view = view;
+  document.querySelectorAll(".view-tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.view === view);
+  });
+  const pb = $("#view-pickboard");
+  const sim = $("#view-sim");
+  if (pb) pb.hidden = view !== "pickboard";
+  if (sim) sim.hidden = view !== "sim";
+  if (view === "pickboard") renderPickBoard();
 }
 
 function setLoading(on, msg) {
@@ -78,6 +84,7 @@ function setLoading(on, msg) {
 
 function populateSelect() {
   const sel = $("#game-select");
+  if (!sel) return;
   if (!state.games.length) {
     sel.innerHTML = `<option value="">No games</option>`;
     return;
@@ -106,6 +113,7 @@ function populateSelect() {
 function updateRunButton() {
   const g = getGame();
   const btn = $("#btn-run");
+  if (!btn) return;
   if (!g) {
     btn.disabled = true;
     btn.textContent = "Run Simulation";
@@ -242,8 +250,10 @@ function setNPills() {
 
 function showEmpty() {
   const g = getGame();
+  const el = $("#results");
+  if (!el) return;
   if (g?.completed && g.home.score != null) {
-    $("#results").innerHTML = `
+    el.innerHTML = `
       <div class="card empty-state">
         <strong>Final: ${g.away.abbr} ${g.away.score} @ ${g.home.abbr} ${g.home.score}</strong>
         ${
@@ -255,7 +265,7 @@ function showEmpty() {
     return;
   }
   if (g && !g.hasOdds) {
-    $("#results").innerHTML = `
+    el.innerHTML = `
       <div class="card empty-state">
         <strong>No line available</strong>
         No multi-book spread/total for this matchup. Pick another game or refresh later.
@@ -263,7 +273,7 @@ function showEmpty() {
     return;
   }
   const snap = state.snapshotAt ? fmtFetched(state.snapshotAt) : "—";
-  $("#results").innerHTML = `
+  el.innerHTML = `
     <div class="card empty-state">
       <strong>Ready to simulate</strong>
       Multi-book median consensus · market-implied expected scores · default 10,000 trials.<br/>
@@ -379,9 +389,234 @@ function run() {
   });
 }
 
+/** Upcoming (non-final) games — pick board candidates. */
+function pickBoardGames() {
+  return state.games.filter((g) => !g.completed && g.statusState !== "post");
+}
+
+function yieldToUI() {
+  return new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0)));
+}
+
+async function runPickBoardSims({ force = false } = {}) {
+  const candidates = pickBoardGames().filter((g) => g.hasOdds);
+  const status = $("#pickboard-status");
+  const btn = $("#btn-resim-pb");
+  if (!candidates.length) {
+    if (status) status.textContent = "No upcoming games with consensus lines yet.";
+    renderPickBoard();
+    return;
+  }
+
+  state.pickBoardRunning = true;
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Simulating…";
+  }
+
+  let done = 0;
+  for (const g of candidates) {
+    if (!force && state.pickSims.has(g.id)) {
+      done++;
+      continue;
+    }
+    if (status) {
+      status.textContent = `Running quick sims (${PICK_BOARD_N.toLocaleString()} each)… ${done + 1}/${candidates.length} · ${g.away.abbr} @ ${g.home.abbr}`;
+    }
+    await yieldToUI();
+    const result = runSimulation(g, PICK_BOARD_N);
+    state.pickSims.set(g.id, {
+      homeWinPct: result.homeWinPct,
+      awayWinPct: result.awayWinPct,
+      n: result.n,
+    });
+    done++;
+    renderPickBoard();
+  }
+
+  state.pickBoardRunning = false;
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = "Re-run sims";
+  }
+  if (status) {
+    status.textContent = `Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials · Week ${state.week}`;
+  }
+  renderPickBoard();
+}
+
+function openInSim(gameId) {
+  state.gameId = gameId;
+  state.lastResult = null;
+  populateSelect();
+  renderMatchupPreview();
+  showEmpty();
+  setView("sim");
+}
+
+function renderPickCard(g) {
+  const sim = state.pickSims.get(g.id) || null;
+  const leans = g.hasOdds ? computeLeans(g, sim) : null;
+  const shop = g.hasOdds ? lineShop(g) : null;
+
+  if (!g.hasOdds) {
+    return `
+      <article class="pick-card waiting" data-id="${g.id}">
+        <div class="pick-card-head">
+          <div class="pick-matchup">
+            <span class="away">${g.away.abbr}</span>
+            <span class="at">@</span>
+            <span class="home">${g.home.abbr}</span>
+          </div>
+          <div class="pick-meta">
+            <span>${formatKickoff(g.kickoffIso)}</span>
+            <span class="status-pill">${statusLabel(g)}</span>
+          </div>
+        </div>
+        <p class="waiting-msg">Waiting on lines — no consensus yet.</p>
+      </article>`;
+  }
+
+  const leanClass = leans?.hasLean ? "has-lean" : "no-lean";
+  let leanHtml;
+  if (!leans?.hasLean) {
+    leanHtml = `<div class="lean-badge none">No lean — market too tight / no shop edge</div>`;
+  } else {
+    const badges = [
+      ...leans.spreadLeans.map(
+        (l) =>
+          `<span class="lean-badge spread ${l.side}">ATS · ${escapeHtml(l.label)} <small>${escapeHtml(l.book)}</small></span>`
+      ),
+      ...leans.mlLeans.map(
+        (l) =>
+          `<span class="lean-badge ml ${l.side}">ML · ${escapeHtml(l.label)}</span>`
+      ),
+    ];
+    leanHtml = `<div class="lean-badges">${badges.join("")}</div>`;
+  }
+
+  const bestHomeCls = shop?.bestHome?.better ? "best" : "";
+  const bestAwayCls = shop?.bestAway?.better ? "best" : "";
+
+  const whyList = (leans?.why || [])
+    .map((w) => `<li>${escapeHtml(w)}</li>`)
+    .join("");
+
+  const winHome = sim ? fmtPct(sim.homeWinPct) : "…";
+  const winAway = sim ? fmtPct(sim.awayWinPct) : "…";
+
+  return `
+    <article class="pick-card ${leanClass}" data-id="${g.id}">
+      <div class="pick-card-head">
+        <div class="pick-matchup">
+          <span class="away">${g.away.abbr}</span>
+          <span class="at">@</span>
+          <span class="home">${g.home.abbr}</span>
+        </div>
+        <div class="pick-meta">
+          <span>${formatKickoff(g.kickoffIso)}</span>
+          <span class="status-pill">${statusLabel(g)}</span>
+        </div>
+      </div>
+
+      <div class="pick-grid">
+        <div class="pick-box">
+          <div class="k">Consensus</div>
+          <div class="v mono">${g.home.abbr} ${fmtLine(g.spread)} · O/U ${fmtTotal(g.total)}</div>
+          <div class="sub">${(g.books || []).length} books · median</div>
+        </div>
+        <div class="pick-box line-shop">
+          <div class="k">Best home spread</div>
+          <div class="v mono ${bestHomeCls}">${shop?.bestHome ? `${fmtLine(shop.bestHome.spread)} <small>${escapeHtml(shop.bestHome.book)}</small>` : "—"}</div>
+          <div class="sub">vs cons ${fmtLine(shop?.consensus)}${shop?.bestHome ? ` · Δ ${(shop.homeEdge >= 0 ? "+" : "") + shop.homeEdge.toFixed(2)}` : ""}</div>
+        </div>
+        <div class="pick-box line-shop">
+          <div class="k">Best away spread</div>
+          <div class="v mono ${bestAwayCls}">${shop?.bestAway ? `${fmtLine(shop.bestAway.spread)} <small>${escapeHtml(shop.bestAway.book)}</small>` : "—"}</div>
+          <div class="sub">vs cons ${fmtLine(shop?.consensus != null ? -shop.consensus : null)}${shop?.bestAway ? ` · Δ ${(shop.awayEdge >= 0 ? "+" : "") + shop.awayEdge.toFixed(2)}` : ""}</div>
+        </div>
+        <div class="pick-box">
+          <div class="k">Market-implied win%</div>
+          <div class="v mono winpct">
+            <span class="away">${g.away.abbr} ${winAway}</span>
+            <span class="sep">·</span>
+            <span class="home">${g.home.abbr} ${winHome}</span>
+          </div>
+          <div class="sub">${sim ? `${sim.n.toLocaleString()} sims @ consensus` : "sim pending…"}</div>
+        </div>
+      </div>
+
+      <div class="pick-lean-row">
+        <div class="k">Lean</div>
+        ${leanHtml}
+      </div>
+
+      <div class="pick-why">
+        <div class="k">Why</div>
+        <ul>${whyList}</ul>
+      </div>
+
+      <div class="pick-card-foot">
+        <button type="button" class="btn-link" data-open-sim="${g.id}">Open in Sim →</button>
+      </div>
+    </article>`;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderPickBoard() {
+  const root = $("#pickboard");
+  if (!root) return;
+
+  let games = pickBoardGames();
+  const enriched = games.map((g) => {
+    const sim = state.pickSims.get(g.id) || null;
+    const leans = g.hasOdds ? computeLeans(g, sim) : null;
+    return { g, leans };
+  });
+
+  const filter = state.pickFilter;
+  let filtered = enriched;
+  if (filter === "lean") filtered = enriched.filter((x) => x.leans?.hasLean);
+  else if (filter === "spread")
+    filtered = enriched.filter((x) => x.leans?.hasSpreadLean);
+  else if (filter === "ml") filtered = enriched.filter((x) => x.leans?.hasMlLean);
+
+  // Sort: leans first, then kickoff
+  filtered.sort((a, b) => {
+    const aLean = a.leans?.hasLean ? 1 : 0;
+    const bLean = b.leans?.hasLean ? 1 : 0;
+    if (aLean !== bLean) return bLean - aLean;
+    return (a.g.kickoffMs || 0) - (b.g.kickoffMs || 0);
+  });
+
+  if (!filtered.length) {
+    root.innerHTML = `
+      <div class="card empty-state">
+        <strong>No games match this filter</strong>
+        Try All, or refresh lines after books post.
+      </div>`;
+    return;
+  }
+
+  root.innerHTML = filtered.map(({ g }) => renderPickCard(g)).join("");
+
+  root.querySelectorAll("[data-open-sim]").forEach((btn) => {
+    btn.addEventListener("click", () => openInSim(btn.getAttribute("data-open-sim")));
+  });
+}
+
 async function loadLines() {
   const btnRefresh = $("#btn-refresh");
+  const btnRefreshPb = $("#btn-refresh-pb");
   if (btnRefresh) btnRefresh.disabled = true;
+  if (btnRefreshPb) btnRefreshPb.disabled = true;
   state.error = null;
   setLoading(true, "Fetching snapshot + live ESPN DraftKings…");
 
@@ -395,6 +630,7 @@ async function loadLines() {
     state.liveEspnAt = data.liveEspnAt;
     state.sources = data.sources;
     state.error = null;
+    state.pickSims.clear();
 
     populateSelect();
     renderMatchupPreview();
@@ -413,32 +649,62 @@ async function loadLines() {
     if (stamp) {
       stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median · not betting advice`;
     }
+
+    renderPickBoard();
+    await runPickBoardSims({ force: true });
   } catch (err) {
     console.error(err);
     state.error = `Failed to load lines: ${err.message || err}`;
     setLoading(false);
-    $("#results").innerHTML = `
+    const results = $("#results");
+    if (results) {
+      results.innerHTML = `
       <div class="card empty-state">
         <strong>Could not load lines</strong>
         ${state.error}. Check your network and hit Refresh lines.
       </div>`;
+    }
+    const pb = $("#pickboard");
+    if (pb) {
+      pb.innerHTML = `<div class="card empty-state"><strong>Could not load lines</strong>${state.error}</div>`;
+    }
   } finally {
     if (btnRefresh) btnRefresh.disabled = false;
+    if (btnRefreshPb) btnRefreshPb.disabled = false;
     updateRunButton();
   }
 }
 
 function init() {
   setNPills();
-  $("#model-sigma").textContent = String(MODEL.scoreSigma);
-  $("#model-rho").textContent = String(MODEL.scoreCorrelation);
+  const sigma = $("#model-sigma");
+  const rho = $("#model-rho");
+  if (sigma) sigma.textContent = String(MODEL.scoreSigma);
+  if (rho) rho.textContent = String(MODEL.scoreCorrelation);
 
-  $("#game-select").addEventListener("change", (e) => {
-    state.gameId = e.target.value;
-    state.lastResult = null;
-    renderMatchupPreview();
-    showEmpty();
+  document.querySelectorAll(".view-tab").forEach((btn) => {
+    btn.addEventListener("click", () => setView(btn.dataset.view));
   });
+
+  document.querySelectorAll("#pick-filters button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.pickFilter = btn.dataset.filter;
+      document.querySelectorAll("#pick-filters button").forEach((b) => {
+        b.classList.toggle("active", b.dataset.filter === state.pickFilter);
+      });
+      renderPickBoard();
+    });
+  });
+
+  const sel = $("#game-select");
+  if (sel) {
+    sel.addEventListener("change", (e) => {
+      state.gameId = e.target.value;
+      state.lastResult = null;
+      renderMatchupPreview();
+      showEmpty();
+    });
+  }
 
   document.querySelectorAll(".n-pills button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -447,8 +713,16 @@ function init() {
     });
   });
 
-  $("#btn-run").addEventListener("click", run);
-  $("#btn-refresh").addEventListener("click", () => loadLines());
+  const btnRun = $("#btn-run");
+  if (btnRun) btnRun.addEventListener("click", run);
+  const btnRefresh = $("#btn-refresh");
+  if (btnRefresh) btnRefresh.addEventListener("click", () => loadLines());
+  const btnRefreshPb = $("#btn-refresh-pb");
+  if (btnRefreshPb) btnRefreshPb.addEventListener("click", () => loadLines());
+  const btnResim = $("#btn-resim-pb");
+  if (btnResim) {
+    btnResim.addEventListener("click", () => runPickBoardSims({ force: true }));
+  }
 
   window.addEventListener("resize", () => {
     if (!state.lastResult) return;
@@ -476,6 +750,7 @@ function init() {
       });
   });
 
+  setView("pickboard");
   loadLines();
 }
 
