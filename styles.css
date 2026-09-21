@@ -7,9 +7,9 @@
   --muted: #8b95a8;
   --accent: #3dd68c;
   --accent-dim: rgba(61, 214, 140, 0.15);
-  /* Neutral home/away — not win/lose colors */
-  --home: #c9b896;
-  --away: #a8b4c4;
+  /* Fallbacks only when team color missing — vivid, not gray, not danger-red */
+  --home: #5eead4;
+  --away: #c4b5fd;
   --warn: #f5a623;
   --tie: #6b7280;
   --radius: 12px;
@@ -247,11 +247,11 @@ input[type="number"]:focus {
 }
 
 .team-chip.home {
-  border-color: rgba(201, 184, 150, 0.45);
+  border-color: rgba(94, 234, 212, 0.35);
 }
 
 .team-chip.away {
-  border-color: rgba(168, 180, 196, 0.45);
+  border-color: rgba(196, 181, 253, 0.35);
 }
 
 .team-chip .abbr {
@@ -415,7 +415,7 @@ input[type="number"]:focus {
 }
 
 .winbar-away {
-  background: linear-gradient(90deg, #7a8799, #a8b4c4);
+  background: linear-gradient(90deg, #7c6bc4, #c4b5fd);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -425,7 +425,7 @@ input[type="number"]:focus {
 }
 
 .winbar-home {
-  background: linear-gradient(90deg, #9a8868, #c9b896);
+  background: linear-gradient(90deg, #2dd4bf, #5eead4);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -1122,5 +1122,4 @@ code {
   letter-spacing: 0.02em;
 }
 
-.team-mark.away .abbr-sm { color: var(--away); }
-.team-mark.home .abbr-sm { color: var(--home); }
+.team-mark .abbr-sm { color: inherit; font-weight: 800; }

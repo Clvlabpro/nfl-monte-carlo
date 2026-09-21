@@ -1,5 +1,5 @@
 import { MODEL, ESPN_DEFAULTS } from "./data.js";
-import { formatKickoff, statusLabel, teamLogoUrl } from "./espn.js";
+import { formatKickoff, statusLabel, teamLogoUrl, readableTeamColor, teamColorHex } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
@@ -24,10 +24,12 @@ function teamMark(team, side = "") {
   const url = logoUrl(team);
   const abbr = team?.abbr || "?";
   const name = team?.name || abbr;
+  const color = team?.color || readableTeamColor(teamColorHex(team)) || "";
+  const style = color ? ` style="color:${color}"` : "";
   if (url) {
-    return `<span class="team-mark ${side}"><img class="team-logo" src="${url}" alt="${abbr}" title="${name}" width="36" height="36" loading="lazy" /><span class="abbr-sm">${abbr}</span></span>`;
+    return `<span class="team-mark ${side}"${style}><img class="team-logo" src="${url}" alt="${abbr}" title="${name}" width="36" height="36" loading="lazy" /><span class="abbr-sm">${abbr}</span></span>`;
   }
-  return `<span class="team-mark ${side}"><span class="abbr">${abbr}</span></span>`;
+  return `<span class="team-mark ${side}"${style}><span class="abbr">${abbr}</span></span>`;
 }
 
 function setChipLogo(imgEl, team) {
@@ -198,6 +200,10 @@ function renderMatchupPreview() {
     $("#chip-home-name").textContent = "Home";
     setChipLogo($("#chip-away-logo"), null);
     setChipLogo($("#chip-home-logo"), null);
+    const awayAbbrEl = $("#chip-away-abbr");
+    const homeAbbrEl = $("#chip-home-abbr");
+    if (awayAbbrEl) awayAbbrEl.style.color = "";
+    if (homeAbbrEl) homeAbbrEl.style.color = "";
     $("#line-spread").textContent = "—";
     $("#line-total").textContent = "—";
     $("#line-book").textContent = "—";
@@ -219,6 +225,10 @@ function renderMatchupPreview() {
   $("#chip-home-name").textContent = g.home.name;
   setChipLogo($("#chip-away-logo"), g.away);
   setChipLogo($("#chip-home-logo"), g.home);
+  const awayAbbrEl = $("#chip-away-abbr");
+  const homeAbbrEl = $("#chip-home-abbr");
+  if (awayAbbrEl) awayAbbrEl.style.color = g.away.color || "";
+  if (homeAbbrEl) homeAbbrEl.style.color = g.home.color || "";
 
   $("#line-spread").textContent = g.hasOdds
     ? `${g.home.abbr} ${fmtLine(g.spread)}`
