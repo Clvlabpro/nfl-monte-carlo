@@ -14,6 +14,10 @@
  *   ERA sign: worse opposing SP (higher ERA) → more runs for this side (matches WHIP/K9).
  *
  * Books still used for ATS/OU vs posted lines and ML implied % / edge.
+ *
+ * MLB display win%: after independent sim, blend toward no-vig book implied
+ *   pDisplay = 0.65 * pModel + 0.35 * pBook (renormalize away+home=1).
+ * Used for Model %, Edge, Top Edge Plays. Raw pModel kept on the result.
  */
 
 import { MODEL, MLB_MODEL } from "./data.js";
@@ -44,6 +48,33 @@ export function noVigMoneyline(homeOdds, awayOdds) {
   const s = h + a;
   if (!(s > 0)) return { home: null, away: null, rawHome: h, rawAway: a };
   return { home: h / s, away: a / s, rawHome: h, rawAway: a };
+}
+
+/**
+ * Light market shrink for MLB board/edge display.
+ * pDisplay_i = wM * pModel_i + wB * pBook_i, then renormalize so home+away=1.
+ * Returns null fields when book probs missing (caller keeps raw model).
+ */
+export function blendDisplayWinPct(pModelHome, pModelAway, pBookHome, pBookAway, model = MLB_MODEL) {
+  const wM = model.displayBlendModel ?? 0.65;
+  const wB = model.displayBlendBook ?? 0.35;
+  if (
+    pModelHome == null ||
+    pModelAway == null ||
+    pBookHome == null ||
+    pBookAway == null ||
+    !Number.isFinite(pModelHome) ||
+    !Number.isFinite(pModelAway) ||
+    !Number.isFinite(pBookHome) ||
+    !Number.isFinite(pBookAway)
+  ) {
+    return { home: null, away: null, applied: false };
+  }
+  let h = wM * pModelHome + wB * pBookHome;
+  let a = wM * pModelAway + wB * pBookAway;
+  const s = h + a;
+  if (!(s > 0)) return { home: null, away: null, applied: false };
+  return { home: h / s, away: a / s, applied: true };
 }
 
 export function moneylineFromGame(game) {
@@ -431,17 +462,43 @@ export function runSimulation(game, n, opts = {}) {
     }
   }
 
-  const homeWinPct = homeWins / n;
-  const awayWinPct = awayWins / n;
+  // Raw independent sim win% (before any market shrink)
+  const rawModelHomeWinPct = homeWins / n;
+  const rawModelAwayWinPct = awayWins / n;
 
   const ml = moneylineFromGame(game);
   const market = noVigMoneyline(ml.home, ml.away);
   const marketHomeWinPct = market.home;
   const marketAwayWinPct = market.away;
+
+  // MLB: blend display win% toward no-vig book for Model % / Edge / Top Edge Plays.
+  // Means remain independent; NFL stays raw (already market-calibrated).
+  let homeWinPct = rawModelHomeWinPct;
+  let awayWinPct = rawModelAwayWinPct;
+  let displayShrunk = false;
+  if (isMlbStats) {
+    const blended = blendDisplayWinPct(
+      rawModelHomeWinPct,
+      rawModelAwayWinPct,
+      marketHomeWinPct,
+      marketAwayWinPct,
+      model
+    );
+    if (blended.applied) {
+      homeWinPct = blended.home;
+      awayWinPct = blended.away;
+      displayShrunk = true;
+    }
+  }
+
   const edge =
     marketHomeWinPct != null ? homeWinPct - marketHomeWinPct : null;
   const edgeAway =
     marketAwayWinPct != null ? awayWinPct - marketAwayWinPct : null;
+  const rawEdge =
+    marketHomeWinPct != null ? rawModelHomeWinPct - marketHomeWinPct : null;
+  const rawEdgeAway =
+    marketAwayWinPct != null ? rawModelAwayWinPct - marketAwayWinPct : null;
 
   return {
     n,
@@ -458,8 +515,13 @@ export function runSimulation(game, n, opts = {}) {
     homeWins,
     awayWins,
     ties,
+    /** Display win% (MLB: market-shrunk when book ML present; else raw) */
     homeWinPct,
     awayWinPct,
+    /** Raw independent sim win% (pre-shrink) */
+    rawModelHomeWinPct,
+    rawModelAwayWinPct,
+    displayShrunk,
     tiePct: ties / n,
     meanHome: sumHome / n,
     meanAway: sumAway / n,
@@ -477,6 +539,8 @@ export function runSimulation(game, n, opts = {}) {
     marketAwayWinPct,
     edge,
     edgeAway,
+    rawEdge,
+    rawEdgeAway,
     moneyline: ml,
     model,
   };

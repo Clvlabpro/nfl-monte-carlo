@@ -599,7 +599,7 @@ function renderResults(result, ms) {
           <div class="value">${fmtScore(result.awayExp)}</div>
           <div class="sub">${state.sport === "mlb"
             ? (result.marketHomeWinPct != null
-                ? `book home ${fmtPct(result.marketHomeWinPct)} · edge ${fmtEdgePp(result.edge)}`
+                ? `book home ${fmtPct(result.marketHomeWinPct)} · edge ${fmtEdgePp(result.edge)}${result.displayShrunk ? " · shrunk" : ""}`
                 : "no book ML")
             : "from consensus"}</div>
         </div>
@@ -732,6 +732,9 @@ async function runPickBoardSims({ force = false } = {}) {
     state.pickSims.set(g.id, {
       homeWinPct: result.homeWinPct,
       awayWinPct: result.awayWinPct,
+      rawModelHomeWinPct: result.rawModelHomeWinPct,
+      rawModelAwayWinPct: result.rawModelAwayWinPct,
+      displayShrunk: result.displayShrunk,
       n: result.n,
       meanHome: result.meanHome,
       meanAway: result.meanAway,
@@ -739,6 +742,8 @@ async function runPickBoardSims({ force = false } = {}) {
       marketAwayWinPct: result.marketAwayWinPct,
       edge: result.edge,
       edgeAway: result.edgeAway,
+      rawEdge: result.rawEdge,
+      rawEdgeAway: result.rawEdgeAway,
       thinData: result.thinData,
       source: result.source,
       homeExp: result.homeExp,
@@ -971,6 +976,10 @@ function modelWinBox(g, sim) {
     : "";
 
   if (mlb) {
+    const rawNote =
+      sim?.displayShrunk && sim.rawModelHomeWinPct != null
+        ? `<div class="sub muted raw-model" title="Independent sim before light market shrink">Raw model · ${escapeHtml(g.away.abbr)} ${fmtPct(sim.rawModelAwayWinPct)} · ${escapeHtml(g.home.abbr)} ${fmtPct(sim.rawModelHomeWinPct)}</div>`
+        : "";
     const bookRow =
       bookHome != null
         ? `<div class="sub">Book implied · ${escapeHtml(g.away.abbr)} ${bookAway} · ${escapeHtml(g.home.abbr)} ${bookHome}</div>
@@ -978,17 +987,18 @@ function modelWinBox(g, sim) {
              bestEdge
                ? `${escapeHtml(bestEdge.side === "home" ? g.home.abbr : g.away.abbr)} ${fmtEdgePp(bestEdge.edge)}`
                : "—"
-           } <span class="muted">(model − book)</span></div>`
+           } <span class="muted">(display − book)</span></div>`
         : `<div class="sub muted">No book ML yet — model only</div>`;
     return `
       <div class="pick-box model-win">
-        <div class="k">Model win%</div>
+        <div class="k">Model win% <span class="muted">(market-shrunk)</span></div>
         <div class="v mono winpct">
           <span class="away">${escapeHtml(g.away.abbr)} ${winAway}</span>
           <span class="sep">·</span>
           <span class="home">${escapeHtml(g.home.abbr)} ${winHome}</span>
         </div>
         <div class="sub">${sim ? `${sim.n.toLocaleString()} sims · stats model` : "sim pending…"}</div>
+        ${rawNote}
         ${bookRow}
         ${thin}
       </div>`;
@@ -1147,9 +1157,13 @@ function escapeHtml(s) {
 }
 
 
+/** Soft cap: exclude mega-edges from featured Top Edge Plays (after shrink). */
+const TOP_EDGE_MAX_ABS_PP = 0.08; // 8 percentage points
+
 /**
- * Top-N positive model−book edges among upcoming games with both model + no-vig ML.
+ * Top-N positive display−book edges among upcoming games with both model + no-vig ML.
  * Prefers games starting today (Chicago); else earliest slate day with candidates.
+ * Uses market-shrunk display win% (sim.homeWinPct). Soft guardrail: |edge| > 8 pp → skip.
  * Ranked by largest edge. Returns [] if none.
  */
 function computeTopEdgePlays(n = 3) {
@@ -1162,6 +1176,7 @@ function computeTopEdgePlays(n = 3) {
     if (sim.marketHomeWinPct == null || sim.marketAwayWinPct == null) continue;
     if (sim.homeWinPct == null || sim.awayWinPct == null) continue;
 
+    // Display win% already market-shrunk for MLB in runSimulation
     const homeEdge = sim.homeWinPct - sim.marketHomeWinPct;
     const awayEdge = sim.awayWinPct - sim.marketAwayWinPct;
     const pick =
@@ -1170,6 +1185,7 @@ function computeTopEdgePlays(n = 3) {
             side: "home",
             team: g.home,
             modelWinPct: sim.homeWinPct,
+            rawModelWinPct: sim.rawModelHomeWinPct,
             bookWinPct: sim.marketHomeWinPct,
             edge: homeEdge,
           }
@@ -1177,10 +1193,13 @@ function computeTopEdgePlays(n = 3) {
             side: "away",
             team: g.away,
             modelWinPct: sim.awayWinPct,
+            rawModelWinPct: sim.rawModelAwayWinPct,
             bookWinPct: sim.marketAwayWinPct,
             edge: awayEdge,
           };
     if (!(pick.edge > 0)) continue;
+    // Soft guardrail: never feature mega-edges (e.g. future bug) in top-3
+    if (Math.abs(pick.edge) > TOP_EDGE_MAX_ABS_PP) continue;
 
     const ymd = gameDateYmd(g) || today;
     rows.push({ g, sim, pick, ymd });
@@ -1202,8 +1221,11 @@ function computeTopEdgePlays(n = 3) {
 function buildEdgeWhyShort(best) {
   const why = [];
   why.push(
-    `Model ${fmtPct(best.pick.modelWinPct)} vs book no-vig ${fmtPct(best.pick.bookWinPct)} → ${fmtEdgePp(best.pick.edge)}.`
+    `Display ${fmtPct(best.pick.modelWinPct)} vs book no-vig ${fmtPct(best.pick.bookWinPct)} → ${fmtEdgePp(best.pick.edge)}.`
   );
+  if (best.pick.rawModelWinPct != null && Number.isFinite(best.pick.rawModelWinPct)) {
+    why.push(`Raw model ${fmtPct(best.pick.rawModelWinPct)} (pre-shrink).`);
+  }
   if (state.sport === "mlb") {
     const ap = best.g.awayPitcher;
     const hp = best.g.homePitcher;
@@ -1257,10 +1279,11 @@ function renderTopEdgePlays(eps) {
         <span class="ep-kicker">Top Edge Plays</span>
         <span class="ep-day mono">${escapeHtml(focusDay)} · model−book ML</span>
       </div>
+      <p class="ep-shrink-note muted">Edges are model vs market after light market shrink (research tool).</p>
       <div class="top-edge-grid">
         ${cards}
       </div>
-      <p class="ep-disclaimer muted">Honest label: model edge vs market — not guaranteed profit / not betting advice.</p>
+      <p class="ep-disclaimer muted">Honest label: model edge vs market after light shrink — not guaranteed profit / not betting advice.</p>
     </section>`;
 }
 

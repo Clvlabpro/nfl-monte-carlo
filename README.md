@@ -37,17 +37,18 @@ homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(awaySP.era − leagueERA) + HFA
   - `platoonAdj = clamp((facedOPS − neutralOPS) × 2.0, ±0.30)` added to that offense’s expected runs
 - **No ties** — extras until scores differ.
 - σ ≈ 3.0 runs · ρ ≈ 0.20
-- Books (ESPN DraftKings) stay for **comparison / edge only**: model win% vs no-vig ML implied, ATS/OU vs posted RL/total.
-
-**Do not calibrate win% to match the moneyline.**
+- Books (ESPN DraftKings) stay for **comparison / edge only**: display win% vs no-vig ML implied, ATS/OU vs posted RL/total.
+- **Display / edge shrink** (board Model %, Edge, Top Edge Plays only):  
+  `pDisplay = 0.65 * pModel + 0.35 * pBook` (renormalize so away+home=1).  
+  Underlying expected-run means stay independent. Raw model win% is kept for a small board note.
 
 ## Top Edge Plays
 
-Among upcoming games with both model win% and book ML:
+Among upcoming games with both display win% and book ML:
 
-`edge_pp = (modelWinPct − bookImpliedWinPct) × 100`
+`edge_pp = (pDisplay − bookImpliedWinPct) × 100`
 
-Featured section = top **3 positive** edges on today / next slate day with lines (fewer if the slate is thin). Honest label: model edge vs market — not guaranteed profit / not betting advice.
+Featured section = top **3 positive** edges on today / next slate day with lines (fewer if the slate is thin). Soft guardrail: `|edge| > 8 pp` after shrink → exclude from featured top-3. UI note: edges are model vs market after light market shrink (research tool). Not guaranteed profit / not betting advice.
 
 ## Quick start
 

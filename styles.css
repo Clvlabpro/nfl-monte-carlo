@@ -1344,6 +1344,11 @@ code {
 
 
 /* —— Top Edge Plays —— */
+.ep-shrink-note {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
 .top-edge-plays {
   grid-column: 1 / -1;
   margin-bottom: 8px;

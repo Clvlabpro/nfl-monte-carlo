@@ -40,6 +40,14 @@ export const MLB_MODEL = {
   leagueOPS: 0.720,
   platoonK: 2.0,
   platoonClamp: 0.30,
+  /**
+   * Display/sim win% used for Model %, Edge, Top Edge Plays:
+   * pDisplay = blendModel * pModel + blendBook * pBook (then renormalize).
+   * Underlying means stay independent; this is a light market shrink for board UX.
+   * Raw model win% is kept separately (tooltip / rawModel* fields).
+   */
+  displayBlendModel: 0.65,
+  displayBlendBook: 0.35,
 };
 
 /** Default ESPN NFL scoreboard query (regular season Week 3, 2026). */
