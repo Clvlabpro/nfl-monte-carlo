@@ -1,0 +1,2862 @@
+{
+  "fetchedAt": "2026-09-22T04:03:58Z",
+  "sport": "mlb",
+  "season": 2026,
+  "dateStart": "2026-09-21",
+  "dateEnd": "2026-09-24",
+  "daysAhead": 3,
+  "sources": {
+    "mlbStatsApi": {
+      "ok": true,
+      "games": 46
+    },
+    "espnDraftKings": {
+      "ok": true,
+      "espnDaysOk": 4,
+      "espnMatched": 46,
+      "espnWithOdds": 16,
+      "espnGamesSeen": 46
+    },
+    "multiBook": {
+      "ok": false,
+      "note": "FanDuel/BetMGM/Bovada MLB scrapers not adapted; ESPN DK only."
+    }
+  },
+  "disclaimer": "Research tool \u2014 not betting advice. Odds from ESPN DraftKings when present; schedule/pitchers/team context from MLB Stats API. No invented lines.",
+  "games": [
+    {
+      "id": "824787",
+      "gamePk": 824787,
+      "key": "TOR@BAL",
+      "date": "2026-09-21",
+      "kickoffIso": "2026-09-21T22:35:00Z",
+      "completed": true,
+      "statusDetail": "Final",
+      "statusState": "post",
+      "away": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e"
+      },
+      "home": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601"
+      },
+      "awayPitcher": {
+        "id": 702056,
+        "name": "Trey Yesavage",
+        "stats": {
+          "era": 3.67,
+          "whip": 1.13,
+          "inningsPitched": "95.2",
+          "strikeOuts": 94,
+          "strikeoutsPer9Inn": 8.84,
+          "wins": 5,
+          "losses": 5,
+          "gamesStarted": 19
+        }
+      },
+      "homePitcher": {
+        "id": 669358,
+        "name": "Shane Baz",
+        "stats": {
+          "era": 4.11,
+          "whip": 1.35,
+          "inningsPitched": "179.2",
+          "strikeOuts": 154,
+          "strikeoutsPer9Inn": 7.71,
+          "wins": 6,
+          "losses": 15,
+          "gamesStarted": 31
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817027",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824221",
+      "gamePk": 824221,
+      "key": "WSH@DET",
+      "date": "2026-09-21",
+      "kickoffIso": "2026-09-21T22:40:00Z",
+      "completed": true,
+      "statusDetail": "Final",
+      "statusState": "post",
+      "away": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003"
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240"
+      },
+      "awayPitcher": {
+        "id": 687792,
+        "name": "DJ Herz",
+        "stats": {
+          "era": 9.0,
+          "whip": 1.75,
+          "inningsPitched": "4.0",
+          "strikeOuts": 4,
+          "strikeoutsPer9Inn": 9.0,
+          "wins": 0,
+          "losses": 1,
+          "gamesStarted": 1
+        }
+      },
+      "homePitcher": {
+        "id": 689981,
+        "name": "River Ryan",
+        "stats": {
+          "era": 0.0,
+          "whip": 1.0,
+          "inningsPitched": "3.0",
+          "strikeOuts": 3,
+          "strikeoutsPer9Inn": 9.0,
+          "wins": 0,
+          "losses": 0,
+          "gamesStarted": 1
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817028",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823169",
+      "gamePk": 823169,
+      "key": "MIN@SF",
+      "date": "2026-09-21",
+      "kickoffIso": "2026-09-22T01:45:00Z",
+      "completed": false,
+      "statusDetail": "In Progress",
+      "statusState": "in",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40"
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000"
+      },
+      "awayPitcher": {
+        "id": 805673,
+        "name": "Zebby Matthews",
+        "stats": {
+          "era": 4.9,
+          "whip": 1.26,
+          "inningsPitched": "130.1",
+          "strikeOuts": 116,
+          "strikeoutsPer9Inn": 8.01,
+          "wins": 9,
+          "losses": 10,
+          "gamesStarted": 23
+        }
+      },
+      "homePitcher": {
+        "id": 694918,
+        "name": "Blade Tidwell",
+        "stats": {
+          "era": 4.45,
+          "whip": 1.18,
+          "inningsPitched": "56.2",
+          "strikeOuts": 46,
+          "strikeoutsPer9Inn": 7.31,
+          "wins": 1,
+          "losses": 2,
+          "gamesStarted": 9
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817029",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823543",
+      "gamePk": 823543,
+      "key": "TB@NYY",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T17:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c"
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448"
+      },
+      "awayPitcher": {
+        "id": 607259,
+        "name": "Nick Martinez",
+        "stats": {
+          "era": 2.94,
+          "whip": 1.07,
+          "inningsPitched": "171.1",
+          "strikeOuts": 101,
+          "strikeoutsPer9Inn": 5.31,
+          "wins": 15,
+          "losses": 4,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": {
+        "id": 607074,
+        "name": "Carlos Rod\u00f3n",
+        "stats": {
+          "era": 2.95,
+          "whip": 1.13,
+          "inningsPitched": "76.1",
+          "strikeOuts": 83,
+          "strikeoutsPer9Inn": 9.79,
+          "wins": 6,
+          "losses": 3,
+          "gamesStarted": 15
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 6.5,
+          "moneylineHome": -137,
+          "moneylineAway": 113,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -137,
+        "away": 113
+      },
+      "spread": -1.5,
+      "total": 6.5,
+      "espnId": "401817034",
+      "consensus": {
+        "spread": -1.5,
+        "total": 6.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824785",
+      "gamePk": 824785,
+      "key": "TOR@BAL",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T22:35:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e"
+      },
+      "home": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601"
+      },
+      "awayPitcher": {
+        "id": 453286,
+        "name": "Max Scherzer",
+        "stats": {
+          "era": 6.07,
+          "whip": 1.36,
+          "inningsPitched": "72.2",
+          "strikeOuts": 54,
+          "strikeoutsPer9Inn": 6.69,
+          "wins": 3,
+          "losses": 8,
+          "gamesStarted": 16
+        }
+      },
+      "homePitcher": {
+        "id": 605135,
+        "name": "Chris Bassitt",
+        "stats": {
+          "era": 4.64,
+          "whip": 1.55,
+          "inningsPitched": "97.0",
+          "strikeOuts": 72,
+          "strikeoutsPer9Inn": 6.68,
+          "wins": 8,
+          "losses": 5,
+          "gamesStarted": 17
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.5,
+          "moneylineHome": -122,
+          "moneylineAway": 101,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -122,
+        "away": 101
+      },
+      "spread": -1.5,
+      "total": 7.5,
+      "espnId": "401817035",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824222",
+      "gamePk": 824222,
+      "key": "WSH@DET",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003"
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240"
+      },
+      "awayPitcher": {
+        "id": 800600,
+        "name": "Jackson Kent",
+        "stats": {
+          "era": 6.4,
+          "whip": 1.76,
+          "inningsPitched": "32.1",
+          "strikeOuts": 27,
+          "strikeoutsPer9Inn": 7.52,
+          "wins": 1,
+          "losses": 4,
+          "gamesStarted": 7
+        }
+      },
+      "homePitcher": {
+        "id": 623454,
+        "name": "Drew Anderson",
+        "stats": {
+          "era": 3.62,
+          "whip": 1.29,
+          "inningsPitched": "102.0",
+          "strikeOuts": 109,
+          "strikeoutsPer9Inn": 9.62,
+          "wins": 5,
+          "losses": 6,
+          "gamesStarted": 10
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 8.0,
+          "moneylineHome": -156,
+          "moneylineAway": 129,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -156,
+        "away": 129
+      },
+      "spread": -1.5,
+      "total": 8.0,
+      "espnId": "401817036",
+      "consensus": {
+        "spread": -1.5,
+        "total": 8.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823328",
+      "gamePk": 823328,
+      "key": "STL@PIT",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14"
+      },
+      "home": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000"
+      },
+      "awayPitcher": {
+        "id": 669467,
+        "name": "Andre Pallante",
+        "stats": {
+          "era": 3.7,
+          "whip": 1.26,
+          "inningsPitched": "151.0",
+          "strikeOuts": 104,
+          "strikeoutsPer9Inn": 6.2,
+          "wins": 12,
+          "losses": 7,
+          "gamesStarted": 27
+        }
+      },
+      "homePitcher": {
+        "id": 683003,
+        "name": "Jared Jones",
+        "stats": {
+          "era": 4.17,
+          "whip": 1.19,
+          "inningsPitched": "90.2",
+          "strikeOuts": 109,
+          "strikeoutsPer9Inn": 10.82,
+          "wins": 4,
+          "losses": 6,
+          "gamesStarted": 19
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.0,
+          "moneylineHome": -155,
+          "moneylineAway": 129,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -155,
+        "away": 129
+      },
+      "spread": -1.5,
+      "total": 7.0,
+      "espnId": "401817033",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823412",
+      "gamePk": 823412,
+      "key": "MIL@PHI",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b"
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828"
+      },
+      "awayPitcher": {
+        "id": 669160,
+        "name": "Dustin May",
+        "stats": {
+          "era": 4.61,
+          "whip": 1.32,
+          "inningsPitched": "140.2",
+          "strikeOuts": 137,
+          "strikeoutsPer9Inn": 8.77,
+          "wins": 7,
+          "losses": 9,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": {
+        "id": 554430,
+        "name": "Zack Wheeler",
+        "stats": {
+          "era": 2.99,
+          "whip": 1.06,
+          "inningsPitched": "150.1",
+          "strikeOuts": 177,
+          "strikeoutsPer9Inn": 10.6,
+          "wins": 13,
+          "losses": 5,
+          "gamesStarted": 26
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.0,
+          "moneylineHome": -137,
+          "moneylineAway": 113,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -137,
+        "away": 113
+      },
+      "spread": -1.5,
+      "total": 7.0,
+      "espnId": "401817032",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824709",
+      "gamePk": 824709,
+      "key": "CLE@BOS",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T22:45:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c"
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56"
+      },
+      "awayPitcher": {
+        "id": 800048,
+        "name": "Parker Messick",
+        "stats": {
+          "era": 2.57,
+          "whip": 1.04,
+          "inningsPitched": "178.1",
+          "strikeOuts": 186,
+          "strikeoutsPer9Inn": 9.39,
+          "wins": 12,
+          "losses": 9,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": {
+        "id": 801139,
+        "name": "Payton Tolle",
+        "stats": {
+          "era": 3.02,
+          "whip": 1.07,
+          "inningsPitched": "143.0",
+          "strikeOuts": 166,
+          "strikeoutsPer9Inn": 10.45,
+          "wins": 9,
+          "losses": 6,
+          "gamesStarted": 25
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.0,
+          "moneylineHome": -132,
+          "moneylineAway": 110,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -132,
+        "away": 110
+      },
+      "spread": -1.5,
+      "total": 7.0,
+      "espnId": "401817031",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823494",
+      "gamePk": 823494,
+      "key": "TB@NYY",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T23:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c"
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448"
+      },
+      "awayPitcher": {
+        "id": 656876,
+        "name": "Drew Rasmussen",
+        "stats": {
+          "era": 2.72,
+          "whip": 0.93,
+          "inningsPitched": "165.1",
+          "strikeOuts": 163,
+          "strikeoutsPer9Inn": 8.87,
+          "wins": 15,
+          "losses": 5,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": {
+        "id": 608331,
+        "name": "Max Fried",
+        "stats": {
+          "era": 2.63,
+          "whip": 0.98,
+          "inningsPitched": "106.0",
+          "strikeOuts": 100,
+          "strikeoutsPer9Inn": 8.49,
+          "wins": 5,
+          "losses": 4,
+          "gamesStarted": 19
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 6.5,
+          "moneylineHome": -137,
+          "moneylineAway": 113,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -137,
+        "away": 113
+      },
+      "spread": -1.5,
+      "total": 6.5,
+      "espnId": "401817034",
+      "consensus": {
+        "spread": -1.5,
+        "total": 6.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824867",
+      "gamePk": 824867,
+      "key": "CIN@ATL",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f"
+      },
+      "home": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340"
+      },
+      "awayPitcher": {
+        "id": 682227,
+        "name": "Brandon Williamson",
+        "stats": {
+          "era": 5.56,
+          "whip": 1.53,
+          "inningsPitched": "43.2",
+          "strikeOuts": 31,
+          "strikeoutsPer9Inn": 6.39,
+          "wins": 4,
+          "losses": 4,
+          "gamesStarted": 7
+        }
+      },
+      "homePitcher": {
+        "id": 702275,
+        "name": "JR Ritchie",
+        "stats": {
+          "era": 5.03,
+          "whip": 1.47,
+          "inningsPitched": "62.2",
+          "strikeOuts": 58,
+          "strikeoutsPer9Inn": 8.33,
+          "wins": 1,
+          "losses": 3,
+          "gamesStarted": 9
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 9.0,
+          "moneylineHome": -193,
+          "moneylineAway": 158,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -193,
+        "away": 158
+      },
+      "spread": -1.5,
+      "total": 9.0,
+      "espnId": "401817030",
+      "consensus": {
+        "spread": -1.5,
+        "total": 9.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824061",
+      "gamePk": 824061,
+      "key": "CHW@KC",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000"
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687"
+      },
+      "awayPitcher": {
+        "id": 641743,
+        "name": "Anthony Kay",
+        "stats": {
+          "era": 4.41,
+          "whip": 1.36,
+          "inningsPitched": "149.0",
+          "strikeOuts": 121,
+          "strikeoutsPer9Inn": 7.31,
+          "wins": 9,
+          "losses": 9,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": {
+        "id": 663738,
+        "name": "Daniel Lynch IV",
+        "stats": {
+          "era": 3.29,
+          "whip": 1.07,
+          "inningsPitched": "76.2",
+          "strikeOuts": 52,
+          "strikeoutsPer9Inn": 6.1,
+          "wins": 6,
+          "losses": 5,
+          "gamesStarted": 8
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 1.5,
+          "total": 8.0,
+          "moneylineHome": 100,
+          "moneylineAway": -120,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": 100,
+        "away": -120
+      },
+      "spread": 1.5,
+      "total": 8.0,
+      "espnId": "401817037",
+      "consensus": {
+        "spread": 1.5,
+        "total": 8.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824624",
+      "gamePk": 824624,
+      "key": "MIA@CHC",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-22T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0"
+      },
+      "home": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386"
+      },
+      "awayPitcher": {
+        "id": 676083,
+        "name": "Janson Junk",
+        "stats": {
+          "era": 4.5,
+          "whip": 1.34,
+          "inningsPitched": "114.0",
+          "strikeOuts": 78,
+          "strikeoutsPer9Inn": 6.16,
+          "wins": 6,
+          "losses": 9,
+          "gamesStarted": 23
+        }
+      },
+      "homePitcher": null,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 6.5,
+          "moneylineHome": -218,
+          "moneylineAway": 178,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -218,
+        "away": 178
+      },
+      "spread": -1.5,
+      "total": 6.5,
+      "espnId": "401817038",
+      "consensus": {
+        "spread": -1.5,
+        "total": 6.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "822840",
+      "gamePk": 822840,
+      "key": "NYM@TEX",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T00:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72"
+      },
+      "home": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278"
+      },
+      "awayPitcher": {
+        "id": 640455,
+        "name": "Sean Manaea",
+        "stats": {
+          "era": 4.74,
+          "whip": 1.32,
+          "inningsPitched": "138.2",
+          "strikeOuts": 132,
+          "strikeoutsPer9Inn": 8.57,
+          "wins": 5,
+          "losses": 7,
+          "gamesStarted": 17
+        }
+      },
+      "homePitcher": {
+        "id": 669022,
+        "name": "MacKenzie Gore",
+        "stats": {
+          "era": 4.67,
+          "whip": 1.35,
+          "inningsPitched": "165.2",
+          "strikeOuts": 172,
+          "strikeoutsPer9Inn": 9.34,
+          "wins": 8,
+          "losses": 11,
+          "gamesStarted": 32
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.5,
+          "moneylineHome": -149,
+          "moneylineAway": 123,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -149,
+        "away": 123
+      },
+      "spread": -1.5,
+      "total": 7.5,
+      "espnId": "401817039",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824302",
+      "gamePk": 824302,
+      "key": "ARI@COL",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T00:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c"
+      },
+      "home": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f"
+      },
+      "awayPitcher": {
+        "id": 647336,
+        "name": "Michael Soroka",
+        "stats": {
+          "era": 3.45,
+          "whip": 1.13,
+          "inningsPitched": "104.1",
+          "strikeOuts": 101,
+          "strikeoutsPer9Inn": 8.71,
+          "wins": 8,
+          "losses": 5,
+          "gamesStarted": 19
+        }
+      },
+      "homePitcher": {
+        "id": 607536,
+        "name": "Kyle Freeland",
+        "stats": {
+          "era": 6.38,
+          "whip": 1.47,
+          "inningsPitched": "128.1",
+          "strikeOuts": 104,
+          "strikeoutsPer9Inn": 7.29,
+          "wins": 4,
+          "losses": 10,
+          "gamesStarted": 24
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 1.5,
+          "total": 11.0,
+          "moneylineHome": 163,
+          "moneylineAway": -198,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": 163,
+        "away": -198
+      },
+      "spread": 1.5,
+      "total": 11.0,
+      "espnId": "401817040",
+      "consensus": {
+        "spread": 1.5,
+        "total": 11.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824953",
+      "gamePk": 824953,
+      "key": "LAA@ATH",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021"
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831"
+      },
+      "awayPitcher": {
+        "id": 579328,
+        "name": "Yusei Kikuchi",
+        "stats": {
+          "era": 5.02,
+          "whip": 1.55,
+          "inningsPitched": "57.1",
+          "strikeOuts": 58,
+          "strikeoutsPer9Inn": 9.1,
+          "wins": 1,
+          "losses": 6,
+          "gamesStarted": 12
+        }
+      },
+      "homePitcher": {
+        "id": 669620,
+        "name": "Brady Basso",
+        "stats": {
+          "era": 4.5,
+          "whip": 1.48,
+          "inningsPitched": "40.0",
+          "strikeOuts": 28,
+          "strikeoutsPer9Inn": 6.3,
+          "wins": 1,
+          "losses": 3,
+          "gamesStarted": 6
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 1.5,
+          "total": 9.5,
+          "moneylineHome": -110,
+          "moneylineAway": -109,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -110,
+        "away": -109
+      },
+      "spread": 1.5,
+      "total": 9.5,
+      "espnId": "401817041",
+      "consensus": {
+        "spread": 1.5,
+        "total": 9.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823089",
+      "gamePk": 823089,
+      "key": "HOU@SEA",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62"
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c"
+      },
+      "awayPitcher": {
+        "id": 664299,
+        "name": "Cristian Javier",
+        "stats": {
+          "era": 5.31,
+          "whip": 1.46,
+          "inningsPitched": "61.0",
+          "strikeOuts": 57,
+          "strikeoutsPer9Inn": 8.41,
+          "wins": 2,
+          "losses": 6,
+          "gamesStarted": 11
+        }
+      },
+      "homePitcher": {
+        "id": 669302,
+        "name": "Logan Gilbert",
+        "stats": {
+          "era": 3.69,
+          "whip": 1.06,
+          "inningsPitched": "178.0",
+          "strikeOuts": 194,
+          "strikeoutsPer9Inn": 9.81,
+          "wins": 12,
+          "losses": 10,
+          "gamesStarted": 30
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": -1.5,
+          "total": 7.5,
+          "moneylineHome": -149,
+          "moneylineAway": 124,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -149,
+        "away": 124
+      },
+      "spread": -1.5,
+      "total": 7.5,
+      "espnId": "401817042",
+      "consensus": {
+        "spread": -1.5,
+        "total": 7.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823166",
+      "gamePk": 823166,
+      "key": "MIN@SF",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T01:45:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40"
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000"
+      },
+      "awayPitcher": {
+        "id": 671737,
+        "name": "Taj Bradley",
+        "stats": {
+          "era": 3.81,
+          "whip": 1.23,
+          "inningsPitched": "172.1",
+          "strikeOuts": 199,
+          "strikeoutsPer9Inn": 10.39,
+          "wins": 11,
+          "losses": 6,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": {
+        "id": 683627,
+        "name": "Anthony Molina",
+        "stats": {
+          "era": 4.18,
+          "whip": 1.11,
+          "inningsPitched": "28.0",
+          "strikeOuts": 25,
+          "strikeoutsPer9Inn": 8.04,
+          "wins": 3,
+          "losses": 1,
+          "gamesStarted": 4
+        }
+      },
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 1.5,
+          "total": 7.5,
+          "moneylineHome": 109,
+          "moneylineAway": -131,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": 109,
+        "away": -131
+      },
+      "spread": 1.5,
+      "total": 7.5,
+      "espnId": "401817043",
+      "consensus": {
+        "spread": 1.5,
+        "total": 7.5,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "823897",
+      "gamePk": 823897,
+      "key": "SD@LAD",
+      "date": "2026-09-22",
+      "kickoffIso": "2026-09-23T02:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d"
+      },
+      "home": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c"
+      },
+      "awayPitcher": {
+        "id": 650633,
+        "name": "Michael King",
+        "stats": {
+          "era": 3.03,
+          "whip": 1.16,
+          "inningsPitched": "181.0",
+          "strikeOuts": 154,
+          "strikeoutsPer9Inn": 7.66,
+          "wins": 12,
+          "losses": 9,
+          "gamesStarted": 31
+        }
+      },
+      "homePitcher": null,
+      "books": [
+        {
+          "name": "DraftKings",
+          "spread": 1.5,
+          "total": 8.0,
+          "moneylineHome": -120,
+          "moneylineAway": 100,
+          "source": "espn"
+        }
+      ],
+      "moneyline": {
+        "home": -120,
+        "away": 100
+      },
+      "spread": 1.5,
+      "total": 8.0,
+      "espnId": "401817044",
+      "consensus": {
+        "spread": 1.5,
+        "total": 8.0,
+        "method": "median"
+      },
+      "hasOdds": true
+    },
+    {
+      "id": "824223",
+      "gamePk": 824223,
+      "key": "WSH@DET",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T17:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003"
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 664285,
+        "name": "Framber Valdez",
+        "stats": {
+          "era": 4.06,
+          "whip": 1.36,
+          "inningsPitched": "168.2",
+          "strikeOuts": 129,
+          "strikeoutsPer9Inn": 6.88,
+          "wins": 10,
+          "losses": 11,
+          "gamesStarted": 30
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817051",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823168",
+      "gamePk": 823168,
+      "key": "MIN@SF",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T19:45:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40"
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 702885,
+        "name": "Cesar Perdomo",
+        "stats": {
+          "era": 3.72,
+          "whip": 1.5,
+          "inningsPitched": "19.1",
+          "strikeOuts": 12,
+          "strikeoutsPer9Inn": 5.59,
+          "wins": 0,
+          "losses": 1,
+          "gamesStarted": 3
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817058",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824784",
+      "gamePk": 824784,
+      "key": "TOR@BAL",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T22:35:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e"
+      },
+      "home": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601"
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817050",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823327",
+      "gamePk": 823327,
+      "key": "STL@PIT",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14"
+      },
+      "home": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000"
+      },
+      "awayPitcher": {
+        "id": 669461,
+        "name": "Matthew Liberatore",
+        "stats": {
+          "era": 5.36,
+          "whip": 1.49,
+          "inningsPitched": "149.1",
+          "strikeOuts": 148,
+          "strikeoutsPer9Inn": 8.92,
+          "wins": 5,
+          "losses": 14,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817048",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823410",
+      "gamePk": 823410,
+      "key": "MIL@PHI",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b"
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828"
+      },
+      "awayPitcher": {
+        "id": 701656,
+        "name": "Logan Henderson",
+        "stats": {
+          "era": 2.51,
+          "whip": 0.81,
+          "inningsPitched": "93.1",
+          "strikeOuts": 107,
+          "strikeoutsPer9Inn": 10.32,
+          "wins": 10,
+          "losses": 3,
+          "gamesStarted": 17
+        }
+      },
+      "homePitcher": {
+        "id": 605400,
+        "name": "Aaron Nola",
+        "stats": {
+          "era": 4.49,
+          "whip": 1.35,
+          "inningsPitched": "168.1",
+          "strikeOuts": 169,
+          "strikeoutsPer9Inn": 9.04,
+          "wins": 7,
+          "losses": 10,
+          "gamesStarted": 31
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817047",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823492",
+      "gamePk": 823492,
+      "key": "TB@NYY",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T23:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c"
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 543037,
+        "name": "Gerrit Cole",
+        "stats": {
+          "era": 3.63,
+          "whip": 1.1,
+          "inningsPitched": "121.1",
+          "strikeOuts": 123,
+          "strikeoutsPer9Inn": 9.12,
+          "wins": 9,
+          "losses": 9,
+          "gamesStarted": 21
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817049",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824710",
+      "gamePk": 824710,
+      "key": "CLE@BOS",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c"
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56"
+      },
+      "awayPitcher": {
+        "id": 656492,
+        "name": "Foster Griffin",
+        "stats": {
+          "era": 3.67,
+          "whip": 1.19,
+          "inningsPitched": "166.2",
+          "strikeOuts": 151,
+          "strikeoutsPer9Inn": 8.15,
+          "wins": 15,
+          "losses": 5,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": {
+        "id": 543243,
+        "name": "Sonny Gray",
+        "stats": {
+          "era": 2.82,
+          "whip": 1.16,
+          "inningsPitched": "163.0",
+          "strikeOuts": 146,
+          "strikeoutsPer9Inn": 8.06,
+          "wins": 17,
+          "losses": 5,
+          "gamesStarted": 28
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817046",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824868",
+      "gamePk": 824868,
+      "key": "CIN@ATL",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f"
+      },
+      "home": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340"
+      },
+      "awayPitcher": {
+        "id": 671096,
+        "name": "Andrew Abbott",
+        "stats": {
+          "era": 4.7,
+          "whip": 1.47,
+          "inningsPitched": "159.0",
+          "strikeOuts": 125,
+          "strikeoutsPer9Inn": 7.08,
+          "wins": 6,
+          "losses": 11,
+          "gamesStarted": 31
+        }
+      },
+      "homePitcher": {
+        "id": 519242,
+        "name": "Chris Sale",
+        "stats": {
+          "era": 2.18,
+          "whip": 0.99,
+          "inningsPitched": "157.0",
+          "strikeOuts": 190,
+          "strikeoutsPer9Inn": 10.89,
+          "wins": 14,
+          "losses": 9,
+          "gamesStarted": 26
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817045",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824060",
+      "gamePk": 824060,
+      "key": "CHW@KC",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000"
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687"
+      },
+      "awayPitcher": {
+        "id": 607200,
+        "name": "Erick Fedde",
+        "stats": {
+          "era": 3.9,
+          "whip": 1.34,
+          "inningsPitched": "138.1",
+          "strikeOuts": 97,
+          "strikeoutsPer9Inn": 6.31,
+          "wins": 8,
+          "losses": 9,
+          "gamesStarted": 15
+        }
+      },
+      "homePitcher": {
+        "id": 607625,
+        "name": "Seth Lugo",
+        "stats": {
+          "era": 5.06,
+          "whip": 1.46,
+          "inningsPitched": "169.0",
+          "strikeOuts": 131,
+          "strikeoutsPer9Inn": 6.98,
+          "wins": 7,
+          "losses": 9,
+          "gamesStarted": 31
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817052",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824625",
+      "gamePk": 824625,
+      "key": "MIA@CHC",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-23T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0"
+      },
+      "home": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386"
+      },
+      "awayPitcher": {
+        "id": 687473,
+        "name": "Ryan Gusto",
+        "stats": {
+          "era": 4.14,
+          "whip": 1.44,
+          "inningsPitched": "82.2",
+          "strikeOuts": 69,
+          "strikeoutsPer9Inn": 7.51,
+          "wins": 1,
+          "losses": 5,
+          "gamesStarted": 17
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817053",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822841",
+      "gamePk": 822841,
+      "key": "NYM@TEX",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-24T00:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72"
+      },
+      "home": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278"
+      },
+      "awayPitcher": {
+        "id": 690997,
+        "name": "Nolan McLean",
+        "stats": {
+          "era": 3.18,
+          "whip": 1.19,
+          "inningsPitched": "172.2",
+          "strikeOuts": 189,
+          "strikeoutsPer9Inn": 9.85,
+          "wins": 11,
+          "losses": 10,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817054",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824301",
+      "gamePk": 824301,
+      "key": "ARI@COL",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-24T00:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c"
+      },
+      "home": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f"
+      },
+      "awayPitcher": {
+        "id": 518876,
+        "name": "Merrill Kelly",
+        "stats": {
+          "era": 5.0,
+          "whip": 1.47,
+          "inningsPitched": "156.2",
+          "strikeOuts": 111,
+          "strikeoutsPer9Inn": 6.38,
+          "wins": 9,
+          "losses": 14,
+          "gamesStarted": 28
+        }
+      },
+      "homePitcher": {
+        "id": 690279,
+        "name": "Mason Adams",
+        "stats": {
+          "era": 5.09,
+          "whip": 1.65,
+          "inningsPitched": "23.0",
+          "strikeOuts": 23,
+          "strikeoutsPer9Inn": 9.0,
+          "wins": 0,
+          "losses": 1,
+          "gamesStarted": 5
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817055",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824951",
+      "gamePk": 824951,
+      "key": "LAA@ATH",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-24T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021"
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831"
+      },
+      "awayPitcher": {
+        "id": 700712,
+        "name": "Walbert Ure\u00f1a",
+        "stats": {
+          "era": 2.74,
+          "whip": 1.21,
+          "inningsPitched": "144.1",
+          "strikeOuts": 140,
+          "strikeoutsPer9Inn": 8.73,
+          "wins": 9,
+          "losses": 10,
+          "gamesStarted": 26
+        }
+      },
+      "homePitcher": {
+        "id": 605488,
+        "name": "Jeffrey Springs",
+        "stats": {
+          "era": 6.18,
+          "whip": 1.47,
+          "inningsPitched": "138.1",
+          "strikeOuts": 109,
+          "strikeoutsPer9Inn": 7.09,
+          "wins": 4,
+          "losses": 14,
+          "gamesStarted": 28
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817056",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823894",
+      "gamePk": 823894,
+      "key": "SD@LAD",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-24T02:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d"
+      },
+      "home": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c"
+      },
+      "awayPitcher": {
+        "id": 592662,
+        "name": "Robbie Ray",
+        "stats": {
+          "era": 3.6,
+          "whip": 1.33,
+          "inningsPitched": "162.1",
+          "strikeOuts": 138,
+          "strikeoutsPer9Inn": 7.65,
+          "wins": 13,
+          "losses": 8,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817059",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823086",
+      "gamePk": 823086,
+      "key": "HOU@SEA",
+      "date": "2026-09-23",
+      "kickoffIso": "2026-09-24T02:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62"
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 669923,
+        "name": "George Kirby",
+        "stats": {
+          "era": 4.24,
+          "whip": 1.39,
+          "inningsPitched": "169.2",
+          "strikeOuts": 143,
+          "strikeoutsPer9Inn": 7.59,
+          "wins": 9,
+          "losses": 11,
+          "gamesStarted": 29
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817057",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823326",
+      "gamePk": 823326,
+      "key": "STL@PIT",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T16:35:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14"
+      },
+      "home": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000"
+      },
+      "awayPitcher": {
+        "id": 681517,
+        "name": "Kyle Leahy",
+        "stats": {
+          "era": 3.65,
+          "whip": 1.34,
+          "inningsPitched": "138.0",
+          "strikeOuts": 129,
+          "strikeoutsPer9Inn": 8.41,
+          "wins": 10,
+          "losses": 5,
+          "gamesStarted": 29
+        }
+      },
+      "homePitcher": {
+        "id": 694973,
+        "name": "Paul Skenes",
+        "stats": {
+          "era": 3.91,
+          "whip": 1.13,
+          "inningsPitched": "168.0",
+          "strikeOuts": 192,
+          "strikeoutsPer9Inn": 10.29,
+          "wins": 10,
+          "losses": 11,
+          "gamesStarted": 31
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817063",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824059",
+      "gamePk": 824059,
+      "key": "CHW@KC",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T18:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000"
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 677976,
+        "name": "Randy Dobnak",
+        "stats": {
+          "era": 3.08,
+          "whip": 1.33,
+          "inningsPitched": "73.0",
+          "strikeOuts": 48,
+          "strikeoutsPer9Inn": 5.92,
+          "wins": 3,
+          "losses": 4,
+          "gamesStarted": 12
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817065",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824623",
+      "gamePk": 824623,
+      "key": "MIA@CHC",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T18:20:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0"
+      },
+      "home": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386"
+      },
+      "awayPitcher": {
+        "id": 663969,
+        "name": "Tyler Phillips",
+        "stats": {
+          "era": 3.45,
+          "whip": 1.31,
+          "inningsPitched": "122.2",
+          "strikeOuts": 99,
+          "strikeoutsPer9Inn": 7.26,
+          "wins": 5,
+          "losses": 6,
+          "gamesStarted": 19
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817066",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822842",
+      "gamePk": 822842,
+      "key": "NYM@TEX",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T18:35:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72"
+      },
+      "home": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278"
+      },
+      "awayPitcher": {
+        "id": 804267,
+        "name": "Zac Thornton",
+        "stats": {
+          "era": 3.4,
+          "whip": 1.15,
+          "inningsPitched": "79.1",
+          "strikeOuts": 59,
+          "strikeoutsPer9Inn": 6.69,
+          "wins": 5,
+          "losses": 5,
+          "gamesStarted": 14
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817067",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824298",
+      "gamePk": 824298,
+      "key": "ARI@COL",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c"
+      },
+      "home": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f"
+      },
+      "awayPitcher": {
+        "id": 593958,
+        "name": "Eduardo Rodriguez",
+        "stats": {
+          "era": 2.89,
+          "whip": 1.23,
+          "inningsPitched": "183.2",
+          "strikeOuts": 140,
+          "strikeoutsPer9Inn": 6.86,
+          "wins": 15,
+          "losses": 7,
+          "gamesStarted": 31
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817068",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823411",
+      "gamePk": 823411,
+      "key": "MIL@PHI",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T22:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b"
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828"
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817062",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824707",
+      "gamePk": 824707,
+      "key": "CLE@BOS",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T22:45:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c"
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 624133,
+        "name": "Ranger Suarez",
+        "stats": {
+          "era": 3.27,
+          "whip": 1.2,
+          "inningsPitched": "143.1",
+          "strikeOuts": 135,
+          "strikeoutsPer9Inn": 8.48,
+          "wins": 8,
+          "losses": 4,
+          "gamesStarted": 27
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817061",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823493",
+      "gamePk": 823493,
+      "key": "TB@NYY",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T23:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c"
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448"
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 693645,
+        "name": "Cam Schlittler",
+        "stats": {
+          "era": 1.94,
+          "whip": 0.91,
+          "inningsPitched": "190.2",
+          "strikeOuts": 234,
+          "strikeoutsPer9Inn": 11.05,
+          "wins": 14,
+          "losses": 6,
+          "gamesStarted": 32
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817064",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824866",
+      "gamePk": 824866,
+      "key": "CIN@ATL",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-24T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f"
+      },
+      "home": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340"
+      },
+      "awayPitcher": {
+        "id": 663903,
+        "name": "Brady Singer",
+        "stats": {
+          "era": 5.67,
+          "whip": 1.56,
+          "inningsPitched": "154.0",
+          "strikeOuts": 125,
+          "strikeoutsPer9Inn": 7.31,
+          "wins": 6,
+          "losses": 15,
+          "gamesStarted": 30
+        }
+      },
+      "homePitcher": {
+        "id": 641816,
+        "name": "Tyler Mahle",
+        "stats": {
+          "era": 3.81,
+          "whip": 1.22,
+          "inningsPitched": "144.0",
+          "strikeOuts": 133,
+          "strikeoutsPer9Inn": 8.31,
+          "wins": 7,
+          "losses": 10,
+          "gamesStarted": 26
+        }
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817060",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824950",
+      "gamePk": 824950,
+      "key": "HOU@ATH",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-25T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62"
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831"
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817070",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823087",
+      "gamePk": 823087,
+      "key": "LAA@SEA",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-25T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021"
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c"
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817069",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823895",
+      "gamePk": 823895,
+      "key": "SD@LAD",
+      "date": "2026-09-24",
+      "kickoffIso": "2026-09-25T02:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d"
+      },
+      "home": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c"
+      },
+      "awayPitcher": {
+        "id": 601713,
+        "name": "Nick Pivetta",
+        "stats": {
+          "era": 3.3,
+          "whip": 1.0,
+          "inningsPitched": "30.0",
+          "strikeOuts": 35,
+          "strikeoutsPer9Inn": 10.5,
+          "wins": 3,
+          "losses": 2,
+          "gamesStarted": 7
+        }
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817071",
+      "consensus": null,
+      "hasOdds": false
+    }
+  ],
+  "counts": {
+    "games": 46,
+    "withOdds": 16,
+    "withBothPitchers": 25
+  }
+}

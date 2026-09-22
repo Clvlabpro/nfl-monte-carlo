@@ -1,36 +1,66 @@
 /**
- * NFL score generator (Gaussian market-calibrated sims).
+ * Score generator (Gaussian market-calibrated sims) for NFL and MLB.
  *
- * Market-calibrated means from spread + total:
+ * Market-calibrated means from spread/run line + total:
  *   marginExp = −spread          // expected home − away
  *   homeExp   = (total − spread) / 2
  *   awayExp   = (total + spread) / 2
  *
- * Correlated Gaussian noise around those means → integer scores ≥ 0.
- * By construction ATS cover ≈ 50% (before push / rounding); win% comes from the spread.
+ * MLB optional pitcher adjust (when both SPs have ERA):
+ *   eraDiff = awayERA − homeERA
+ *   pitcherAdj = clamp(eraDiff * pitcherEraK, −pitcherClamp, +pitcherClamp)
+ *   homeExp += pitcherAdj / 2;  awayExp -= pitcherAdj / 2
+ *
+ * Correlated Gaussian noise → integer scores ≥ 0.
  */
 
 import { MODEL } from "./data.js";
 
+function clamp(x, lo, hi) {
+  return Math.max(lo, Math.min(hi, x));
+}
+
 /**
- * Expected points implied by the sportsbook line.
- * @param {{ spread: number, total: number }} game
+ * Expected points/runs implied by the sportsbook line (+ optional pitcher adj).
+ * @param {{ spread: number, total: number, awayPitcher?: object, homePitcher?: object }} game
+ * @param {object} model
  */
 export function expectedPoints(game, model = MODEL) {
-  void model; // noise params live on MODEL; means are market-only
   const spread = Number(game.spread);
   const total = Number(game.total);
   if (!Number.isFinite(spread) || !Number.isFinite(total)) {
     throw new Error("expectedPoints requires finite spread and total");
   }
-  const marginExp = -spread;
-  const homeExp = (total + marginExp) / 2; // (total - spread) / 2
-  const awayExp = (total - marginExp) / 2; // (total + spread) / 2
+  let marginExp = -spread;
+  let homeExp = (total + marginExp) / 2; // (total - spread) / 2
+  let awayExp = (total - marginExp) / 2; // (total + spread) / 2
+
+  let pitcherAdj = 0;
+  const k = model.pitcherEraK;
+  const lim = model.pitcherClamp;
+  if (k != null && lim != null) {
+    const aEra = game.awayPitcher?.stats?.era;
+    const hEra = game.homePitcher?.stats?.era;
+    if (
+      aEra != null &&
+      hEra != null &&
+      Number.isFinite(Number(aEra)) &&
+      Number.isFinite(Number(hEra))
+    ) {
+      const eraDiff = Number(aEra) - Number(hEra);
+      pitcherAdj = clamp(eraDiff * k, -lim, lim);
+      homeExp += pitcherAdj / 2;
+      awayExp -= pitcherAdj / 2;
+      marginExp = homeExp - awayExp;
+    }
+  }
+
   return {
     homeExp,
     awayExp,
     marginExp,
     totalExp: homeExp + awayExp,
+    pitcherAdj,
   };
 }
 
@@ -58,7 +88,7 @@ export function mulberry32(seed) {
 
 /**
  * Run N simulations. Returns typed arrays + aggregates.
- * Requires game.hasOdds / finite spread+total.
+ * Pass opts.model = MLB_MODEL for baseball sigma / pitcher adjust.
  */
 export function runSimulation(game, n, opts = {}) {
   if (game.spread == null || game.total == null) {
@@ -66,7 +96,7 @@ export function runSimulation(game, n, opts = {}) {
   }
   const model = { ...MODEL, ...(opts.model || {}) };
   const rng = opts.seed != null ? mulberry32(opts.seed) : Math.random;
-  const { homeExp, awayExp } = expectedPoints(game, model);
+  const { homeExp, awayExp, pitcherAdj } = expectedPoints(game, model);
   const sigma = model.scoreSigma;
   const rho = model.scoreCorrelation;
   const sqrt1r2 = Math.sqrt(1 - rho * rho);
@@ -80,8 +110,6 @@ export function runSimulation(game, n, opts = {}) {
   let homeWins = 0;
   let awayWins = 0;
   let ties = 0;
-  // Convention: spread is home perspective (negative = home favored).
-  // Home covers when margin + spread > 0.
   let homeCover = 0;
   let awayCover = 0;
   let pushesSpread = 0;
@@ -131,6 +159,7 @@ export function runSimulation(game, n, opts = {}) {
     n,
     homeExp,
     awayExp,
+    pitcherAdj: pitcherAdj || 0,
     homeScores,
     awayScores,
     margins,

@@ -1,0 +1,230 @@
+{
+  "fetchedAt": "2026-09-22T04:01:09Z",
+  "sport": "mlb",
+  "source": "Action Network public betting",
+  "sourceUrl": "https://www.actionnetwork.com/mlb/public-betting",
+  "bookId": 15,
+  "sharpThreshold": 10,
+  "note": "Action Network MLB public betting \u00b7 3 games on page",
+  "disclaimer": "Public betting sample from Action Network (tickets % vs money %). A money\u2212tickets gap is often read as a sharper lean \u2014 not a guarantee of sharp action and not betting advice. Snapshot only; re-run this script to refresh.",
+  "games": [
+    {
+      "key": "TOR@BAL",
+      "away": "TOR",
+      "home": "BAL",
+      "numBets": 9062,
+      "startTime": "2026-09-21T22:35:00.000Z",
+      "status": "complete",
+      "spread": {
+        "homeTickets": 22,
+        "homeMoney": 32,
+        "awayTickets": 78,
+        "awayMoney": 68,
+        "line": 1.5,
+        "homeSharpGap": 10,
+        "awaySharpGap": -10,
+        "sharpLean": "home",
+        "sharpGap": 10
+      },
+      "moneyline": {
+        "homeTickets": 39,
+        "homeMoney": 22,
+        "awayTickets": 61,
+        "awayMoney": 78,
+        "homeSharpGap": -17,
+        "awaySharpGap": 17,
+        "sharpLean": "away",
+        "sharpGap": 17
+      },
+      "total": {
+        "overTickets": 91,
+        "overMoney": 94,
+        "underTickets": 9,
+        "underMoney": 6,
+        "line": 7.5,
+        "overSharpGap": 3,
+        "underSharpGap": -3
+      }
+    },
+    {
+      "key": "WSH@DET",
+      "away": "WSH",
+      "home": "DET",
+      "numBets": 9890,
+      "startTime": "2026-09-21T22:40:00.000Z",
+      "status": "complete",
+      "spread": {
+        "homeTickets": 46,
+        "homeMoney": 67,
+        "awayTickets": 54,
+        "awayMoney": 33,
+        "line": -1.5,
+        "homeSharpGap": 21,
+        "awaySharpGap": -21,
+        "sharpLean": "home",
+        "sharpGap": 21
+      },
+      "moneyline": {
+        "homeTickets": 79,
+        "homeMoney": 74,
+        "awayTickets": 21,
+        "awayMoney": 26,
+        "homeSharpGap": -5,
+        "awaySharpGap": 5
+      },
+      "total": {
+        "overTickets": 90,
+        "overMoney": 89,
+        "underTickets": 10,
+        "underMoney": 11,
+        "line": 8.5,
+        "overSharpGap": -1,
+        "underSharpGap": 1
+      }
+    },
+    {
+      "key": "MIN@SF",
+      "away": "MIN",
+      "home": "SF",
+      "numBets": 11081,
+      "startTime": "2026-09-22T01:45:00.000Z",
+      "status": "inprogress",
+      "spread": {
+        "homeTickets": 34,
+        "homeMoney": 27,
+        "awayTickets": 66,
+        "awayMoney": 73,
+        "line": 1.5,
+        "homeSharpGap": -7,
+        "awaySharpGap": 7
+      },
+      "moneyline": {
+        "homeTickets": 0,
+        "homeMoney": 0,
+        "awayTickets": 75,
+        "awayMoney": 74,
+        "homeSharpGap": 0,
+        "awaySharpGap": -1
+      },
+      "total": {
+        "overTickets": 85,
+        "overMoney": 89,
+        "underTickets": 15,
+        "underMoney": 11,
+        "line": 8.0,
+        "overSharpGap": 4,
+        "underSharpGap": -4
+      }
+    }
+  ],
+  "byKey": {
+    "TOR@BAL": {
+      "key": "TOR@BAL",
+      "away": "TOR",
+      "home": "BAL",
+      "numBets": 9062,
+      "startTime": "2026-09-21T22:35:00.000Z",
+      "status": "complete",
+      "spread": {
+        "homeTickets": 22,
+        "homeMoney": 32,
+        "awayTickets": 78,
+        "awayMoney": 68,
+        "line": 1.5,
+        "homeSharpGap": 10,
+        "awaySharpGap": -10,
+        "sharpLean": "home",
+        "sharpGap": 10
+      },
+      "moneyline": {
+        "homeTickets": 39,
+        "homeMoney": 22,
+        "awayTickets": 61,
+        "awayMoney": 78,
+        "homeSharpGap": -17,
+        "awaySharpGap": 17,
+        "sharpLean": "away",
+        "sharpGap": 17
+      },
+      "total": {
+        "overTickets": 91,
+        "overMoney": 94,
+        "underTickets": 9,
+        "underMoney": 6,
+        "line": 7.5,
+        "overSharpGap": 3,
+        "underSharpGap": -3
+      }
+    },
+    "WSH@DET": {
+      "key": "WSH@DET",
+      "away": "WSH",
+      "home": "DET",
+      "numBets": 9890,
+      "startTime": "2026-09-21T22:40:00.000Z",
+      "status": "complete",
+      "spread": {
+        "homeTickets": 46,
+        "homeMoney": 67,
+        "awayTickets": 54,
+        "awayMoney": 33,
+        "line": -1.5,
+        "homeSharpGap": 21,
+        "awaySharpGap": -21,
+        "sharpLean": "home",
+        "sharpGap": 21
+      },
+      "moneyline": {
+        "homeTickets": 79,
+        "homeMoney": 74,
+        "awayTickets": 21,
+        "awayMoney": 26,
+        "homeSharpGap": -5,
+        "awaySharpGap": 5
+      },
+      "total": {
+        "overTickets": 90,
+        "overMoney": 89,
+        "underTickets": 10,
+        "underMoney": 11,
+        "line": 8.5,
+        "overSharpGap": -1,
+        "underSharpGap": 1
+      }
+    },
+    "MIN@SF": {
+      "key": "MIN@SF",
+      "away": "MIN",
+      "home": "SF",
+      "numBets": 11081,
+      "startTime": "2026-09-22T01:45:00.000Z",
+      "status": "inprogress",
+      "spread": {
+        "homeTickets": 34,
+        "homeMoney": 27,
+        "awayTickets": 66,
+        "awayMoney": 73,
+        "line": 1.5,
+        "homeSharpGap": -7,
+        "awaySharpGap": 7
+      },
+      "moneyline": {
+        "homeTickets": 0,
+        "homeMoney": 0,
+        "awayTickets": 75,
+        "awayMoney": 74,
+        "homeSharpGap": 0,
+        "awaySharpGap": -1
+      },
+      "total": {
+        "overTickets": 85,
+        "overMoney": 89,
+        "underTickets": 15,
+        "underMoney": 11,
+        "line": 8.0,
+        "overSharpGap": 4,
+        "underSharpGap": -4
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
     <title>clvpro</title>
     <meta
       name="description"
-      content="NFL Pick Board + market-calibrated simulator on multi-book median consensus. Research tool — not betting advice."
+      content="clvpro — NFL + MLB Pick Board and market-calibrated sims. Research tool — not betting advice."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +32,11 @@
         </div>
       </header>
 
+      <nav class="sport-tabs" aria-label="Sport">
+        <button type="button" class="sport-tab active" data-sport="nfl" id="tab-sport-nfl">NFL</button>
+        <button type="button" class="sport-tab" data-sport="mlb" id="tab-sport-mlb">MLB</button>
+      </nav>
+
       <nav class="view-tabs" aria-label="Primary views">
         <button type="button" class="view-tab active" data-view="pickboard" id="tab-pickboard">
           Pick Board
@@ -49,9 +54,9 @@
         <div class="pickboard-toolbar card">
           <div class="pickboard-toolbar-row">
             <div>
-              <h2>Week 3 Pick Board</h2>
-              <p class="muted" style="margin:0;font-size:0.82rem">
-                Week 3 + featured remaining Week 2 MNF · consensus lines · quick MC (8k) · transparent lean heuristics
+              <h2 id="pb-title">Week 3 Pick Board</h2>
+              <p class="muted" style="margin:0;font-size:0.82rem" id="pb-subtitle">
+                Week 3 + featured remaining Week 2 MNF · consensus lines · quick sims (8k) · transparent lean heuristics
               </p>
             </div>
             <div class="btn-row pickboard-actions">
@@ -64,7 +69,7 @@
           <div class="filter-pills" id="pick-filters" role="group" aria-label="Pick filters">
             <button type="button" data-filter="all" class="active">All</button>
             <button type="button" data-filter="lean">Has lean</button>
-            <button type="button" data-filter="spread">Spread leans</button>
+            <button type="button" data-filter="spread" id="filter-spread">Spread leans</button>
             <button type="button" data-filter="ml">ML leans</button>
           </div>
         </div>
@@ -74,11 +79,11 @@
 
         <div class="disclaimer pickboard-disclaimer">
           <strong>Research tool — not betting advice.</strong>
-          Leans are transparent heuristics (line shop ≥0.5 pts vs consensus; market-implied MC win% ≥58%/≤42%)
+          Leans are transparent heuristics (line shop ≥0.5 vs consensus; market-implied sim win% ≥58%/≤42%)
           plus sims around consensus means — <em>not</em> a proprietary edge model and not a recommendation to wager.
           <strong>Bets vs Money</strong> is an Action Network public-betting snapshot (tickets % vs money %);
           a money−tickets gap is often read as a sharper lean but is not a guarantee of sharp action.
-          Splits refresh only when <code>scripts/fetch-splits.py</code> is re-run and redeployed. Branding: clvpro.
+          Public splits ≠ proven sharps. Splits/lines refresh when fetch scripts are re-run and redeployed. Branding: <strong>clvpro</strong>.
         </div>
       </section>
 
@@ -125,11 +130,11 @@
                 </div>
                 <div class="lines lines-4">
                   <div class="line-box">
-                    <div class="k">Consensus spread</div>
+                    <div class="k" id="label-spread">Consensus spread</div>
                     <div class="v" id="line-spread">—</div>
                   </div>
                   <div class="line-box">
-                    <div class="k">Consensus total</div>
+                    <div class="k" id="label-total">Consensus total</div>
                     <div class="v" id="line-total">—</div>
                   </div>
                   <div class="line-box">
@@ -141,15 +146,16 @@
                     <div class="v" id="line-status">—</div>
                   </div>
                 </div>
-                <p class="kickoff-line">Kickoff: <span id="line-kickoff">—</span></p>
+                <p class="kickoff-line"><span id="label-kickoff">Kickoff</span>: <span id="line-kickoff">—</span></p>
+                <div id="mlb-sp-row" class="mlb-sp-row" hidden></div>
 
                 <div class="books-table-wrap">
                   <table class="books-table">
                     <thead>
                       <tr>
                         <th>Book</th>
-                        <th>Spread (home)</th>
-                        <th>Total</th>
+                        <th id="th-spread">Spread (home)</th>
+                        <th id="th-total">Total</th>
                       </tr>
                     </thead>
                     <tbody id="books-body"></tbody>
@@ -186,7 +192,7 @@
 
             <div class="card model-panel" style="margin-top: 18px">
               <h2>Transparent model</h2>
-              <p>
+              <p id="model-blurb">
                 Expected points are <strong>market-implied</strong> from the
                 <strong>median consensus</strong> home spread and total across DraftKings (via ESPN),
                 FanDuel, BetMGM, and Bovada when available. Noise is a bivariate normal around those
@@ -239,7 +245,7 @@ Z₁, Z₂ ~ iid N(0,1)  →  Corr ≈ ρ</div>
       </section>
 
       <footer class="app-footer">
-        clvpro · Pick Board + Sim · multi-book snapshot + ESPN live
+        clvpro · NFL + MLB · Pick Board + Sim · research tool — not betting advice
       </footer>
     </div>
     <script type="module" src="./app.js"></script>

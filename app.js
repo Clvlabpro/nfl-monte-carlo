@@ -1,4 +1,4 @@
-import { MODEL, ESPN_DEFAULTS } from "./data.js";
+import { MODEL, MLB_MODEL, ESPN_DEFAULTS, DEFAULT_SPORT } from "./data.js";
 import { formatKickoff, statusLabel, teamLogoUrl, readableTeamColor, teamColorHex } from "./espn.js";
 import { loadMultiBookLines, formatLinesTimestamp } from "./lines.js";
 import {
@@ -7,6 +7,7 @@ import {
   formatSplitsTimestamp,
   sharpLeanFor,
 } from "./splits.js";
+import { loadMlbBoard } from "./mlb.js";
 import { expectedPoints, runSimulation, histogram } from "./sim.js";
 import { drawHistogram, drawWinBar } from "./charts.js";
 import {
@@ -55,6 +56,7 @@ function setChipLogo(imgEl, team) {
 
 
 const state = {
+  sport: DEFAULT_SPORT, // "nfl" | "mlb"
   games: [],
   gameId: null,
   n: 10000,
@@ -67,6 +69,8 @@ const state = {
   loading: false,
   error: null,
   sources: null,
+  dateStart: null,
+  dateEnd: null,
   view: "pickboard",
   pickFilter: "all",
   /** @type {Map<string, {homeWinPct:number,awayWinPct:number,n:number}>} */
@@ -75,6 +79,67 @@ const state = {
   /** @type {null | {ok:boolean,matched:number,fetchedAt:string|null,source:string,week:number|null,note:string|null}} */
   splitsMeta: null,
 };
+
+function activeModel() {
+  return state.sport === "mlb" ? MLB_MODEL : MODEL;
+}
+
+function unitLabel() {
+  return state.sport === "mlb" ? "runs" : "pts";
+}
+
+function spreadWord() {
+  return state.sport === "mlb" ? "run line" : "spread";
+}
+
+function applySportLabels() {
+  const mlb = state.sport === "mlb";
+  document.querySelectorAll(".sport-tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.sport === state.sport);
+  });
+  const pbTitle = $("#pb-title");
+  const pbSub = $("#pb-subtitle");
+  if (pbTitle) {
+    pbTitle.textContent = mlb
+      ? "MLB Pick Board"
+      : `Week ${state.week ?? ESPN_DEFAULTS.week} Pick Board`;
+  }
+  if (pbSub) {
+    pbSub.textContent = mlb
+      ? "Today + next 2–3 days · Stats API + ESPN DK · Action Network splits · quick sims (8k) · pitcher-aware model"
+      : "Week 3 + featured remaining Week 2 MNF · consensus lines · quick sims (8k) · transparent lean heuristics";
+  }
+  const fs = $("#filter-spread");
+  if (fs) fs.textContent = mlb ? "Run line leans" : "Spread leans";
+  const ls = $("#label-spread");
+  if (ls) ls.textContent = mlb ? "Consensus run line" : "Consensus spread";
+  const lt = $("#label-total");
+  if (lt) lt.textContent = mlb ? "Consensus total" : "Consensus total";
+  const lk = $("#label-kickoff");
+  if (lk) lk.textContent = mlb ? "First pitch" : "Kickoff";
+  const ths = $("#th-spread");
+  if (ths) ths.textContent = mlb ? "Run line (home)" : "Spread (home)";
+  const tht = $("#th-total");
+  if (tht) tht.textContent = "Total";
+  const sigma = $("#model-sigma");
+  const rho = $("#model-rho");
+  const m = activeModel();
+  if (sigma) sigma.textContent = String(m.scoreSigma);
+  if (rho) rho.textContent = String(m.scoreCorrelation);
+  const blurb = $("#model-blurb");
+  if (blurb) {
+    blurb.innerHTML = mlb
+      ? `Expected <strong>runs</strong> are <strong>market-implied</strong> from consensus run line + total (ESPN DraftKings when present).
+         When both probable SPs have season ERA, a modest adjustment
+         <code>clamp((awayERA−homeERA)×${m.pitcherEraK}, ±${m.pitcherClamp})</code> shifts means toward the better pitcher.
+         Noise σ≈${m.scoreSigma} runs (lower than NFL). Research tool — not betting advice.`
+      : `Expected points are <strong>market-implied</strong> from the
+         <strong>median consensus</strong> home spread and total across DraftKings (via ESPN),
+         FanDuel, BetMGM, and Bovada when available. Noise is a bivariate normal around those
+         means; scores are rounded to integers and floored at zero. ATS cover rates sit near
+         50% by design; win probability is driven by the spread.`;
+  }
+}
 
 function getGame() {
   return state.games.find((g) => g.id === state.gameId) || state.games[0] || null;
@@ -109,7 +174,7 @@ function setLoading(on, msg) {
   if (on) {
     el.hidden = false;
     el.className = "load-status loading";
-    el.textContent = msg || "Loading multi-book lines…";
+    el.textContent = msg || (state.sport === "mlb" ? "Loading MLB board…" : "Loading multi-book lines…");
   } else if (state.error) {
     el.hidden = false;
     el.className = "load-status error";
@@ -120,7 +185,12 @@ function setLoading(on, msg) {
     const nOdds = state.games.filter((g) => g.hasOdds).length;
     const snap = state.snapshotAt ? fmtFetched(state.snapshotAt) : "n/a";
     const live = state.liveEspnAt ? fmtFetched(state.liveEspnAt) : "n/a";
-    el.textContent = `Week ${state.week} · ${state.games.length} games · ${nOdds} with lines · snapshot ${snap} · ESPN live ${live}`;
+    if (state.sport === "mlb") {
+      const up = state.games.filter((g) => !g.completed && g.statusState !== "post").length;
+      el.textContent = `MLB · ${state.games.length} games (${up} upcoming) · ${nOdds} with lines · snapshot ${snap} · ESPN live ${live}`;
+    } else {
+      el.textContent = `Week ${state.week} · ${state.games.length} games · ${nOdds} with lines · snapshot ${snap} · ESPN live ${live}`;
+    }
   }
 }
 
@@ -224,6 +294,8 @@ function renderMatchupPreview() {
     renderBooksTable(null);
     const splitsHost = $("#sim-splits");
     if (splitsHost) splitsHost.innerHTML = "";
+    const spRow = $("#mlb-sp-row");
+    if (spRow) { spRow.hidden = true; spRow.innerHTML = ""; }
     $("#model-exp").textContent = "Load lines to see market-implied expected scores.";
     updateRunButton();
     return;
@@ -278,21 +350,45 @@ function renderMatchupPreview() {
     splitsHost.innerHTML = renderSplitsSection(g);
   }
 
+  const spRow = $("#mlb-sp-row");
+  if (spRow) {
+    if (state.sport === "mlb") {
+      spRow.hidden = false;
+      const a = g.awayPitcher;
+      const h = g.homePitcher;
+      spRow.innerHTML = `<div class="mlb-sp"><span class="k">Probable SPs</span>
+        <span>${escapeHtml(fmtPitcher(a))} <span class="muted">vs</span> ${escapeHtml(fmtPitcher(h))}</span></div>`;
+    } else {
+      spRow.hidden = true;
+      spRow.innerHTML = "";
+    }
+  }
+
   if (g.hasOdds) {
-    const exp = expectedPoints(g);
+    const exp = expectedPoints(g, activeModel());
     $("#exp-home").textContent = fmtScore(exp.homeExp);
     $("#exp-away").textContent = fmtScore(exp.awayExp);
     $("#exp-margin").textContent =
       (exp.marginExp >= 0 ? "+" : "") + fmtScore(exp.marginExp);
-    $("#model-exp").textContent = `Market-implied means (multi-book median consensus)
+    const sw = spreadWord();
+    const pitcherBit =
+      state.sport === "mlb"
+        ? `
+pitcherAdj = clamp((awayERA−homeERA)×${activeModel().pitcherEraK}, ±${activeModel().pitcherClamp}) = ${(exp.pitcherAdj || 0).toFixed(3)}
+(applied as ±adj/2 to each side; 0 if either SP ERA missing)`
+        : "";
+    $("#model-exp").textContent = `Market-implied means (${state.sport === "mlb" ? "ESPN DK / consensus" : "multi-book median consensus"})
 
-spread (home) = ${fmtLine(g.spread)}
+${sw} (home) = ${fmtLine(g.spread)}
 total         = ${fmtTotal(g.total)}
 books         = ${(g.books || []).map((b) => b.name).join(", ") || "—"}
 
 marginExp = −spread = ${(-g.spread).toFixed(2)}
-homeExp   = (total − spread) / 2 = ${exp.homeExp.toFixed(2)}
-awayExp   = (total + spread) / 2 = ${exp.awayExp.toFixed(2)}`;
+homeExp   = (total − spread) / 2
+awayExp   = (total + spread) / 2${pitcherBit}
+
+homeExp   = ${exp.homeExp.toFixed(2)}
+awayExp   = ${exp.awayExp.toFixed(2)}`;
   } else {
     $("#exp-home").textContent = "N/A";
     $("#exp-away").textContent = "N/A";
@@ -357,12 +453,12 @@ function renderResults(result, ms) {
         <div class="stat away">
           <div class="label">${g.away.abbr} win</div>
           <div class="value">${fmtPct(result.awayWinPct)}</div>
-          <div class="sub">mean ${fmtScore(result.meanAway)} pts</div>
+          <div class="sub">mean ${fmtScore(result.meanAway)} ${unitLabel()}</div>
         </div>
         <div class="stat home">
           <div class="label">${g.home.abbr} win</div>
           <div class="value">${fmtPct(result.homeWinPct)}</div>
-          <div class="sub">mean ${fmtScore(result.meanHome)} pts</div>
+          <div class="sub">mean ${fmtScore(result.meanHome)} ${unitLabel()}</div>
         </div>
         <div class="stat">
           <div class="label">Tie / push ML</div>
@@ -414,24 +510,27 @@ function renderResults(result, ms) {
     g.away.abbr
   );
 
-  const marginHist = histogram(result.margins, 2);
-  const totalHist = histogram(result.totals, 2);
+  const binW = state.sport === "mlb" ? 1 : 2;
+  const marginHist = histogram(result.margins, binW);
+  const totalHist = histogram(result.totals, binW);
 
+  const u = unitLabel();
+  const sw = spreadWord();
   drawHistogram($("#chart-margin"), marginHist, {
     title: "Margin distribution (home − away)",
     color: "#5b8cff",
     zeroLine: true,
     marker: -result.spread,
-    markerLabel: "spread",
-    xLabel: "points",
+    markerLabel: sw,
+    xLabel: u,
   });
 
   drawHistogram($("#chart-total"), totalHist, {
-    title: "Total points distribution",
+    title: state.sport === "mlb" ? "Total runs distribution" : "Total points distribution",
     color: "#3dd68c",
     marker: result.totalLine,
     markerLabel: "O/U",
-    xLabel: "points",
+    xLabel: u,
   });
 }
 
@@ -444,7 +543,7 @@ function run() {
 
   requestAnimationFrame(() => {
     const t0 = performance.now();
-    const result = runSimulation(g, state.n);
+    const result = runSimulation(g, state.n, { model: activeModel() });
     const ms = performance.now() - t0;
     state.lastResult = result;
     renderResults(result, ms);
@@ -487,7 +586,7 @@ async function runPickBoardSims({ force = false } = {}) {
       status.textContent = `Running quick sims (${PICK_BOARD_N.toLocaleString()} each)… ${done + 1}/${candidates.length} · ${g.away.abbr} @ ${g.home.abbr}`;
     }
     await yieldToUI();
-    const result = runSimulation(g, PICK_BOARD_N);
+    const result = runSimulation(g, PICK_BOARD_N, { model: activeModel() });
     state.pickSims.set(g.id, {
       homeWinPct: result.homeWinPct,
       awayWinPct: result.awayWinPct,
@@ -505,7 +604,9 @@ async function runPickBoardSims({ force = false } = {}) {
   if (status) {
     const nFeat = candidates.filter((g) => g.featuredRemaining).length;
     const featNote = nFeat ? ` · +${nFeat} prior-week remaining` : "";
-    status.textContent = `Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials · Week ${state.week}${featNote}`;
+    status.textContent = state.sport === "mlb"
+      ? `MLB Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials`
+      : `Pick Board ready · ${candidates.length} games simmed @ ${PICK_BOARD_N.toLocaleString()} trials · Week ${state.week}${featNote}`;
   }
   renderPickBoard();
 }
@@ -616,7 +717,7 @@ function renderSplitsSection(g, { compact = false } = {}) {
     ? formatSplitsTimestamp(meta.fetchedAt)
     : "—";
   const rows = [
-    renderSplitMarketRow(g, "Spread", split.spread, "spread"),
+    renderSplitMarketRow(g, state.sport === "mlb" ? "Run line" : "Spread", split.spread, "spread"),
     renderSplitMarketRow(g, "ML", split.moneyline, "moneyline"),
     renderSplitMarketRow(g, "Total", split.total, "total"),
   ]
@@ -640,6 +741,31 @@ function renderSplitsSection(g, { compact = false } = {}) {
         Public sample (tickets % vs money %); money−tickets gap ≥10 often read as sharper lean — not a guarantee of sharp action · not betting advice.
       </p>
     </div>`;
+}
+
+
+function fmtPitcher(pp) {
+  if (!pp) return "TBD";
+  const era = pp.stats?.era;
+  const eraBit = era != null && Number.isFinite(Number(era)) ? ` (ERA ${Number(era).toFixed(2)})` : "";
+  return `${pp.name || "TBD"}${eraBit}`;
+}
+
+function renderSpLine(g) {
+  if (state.sport !== "mlb") return "";
+  return `<div class="pick-sp muted">SP · ${escapeHtml(fmtPitcher(g.awayPitcher))} @ ${escapeHtml(fmtPitcher(g.homePitcher))}</div>`;
+}
+
+function renderMlBox(g) {
+  const ml = g.moneyline;
+  if (!ml || (ml.home == null && ml.away == null)) {
+    return `<div class="sub">ML —</div>`;
+  }
+  const fmt = (n) => {
+    if (n == null) return "—";
+    return n > 0 ? `+${n}` : String(n);
+  };
+  return `<div class="sub">ML ${escapeHtml(g.away.abbr)} ${fmt(ml.away)} · ${escapeHtml(g.home.abbr)} ${fmt(ml.home)}</div>`;
 }
 
 function renderPickCard(g) {
@@ -666,6 +792,7 @@ function renderPickCard(g) {
             <span class="status-pill">${statusLabel(g)}</span>
           </div>
         </div>
+        ${renderSpLine(g)}
         <p class="waiting-msg">Waiting on lines — no consensus yet.</p>
         ${renderSplitsSection(g, { compact: true })}
       </article>`;
@@ -679,7 +806,7 @@ function renderPickCard(g) {
     const badges = [
       ...leans.spreadLeans.map(
         (l) =>
-          `<span class="lean-badge spread ${l.side}">ATS · ${escapeHtml(l.label)} <small>${escapeHtml(l.book)}</small></span>`
+          `<span class="lean-badge spread ${l.side}">${state.sport === "mlb" ? "RL" : "ATS"} · ${escapeHtml(l.label)} <small>${escapeHtml(l.book)}</small></span>`
       ),
       ...leans.mlLeans.map(
         (l) =>
@@ -718,19 +845,22 @@ function renderPickCard(g) {
         </div>
       </div>
 
+      ${renderSpLine(g)}
+
       <div class="pick-grid">
         <div class="pick-box">
           <div class="k">Consensus</div>
           <div class="v mono">${g.home.abbr} ${fmtLine(g.spread)} · O/U ${fmtTotal(g.total)}</div>
           <div class="sub">${(g.books || []).length} books · median</div>
+          ${renderMlBox(g)}
         </div>
         <div class="pick-box line-shop">
-          <div class="k">Best home spread</div>
+          <div class="k">Best home ${spreadWord()}</div>
           <div class="v mono ${bestHomeCls}">${shop?.bestHome ? `${fmtLine(shop.bestHome.spread)} <small>${escapeHtml(shop.bestHome.book)}</small>` : "—"}</div>
           <div class="sub">vs cons ${fmtLine(shop?.consensus)}${shop?.bestHome ? ` · Δ ${(shop.homeEdge >= 0 ? "+" : "") + shop.homeEdge.toFixed(2)}` : ""}</div>
         </div>
         <div class="pick-box line-shop">
-          <div class="k">Best away spread</div>
+          <div class="k">Best away ${spreadWord()}</div>
           <div class="v mono ${bestAwayCls}">${shop?.bestAway ? `${fmtLine(shop.bestAway.spread)} <small>${escapeHtml(shop.bestAway.book)}</small>` : "—"}</div>
           <div class="sub">vs cons ${fmtLine(shop?.consensus != null ? -shop.consensus : null)}${shop?.bestAway ? ` · Δ ${(shop.awayEdge >= 0 ? "+" : "") + shop.awayEdge.toFixed(2)}` : ""}</div>
         </div>
@@ -819,69 +949,114 @@ async function loadLines() {
   if (btnRefresh) btnRefresh.disabled = true;
   if (btnRefreshPb) btnRefreshPb.disabled = true;
   state.error = null;
-  setLoading(true, "Fetching snapshot + live ESPN DraftKings…");
+  applySportLabels();
+  setLoading(
+    true,
+    state.sport === "mlb"
+      ? "Fetching MLB Stats snapshot + live ESPN…"
+      : "Fetching snapshot + live ESPN DraftKings…"
+  );
 
   try {
-    const data = await loadMultiBookLines({
-      week: ESPN_DEFAULTS.week,
-      dates: ESPN_DEFAULTS.dates,
-    });
+    if (state.sport === "mlb") {
+      const data = await loadMlbBoard({ daysAhead: 3 });
+      state.games = data.games;
+      state.week = null;
+      state.seasonYear = null;
+      state.fetchedAt = data.fetchedAt;
+      state.snapshotAt = data.snapshotAt;
+      state.liveEspnAt = data.liveEspnAt;
+      state.sources = data.sources;
+      state.dateStart = data.dateStart;
+      state.dateEnd = data.dateEnd;
+      state.splitsMeta = data.splitsMeta;
+      state.error = null;
+      state.pickSims.clear();
+      state.gameId = null;
 
-    let splitsSnap = null;
-    let splitsErr = null;
-    try {
-      splitsSnap = await fetchSplitsSnapshot();
-    } catch (err) {
-      splitsErr = err.message || String(err);
-      console.warn("splits.json:", splitsErr);
+      populateSelect();
+      renderMatchupPreview();
+      showEmpty();
+      setLoading(false);
+      applySportLabels();
+
+      const badge = $("#badge-source");
+      if (badge) {
+        badge.textContent = `MLB · ${data.counts.withOdds}/${data.counts.games} lined · ESPN DK`;
+      }
+      const stamp = $("#lines-updated");
+      if (stamp) {
+        const sm = state.splitsMeta;
+        const splitsBit = sm?.ok
+          ? ` · Splits: Action Network · ${fmtFetched(sm.fetchedAt)} (${sm.matched}/${sm.total} matched)`
+          : " · Splits: unavailable / unmatched";
+        stamp.textContent = `Data as of: lines ${fmtFetched(data.snapshotAt || data.fetchedAt)} · ESPN live ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · window ${data.dateStart || "?"}→${data.dateEnd || "?"}${splitsBit} · not betting advice`;
+      }
+      renderPickBoard();
+      await runPickBoardSims({ force: true });
+    } else {
+      const data = await loadMultiBookLines({
+        week: ESPN_DEFAULTS.week,
+        dates: ESPN_DEFAULTS.dates,
+      });
+
+      let splitsSnap = null;
+      let splitsErr = null;
+      try {
+        splitsSnap = await fetchSplitsSnapshot();
+      } catch (err) {
+        splitsErr = err.message || String(err);
+        console.warn("splits.json:", splitsErr);
+      }
+      state.splitsMeta = mergeSplitsOntoGames(data.games, splitsSnap);
+      if (!splitsSnap) {
+        state.splitsMeta = {
+          ok: false,
+          matched: 0,
+          total: data.games.length,
+          fetchedAt: null,
+          source: "Action Network public betting",
+          week: null,
+          note: splitsErr || "splits.json missing",
+        };
+      }
+
+      state.games = data.games;
+      state.week = data.week;
+      state.seasonYear = data.seasonYear;
+      state.fetchedAt = data.fetchedAt;
+      state.snapshotAt = data.snapshotAt;
+      state.liveEspnAt = data.liveEspnAt;
+      state.sources = data.sources;
+      state.error = null;
+      state.pickSims.clear();
+
+      populateSelect();
+      renderMatchupPreview();
+      showEmpty();
+      setLoading(false);
+      applySportLabels();
+
+      const badge = $("#badge-source");
+      if (badge) {
+        const nBooks = new Set(
+          data.games.flatMap((g) => (g.books || []).map((b) => b.name))
+        ).size;
+        badge.textContent = `Multi-book · ${nBooks} sources · Week ${data.week}`;
+      }
+
+      const stamp = $("#lines-updated");
+      if (stamp) {
+        const sm = state.splitsMeta;
+        const splitsBit = sm?.ok
+          ? ` · Splits: Action Network · ${fmtFetched(sm.fetchedAt)} (${sm.matched}/${sm.total} matched)`
+          : " · Splits: unavailable";
+        stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median${splitsBit} · not betting advice`;
+      }
+
+      renderPickBoard();
+      await runPickBoardSims({ force: true });
     }
-    state.splitsMeta = mergeSplitsOntoGames(data.games, splitsSnap);
-    if (!splitsSnap) {
-      state.splitsMeta = {
-        ok: false,
-        matched: 0,
-        total: data.games.length,
-        fetchedAt: null,
-        source: "Action Network public betting",
-        week: null,
-        note: splitsErr || "splits.json missing",
-      };
-    }
-
-    state.games = data.games;
-    state.week = data.week;
-    state.seasonYear = data.seasonYear;
-    state.fetchedAt = data.fetchedAt;
-    state.snapshotAt = data.snapshotAt;
-    state.liveEspnAt = data.liveEspnAt;
-    state.sources = data.sources;
-    state.error = null;
-    state.pickSims.clear();
-
-    populateSelect();
-    renderMatchupPreview();
-    showEmpty();
-    setLoading(false);
-
-    const badge = $("#badge-source");
-    if (badge) {
-      const nBooks = new Set(
-        data.games.flatMap((g) => (g.books || []).map((b) => b.name))
-      ).size;
-      badge.textContent = `Multi-book · ${nBooks} sources · Week ${data.week}`;
-    }
-
-    const stamp = $("#lines-updated");
-    if (stamp) {
-      const sm = state.splitsMeta;
-      const splitsBit = sm?.ok
-        ? ` · Splits: Action Network · ${fmtFetched(sm.fetchedAt)} (${sm.matched}/${sm.total} matched)`
-        : " · Splits: unavailable";
-      stamp.textContent = `Lines updated: ${fmtFetched(data.snapshotAt || data.fetchedAt)} (snapshot) · ESPN DK live merge ${data.liveEspnAt ? fmtFetched(data.liveEspnAt) : "off"} · consensus = median${splitsBit} · not betting advice`;
-    }
-
-    renderPickBoard();
-    await runPickBoardSims({ force: true });
   } catch (err) {
     console.error(err);
     state.error = `Failed to load lines: ${err.message || err}`;
@@ -905,12 +1080,29 @@ async function loadLines() {
   }
 }
 
+function setSport(sport) {
+  if (sport !== "nfl" && sport !== "mlb") return;
+  if (state.sport === sport && state.games.length) {
+    applySportLabels();
+    return;
+  }
+  state.sport = sport;
+  state.gameId = null;
+  state.lastResult = null;
+  state.pickSims.clear();
+  state.games = [];
+  applySportLabels();
+  setView(state.view);
+  loadLines();
+}
+
 function init() {
   setNPills();
-  const sigma = $("#model-sigma");
-  const rho = $("#model-rho");
-  if (sigma) sigma.textContent = String(MODEL.scoreSigma);
-  if (rho) rho.textContent = String(MODEL.scoreCorrelation);
+  applySportLabels();
+
+  document.querySelectorAll(".sport-tab").forEach((btn) => {
+    btn.addEventListener("click", () => setSport(btn.dataset.sport));
+  });
 
   document.querySelectorAll(".view-tab").forEach((btn) => {
     btn.addEventListener("click", () => setView(btn.dataset.view));
@@ -957,8 +1149,9 @@ function init() {
   window.addEventListener("resize", () => {
     if (!state.lastResult) return;
     const r = state.lastResult;
-    const marginHist = histogram(r.margins, 2);
-    const totalHist = histogram(r.totals, 2);
+    const binW = state.sport === "mlb" ? 1 : 2;
+    const marginHist = histogram(r.margins, binW);
+    const totalHist = histogram(r.totals, binW);
     const cm = $("#chart-margin");
     const ct = $("#chart-total");
     if (cm)
@@ -967,16 +1160,16 @@ function init() {
         color: "#5b8cff",
         zeroLine: true,
         marker: -r.spread,
-        markerLabel: "spread",
-        xLabel: "points",
+        markerLabel: spreadWord(),
+        xLabel: unitLabel(),
       });
     if (ct)
       drawHistogram(ct, totalHist, {
-        title: "Total points distribution",
+        title: state.sport === "mlb" ? "Total runs distribution" : "Total points distribution",
         color: "#3dd68c",
         marker: r.totalLine,
         markerLabel: "O/U",
-        xLabel: "points",
+        xLabel: unitLabel(),
       });
   });
 
