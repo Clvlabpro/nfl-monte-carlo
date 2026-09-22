@@ -1148,10 +1148,11 @@ function escapeHtml(s) {
 
 
 /**
- * Best positive model−book edge among upcoming games with both model + no-vig ML.
+ * Top-N positive model−book edges among upcoming games with both model + no-vig ML.
  * Prefers games starting today (Chicago); else earliest slate day with candidates.
+ * Ranked by largest edge. Returns [] if none.
  */
-function computeEdgePlayOfDay() {
+function computeTopEdgePlays(n = 3) {
   const upcoming = pickBoardGames();
   const today = chicagoTodayYmd();
   const rows = [];
@@ -1184,17 +1185,48 @@ function computeEdgePlayOfDay() {
     const ymd = gameDateYmd(g) || today;
     rows.push({ g, sim, pick, ymd });
   }
-  if (!rows.length) return null;
+  if (!rows.length) return [];
 
   const days = [...new Set(rows.map((r) => r.ymd))].sort();
   const focusDay = days.find((d) => d >= today) || days[0];
   const pool = rows.filter((r) => r.ymd === focusDay);
   pool.sort((a, b) => b.pick.edge - a.pick.edge || (a.g.kickoffMs || 0) - (b.g.kickoffMs || 0));
-  const best = pool[0];
-  if (!best) return null;
 
-  // Splits: does money−tickets agree with the edge side?
-  let splitsNote = null;
+  return pool.slice(0, n).map((best, i) => {
+    const why = buildEdgeWhyShort(best);
+    return { ...best, focusDay, rank: i + 1, why };
+  });
+}
+
+/** Short why bullets for an edge play (SP / platoon / lineup when available). */
+function buildEdgeWhyShort(best) {
+  const why = [];
+  why.push(
+    `Model ${fmtPct(best.pick.modelWinPct)} vs book no-vig ${fmtPct(best.pick.bookWinPct)} → ${fmtEdgePp(best.pick.edge)}.`
+  );
+  if (state.sport === "mlb") {
+    const ap = best.g.awayPitcher;
+    const hp = best.g.homePitcher;
+    if (ap?.name || hp?.name || ap?.stats?.era != null || hp?.stats?.era != null) {
+      const aHand = ap?.pitchHand || ap?.stats?.pitchHand || "";
+      const hHand = hp?.pitchHand || hp?.stats?.pitchHand || "";
+      why.push(
+        `SP: ${ap?.name || "TBD"}${aHand ? ` ${aHand}HP` : ""}${ap?.stats?.era != null ? ` ERA ${Number(ap.stats.era).toFixed(2)}` : ""} @ ${hp?.name || "TBD"}${hHand ? ` ${hHand}HP` : ""}${hp?.stats?.era != null ? ` ERA ${Number(hp.stats.era).toFixed(2)}` : ""}.`
+      );
+    }
+    const aMix = best.g.away?.batMix;
+    const hMix = best.g.home?.batMix;
+    if (aMix || hMix) {
+      const aSrc = aMix?.source === "lineup" ? "lineup" : "roster mix";
+      const hSrc = hMix?.source === "lineup" ? "lineup" : "roster mix";
+      why.push(
+        `Bat mix: ${best.g.away.abbr} ${aMix ? `${aMix.lhb}L/${aMix.rhb}R/${aMix.shb}S (${aSrc})` : "—"} · ${best.g.home.abbr} ${hMix ? `${hMix.lhb}L/${hMix.rhb}R/${hMix.shb}S (${hSrc})` : "—"}.`
+      );
+    }
+  } else {
+    why.push("NFL sim is market-calibrated from consensus spread/total — edge vs ML is informational.");
+  }
+
   const mlSplit = best.g.splits?.moneyline;
   if (mlSplit) {
     const gapHome =
@@ -1207,81 +1239,48 @@ function computeEdgePlayOfDay() {
         : null;
     const agreeGap = best.pick.side === "home" ? gapHome : gapAway;
     if (agreeGap != null && agreeGap >= 10) {
-      splitsNote = `Action Network money−tickets +${agreeGap} on ${best.pick.team.abbr} (often read as sharper lean — public sample, not proven sharps).`;
+      why.push(`AN money−tickets +${agreeGap} on ${best.pick.team.abbr}.`);
     } else if (agreeGap != null && agreeGap <= -10) {
-      splitsNote = `Public tickets lean ${best.pick.team.abbr} more than money (gap ${agreeGap}) — does not confirm the model edge.`;
-    } else if (agreeGap != null) {
-      splitsNote = `Splits near even on ML (money−tickets ${agreeGap > 0 ? "+" : ""}${agreeGap}).`;
+      why.push(`Public tickets lean ${best.pick.team.abbr} more than money (gap ${agreeGap}).`);
     }
   }
+  return why;
+}
 
-  const why = [];
-  why.push(
-    `Model win% ${fmtPct(best.pick.modelWinPct)} vs book no-vig ${fmtPct(best.pick.bookWinPct)} → edge ${fmtEdgePp(best.pick.edge)}.`
-  );
-  if (state.sport === "mlb") {
-    const a = best.g.away;
-    const h = best.g.home;
-    why.push(
-      `Independent means from rpg/rapg + SP ERA (not calibrated to ML): ${a.abbr} ${Number(a.rpg).toFixed(2)}/${Number(a.rapg).toFixed(2)} vs ${h.abbr} ${Number(h.rpg).toFixed(2)}/${Number(h.rapg).toFixed(2)}.`
-    );
-    const ap = best.g.awayPitcher;
-    const hp = best.g.homePitcher;
-    if (ap?.stats?.era != null || hp?.stats?.era != null) {
-      const aHand = ap?.pitchHand || ap?.stats?.pitchHand || "";
-      const hHand = hp?.pitchHand || hp?.stats?.pitchHand || "";
-      why.push(
-        `SPs: ${ap?.name || "TBD"}${aHand ? ` ${aHand}HP` : ""}${ap?.stats?.era != null ? ` ERA ${Number(ap.stats.era).toFixed(2)}` : ""} @ ${hp?.name || "TBD"}${hHand ? ` ${hHand}HP` : ""}${hp?.stats?.era != null ? ` ERA ${Number(hp.stats.era).toFixed(2)}` : ""}.`
-      );
-    }
-    const aMix = best.g.away?.batMix;
-    const hMix = best.g.home?.batMix;
-    if (aMix || hMix) {
-      why.push(
-        `Bat mix: ${best.g.away.abbr} ${aMix ? `${aMix.lhb}L/${aMix.rhb}R/${aMix.shb}S (${aMix.source || "roster mix"})` : "—"} · ${best.g.home.abbr} ${hMix ? `${hMix.lhb}L/${hMix.rhb}R/${hMix.shb}S (${hMix.source || "roster mix"})` : "—"}.`
-      );
-    }
-    const simExp = best.sim;
-    // platoon detail from a fresh expected runs is not on sim cache — mention SP vs LHB/RHB OPS if present
-    const aVs = ap?.stats?.vsLhb?.ops;
-    const aVr = ap?.stats?.vsRhb?.ops;
-    const hVs = hp?.stats?.vsLhb?.ops;
-    const hVr = hp?.stats?.vsRhb?.ops;
-    if (aVs != null || aVr != null || hVs != null || hVr != null) {
-      why.push(
-        `SP vs LHB/RHB OPS: ${ap?.name || "away"} ${aVs != null ? Number(aVs).toFixed(3) : "—"}/${aVr != null ? Number(aVr).toFixed(3) : "—"} · ${hp?.name || "home"} ${hVs != null ? Number(hVs).toFixed(3) : "—"}/${hVr != null ? Number(hVr).toFixed(3) : "—"}.`
-      );
-    }
-  } else {
-    why.push("NFL sim is still market-calibrated from consensus spread/total — edge vs ML is informational.");
-  }
-  if (splitsNote) why.push(splitsNote);
-  why.push("Model edge vs market — not guaranteed profit / not betting advice.");
-
-  return { ...best, focusDay, why, splitsNote };
+function renderTopEdgePlays(eps) {
+  if (!eps?.length) return "";
+  const focusDay = eps[0].focusDay;
+  const cards = eps.map((ep) => renderEdgePlayCard(ep)).join("");
+  return `
+    <section class="top-edge-plays" aria-label="Top Edge Plays">
+      <div class="top-edge-header">
+        <span class="ep-kicker">Top Edge Plays</span>
+        <span class="ep-day mono">${escapeHtml(focusDay)} · model−book ML</span>
+      </div>
+      <div class="top-edge-grid">
+        ${cards}
+      </div>
+      <p class="ep-disclaimer muted">Honest label: model edge vs market — not guaranteed profit / not betting advice.</p>
+    </section>`;
 }
 
 function renderEdgePlayCard(ep) {
   if (!ep) return "";
-  const { g, pick, why, focusDay } = ep;
+  const { g, pick, why, rank } = ep;
   const sideTeam = pick.team;
   const other = pick.side === "home" ? g.away : g.home;
   const edgePct = (pick.edge * 100).toFixed(1);
   const whyLis = why.map((w) => `<li>${escapeHtml(w)}</li>`).join("");
-  const rpg =
-    state.sport === "mlb"
-      ? `<div class="ep-stat">rpg/rapg · ${escapeHtml(g.away.abbr)} ${Number(g.away.rpg).toFixed(2)}/${Number(g.away.rapg).toFixed(2)} · ${escapeHtml(g.home.abbr)} ${Number(g.home.rpg).toFixed(2)}/${Number(g.home.rapg).toFixed(2)}</div>`
-      : "";
   const sp =
     state.sport === "mlb"
       ? `<div class="ep-stat">SP · ${escapeHtml(fmtPitcher(g.awayPitcher))} @ ${escapeHtml(fmtPitcher(g.homePitcher))}</div>`
       : "";
 
   return `
-    <article class="edge-play-card" data-id="${g.id}">
+    <article class="edge-play-card" data-id="${g.id}" data-rank="${rank}">
       <div class="edge-play-banner">
-        <span class="ep-kicker">Edge Play of the Day</span>
-        <span class="ep-day mono">${escapeHtml(focusDay)}</span>
+        <span class="ep-rank">#${rank}</span>
+        <span class="ep-side-label">Play · <strong>${escapeHtml(sideTeam.abbr)}</strong> ML</span>
       </div>
       <div class="edge-play-body">
         <div class="edge-play-matchup">
@@ -1290,7 +1289,6 @@ function renderEdgePlayCard(ep) {
           ${teamMark(g.home, "home")}
         </div>
         <div class="edge-play-pick">
-          <div class="ep-side">Play · <strong>${escapeHtml(sideTeam.abbr)}</strong> ML</div>
           <div class="ep-edge">+${edgePct}%</div>
           <div class="ep-compare mono">
             Model ${fmtPct(pick.modelWinPct)} · Book ${fmtPct(pick.bookWinPct)}
@@ -1299,9 +1297,7 @@ function renderEdgePlayCard(ep) {
         </div>
       </div>
       ${sp}
-      ${rpg}
       <ul class="ep-why">${whyLis}</ul>
-      <p class="ep-disclaimer muted">Honest label: model edge vs market — not guaranteed profit / not betting advice.</p>
       <div class="pick-card-foot">
         <button type="button" class="btn-link" data-open-sim="${g.id}">Open in Sim →</button>
       </div>
@@ -1339,10 +1335,10 @@ function renderPickBoard() {
     return (a.g.kickoffMs || 0) - (b.g.kickoffMs || 0);
   });
 
-  const ep = filter === "all" ? computeEdgePlayOfDay() : null;
-  const epHtml = ep ? renderEdgePlayCard(ep) : "";
+  const eps = filter === "all" ? computeTopEdgePlays(3) : [];
+  const epHtml = eps.length ? renderTopEdgePlays(eps) : "";
 
-  if (!filtered.length && !ep) {
+  if (!filtered.length && !eps.length) {
     root.innerHTML = `
       <div class="card empty-state">
         <strong>No games match this filter</strong>

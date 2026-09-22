@@ -8,7 +8,7 @@ Browser-side **Pick Board** + simulator for **NFL** and **MLB**.
 
 ## Views
 
-- **Pick Board** — upcoming games only (today forward; hide final/completed). **Edge Play of the Day** (largest model−book ML edge) featured at top.
+- **Pick Board** — upcoming games only (today forward; hide final/completed). **Top Edge Plays** (3 largest model−book ML edges) featured at top.
 - **Sim** — deep dive one matchup with histograms.
 
 ### NFL
@@ -41,13 +41,13 @@ homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(leagueERA − awaySP.era) + HFA
 
 **Do not calibrate win% to match the moneyline.**
 
-## Edge Play of the Day
+## Top Edge Plays
 
 Among upcoming games with both model win% and book ML:
 
 `edge_pp = (modelWinPct − bookImpliedWinPct) × 100`
 
-Featured card = largest **positive** edge on today / next slate day with lines. Honest label: model edge vs market — not guaranteed profit / not betting advice.
+Featured section = top **3 positive** edges on today / next slate day with lines (fewer if the slate is thin). Honest label: model edge vs market — not guaranteed profit / not betting advice.
 
 ## Quick start
 
