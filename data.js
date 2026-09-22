@@ -26,7 +26,7 @@ export const MLB_MODEL = {
   leagueR: 4.25,
   leagueERA: 4.1,
   hfa: 0.12,
-  /** Coefficient on (leagueERA − opposing SP ERA) */
+  /** Coefficient on (opposing SP ERA − leagueERA); worse SP → more runs */
   eraCoeff: 0.35,
   expClampLo: 1.5,
   expClampHi: 7.5,

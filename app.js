@@ -453,8 +453,8 @@ function renderMatchupPreview() {
         : "";
     $("#model-exp").textContent = `Stats model means (independent of books)
 
-awayExp = 0.5*(away.rpg + home.rapg) + ${m.eraCoeff}*(leagueERA − homeSP.era)
-homeExp = 0.5*(home.rpg + away.rapg) + ${m.eraCoeff}*(leagueERA − awaySP.era) + HFA
+awayExp = 0.5*(away.rpg + home.rapg) + ${m.eraCoeff}*(homeSP.era − leagueERA)
+homeExp = 0.5*(home.rpg + away.rapg) + ${m.eraCoeff}*(awaySP.era − leagueERA) + HFA
 leagueR=${m.leagueR}  leagueERA=${m.leagueERA}  HFA=${m.hfa}
 
 away rpg/rapg = ${exp.inputs.awayRpg.toFixed(2)} / ${exp.inputs.awayRapg.toFixed(2)}

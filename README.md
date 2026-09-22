@@ -22,8 +22,8 @@ Expected runs are **stats-based**, not taken from run line + total:
 ```
 leagueR ≈ 4.25 · leagueERA ≈ 4.10 · HFA ≈ 0.12
 
-awayExp = 0.5*(away.rpg + home.rapg) + 0.35*(leagueERA − homeSP.era)
-homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(leagueERA − awaySP.era) + HFA
+awayExp = 0.5*(away.rpg + home.rapg) + 0.35*(homeSP.era − leagueERA)
+homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(awaySP.era − leagueERA) + HFA
 ```
 
 - Missing SP ERA → drop that pitcher’s term (0). Clamp each side ≈ `[1.5, 7.5]`.

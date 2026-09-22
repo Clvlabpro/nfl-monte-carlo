@@ -7,10 +7,11 @@
  *   awayExp   = (total + spread) / 2
  *
  * MLB (independent — does NOT use spread+total for means):
- *   awayExp = 0.5*(away.rpg + home.rapg) + 0.35*(leagueERA − homeSP.era)
- *   homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(leagueERA − awaySP.era) + HFA
+ *   awayExp = 0.5*(away.rpg + home.rapg) + 0.35*(homeSP.era − leagueERA)
+ *   homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(awaySP.era − leagueERA) + HFA
  *   Missing SP ERA → drop that pitcher's term (0). Clamp ≈ [1.5, 7.5].
  *   Optional WHIP/K9 nudge (±0.15 max). No ties (extras until not tied).
+ *   ERA sign: worse opposing SP (higher ERA) → more runs for this side (matches WHIP/K9).
  *
  * Books still used for ATS/OU vs posted lines and ML implied % / edge.
  */
@@ -222,11 +223,12 @@ export function expectedMlbRuns(game, model = MLB_MODEL) {
   const homeSpEra = numOrNull(game.homePitcher?.stats?.era);
   const awaySpEra = numOrNull(game.awayPitcher?.stats?.era);
 
-  // Pitcher term: better opposing SP (lower ERA vs league) → fewer runs for this side
+  // Pitcher term: worse opposing SP (higher ERA vs league) → more runs for this side
+  // (same direction as WHIP/K9 nudge; prior build had this sign inverted)
   const awayPitcherTerm =
-    homeSpEra != null ? eraK * (leagueERA - homeSpEra) : 0;
+    homeSpEra != null ? eraK * (homeSpEra - leagueERA) : 0;
   const homePitcherTerm =
-    awaySpEra != null ? eraK * (leagueERA - awaySpEra) : 0;
+    awaySpEra != null ? eraK * (awaySpEra - leagueERA) : 0;
 
   let awayExp = 0.5 * (aOff + hDef) + awayPitcherTerm;
   let homeExp = 0.5 * (hOff + aDef) + homePitcherTerm + hfa;
