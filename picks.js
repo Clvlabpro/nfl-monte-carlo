@@ -6,7 +6,7 @@
  *   Best away ATS number = algebraically smallest home spread (= largest away points).
  * Shop edge ≥ 0.5 pts vs consensus → ATS lean for that side.
  *
- * ML lean: market-calibrated sim win% ≥ 58% home / ≤ 42% away.
+ * ML lean: sim model win% ≥ 58% home / ≤ 42% away (MLB = independent stats model).
  */
 
 export const SHOP_EDGE_PTS = 0.5;
@@ -138,7 +138,7 @@ export function computeLeans(game, sim) {
       winPct: homeWin,
     });
     why.push(
-      `ML lean: market-implied home win% ${fmtPct(homeWin)} ≥ ${fmtPct(ML_HOME_THRESH)} → lean ${game.home.abbr} ML`
+      `ML lean: model home win% ${fmtPct(homeWin)} ≥ ${fmtPct(ML_HOME_THRESH)} → lean ${game.home.abbr} ML`
     );
   } else if (awayWin != null && awayWin >= 1 - ML_AWAY_THRESH) {
     // awayWinPct >= 58% same as homeWinPct <= 42%
@@ -149,7 +149,7 @@ export function computeLeans(game, sim) {
       winPct: awayWin,
     });
     why.push(
-      `ML lean: market-implied away win% ${fmtPct(awayWin)} (home ≤ ${fmtPct(ML_AWAY_THRESH)}) → lean ${game.away.abbr} ML`
+      `ML lean: model away win% ${fmtPct(awayWin)} (home ≤ ${fmtPct(ML_AWAY_THRESH)}) → lean ${game.away.abbr} ML`
     );
   } else if (homeWin != null && homeWin <= ML_AWAY_THRESH) {
     mlLeans.push({
@@ -159,7 +159,7 @@ export function computeLeans(game, sim) {
       winPct: awayWin ?? 1 - homeWin,
     });
     why.push(
-      `ML lean: market-implied home win% ${fmtPct(homeWin)} ≤ ${fmtPct(ML_AWAY_THRESH)} → lean ${game.away.abbr} ML`
+      `ML lean: model home win% ${fmtPct(homeWin)} ≤ ${fmtPct(ML_AWAY_THRESH)} → lean ${game.away.abbr} ML`
     );
   }
 

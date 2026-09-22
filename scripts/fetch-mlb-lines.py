@@ -23,7 +23,7 @@ UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
-DAYS_AHEAD = 3
+DAYS_AHEAD = 7
 SEASON = 2026
 OUT = Path(__file__).resolve().parent.parent / "mlb-lines.json"
 ESPN_HEADERS = {
@@ -120,6 +120,64 @@ _pitcher_cache: dict[int, dict | None] = {}
 _team_cache: dict[int, dict | None] = {}
 
 
+def _ops_from_stat(s: dict) -> float | None:
+    ops = _f(s.get("ops"))
+    if ops is not None:
+        return ops
+    obp = _f(s.get("obp"))
+    slg = _f(s.get("slg"))
+    if obp is not None and slg is not None:
+        return round(obp + slg, 3)
+    return None
+
+
+def fetch_pitcher_hand(person_id: int) -> str | None:
+    try:
+        data = fetch_json(f"https://statsapi.mlb.com/api/v1/people/{person_id}")
+        people = data.get("people") or []
+        if not people:
+            return None
+        code = ((people[0].get("pitchHand") or {}).get("code") or "").upper()
+        return code if code in ("L", "R") else None
+    except Exception:
+        return None
+
+
+def fetch_pitcher_platoon_splits(person_id: int) -> dict:
+    """OPS/BA/OBP/SLG/WHIP vs LHB (vl) and vs RHB (vr) from statsapi sitCodes."""
+    out: dict[str, Any] = {"vsLhb": None, "vsRhb": None}
+    url = (
+        f"https://statsapi.mlb.com/api/v1/people/{person_id}/stats"
+        f"?stats=statSplits&group=pitching&season={SEASON}&sitCodes=vl,vr"
+    )
+    try:
+        data = fetch_json(url)
+        for block in data.get("stats") or []:
+            for sp in block.get("splits") or []:
+                split = sp.get("split") or {}
+                code = (split.get("code") or "").lower()
+                st = sp.get("stat") or {}
+                blob = {
+                    "ops": _ops_from_stat(st),
+                    "avg": _f(st.get("avg")),
+                    "obp": _f(st.get("obp")),
+                    "slg": _f(st.get("slg")),
+                    "whip": _f(st.get("whip")),
+                    "atBats": _i(st.get("atBats")),
+                    "battersFaced": _i(st.get("battersFaced")),
+                    "inningsPitched": st.get("inningsPitched"),
+                    "strikeOuts": _i(st.get("strikeOuts")),
+                    "homeRuns": _i(st.get("homeRuns")),
+                }
+                if code == "vl":
+                    out["vsLhb"] = blob
+                elif code == "vr":
+                    out["vsRhb"] = blob
+    except Exception as e:
+        print(f"  pitcher {person_id} platoon splits fail: {e}", file=sys.stderr)
+    return out
+
+
 def fetch_pitcher_stats(person_id: int) -> dict | None:
     if person_id in _pitcher_cache:
         return _pitcher_cache[person_id]
@@ -147,7 +205,14 @@ def fetch_pitcher_stats(person_id: int) -> dict | None:
             "wins": _i(s.get("wins")),
             "losses": _i(s.get("losses")),
             "gamesStarted": _i(s.get("gamesStarted")),
+            "opsAgainst": _ops_from_stat(s),
+            "avgAgainst": _f(s.get("avg")),
         }
+        # Platoon splits + throwing hand (not W-L primary)
+        platoon = fetch_pitcher_platoon_splits(person_id)
+        out["vsLhb"] = platoon.get("vsLhb")
+        out["vsRhb"] = platoon.get("vsRhb")
+        out["pitchHand"] = fetch_pitcher_hand(person_id)
         _pitcher_cache[person_id] = out
         return out
     except Exception as e:
@@ -156,7 +221,15 @@ def fetch_pitcher_stats(person_id: int) -> dict | None:
         return None
 
 
+def _split_stat(payload: dict | None) -> dict:
+    try:
+        return ((payload.get("stats") or [{}])[0].get("splits") or [{}])[0].get("stat") or {}
+    except Exception:
+        return {}
+
+
 def fetch_team_context(team_id: int) -> dict | None:
+    """Season rpg/rapg + last-10 runs + W-L from MLB Stats API (no paid APIs)."""
     if team_id in _team_cache:
         return _team_cache[team_id]
     try:
@@ -168,8 +241,8 @@ def fetch_team_context(team_id: int) -> dict | None:
             f"https://statsapi.mlb.com/api/v1/teams/{team_id}/stats"
             f"?stats=season&group=pitching&season={SEASON}"
         )
-        hs = ((hit.get("stats") or [{}])[0].get("splits") or [{}])[0].get("stat") or {}
-        ps = ((pitch.get("stats") or [{}])[0].get("splits") or [{}])[0].get("stat") or {}
+        hs = _split_stat(hit)
+        ps = _split_stat(pitch)
         gp = _i(hs.get("gamesPlayed")) or _i(ps.get("gamesPlayed"))
         rs = _f(hs.get("runs"))
         ra = _f(ps.get("runs"))
@@ -179,7 +252,37 @@ def fetch_team_context(team_id: int) -> dict | None:
             "runsAllowed": ra,
             "rpg": round(rs / gp, 2) if gp and rs is not None else None,
             "rapg": round(ra / gp, 2) if gp and ra is not None else None,
+            "wins": _i(hs.get("wins")) or _i(ps.get("wins")),
+            "losses": _i(hs.get("losses")) or _i(ps.get("losses")),
+            "last10Rpg": None,
+            "last10Rapg": None,
+            "last10Record": None,
         }
+        # Last 10 games — widely available via statsapi (skip quietly if unavailable)
+        try:
+            l10h = fetch_json(
+                f"https://statsapi.mlb.com/api/v1/teams/{team_id}/stats"
+                f"?stats=lastTenGames&group=hitting&season={SEASON}"
+            )
+            l10p = fetch_json(
+                f"https://statsapi.mlb.com/api/v1/teams/{team_id}/stats"
+                f"?stats=lastTenGames&group=pitching&season={SEASON}"
+            )
+            lhs = _split_stat(l10h)
+            lps = _split_stat(l10p)
+            lgp = _i(lhs.get("gamesPlayed")) or _i(lps.get("gamesPlayed")) or 10
+            lrs = _f(lhs.get("runs"))
+            lra = _f(lps.get("runs"))
+            if lgp and lrs is not None:
+                out["last10Rpg"] = round(lrs / lgp, 2)
+            if lgp and lra is not None:
+                out["last10Rapg"] = round(lra / lgp, 2)
+            lw = _i(lhs.get("wins")) or _i(lps.get("wins"))
+            ll = _i(lhs.get("losses")) or _i(lps.get("losses"))
+            if lw is not None and ll is not None:
+                out["last10Record"] = f"{lw}-{ll}"
+        except Exception as e:
+            print(f"  team {team_id} last10 skip: {e}", file=sys.stderr)
         _team_cache[team_id] = out
         return out
     except Exception as e:
@@ -196,6 +299,7 @@ def pitcher_blob(raw: dict | None, enrich: bool) -> dict | None:
     return {
         "id": pid,
         "name": raw.get("fullName") or raw.get("lastFirstName") or f"#{pid}",
+        "pitchHand": (stats or {}).get("pitchHand") if stats else None,
         "stats": stats,
     }
 
@@ -296,12 +400,156 @@ def enrich_games(games: list[dict]) -> None:
                 time.sleep(0.04)
         for side in ("away", "home"):
             tid = g[side].get("id")
-            if tid and g[side].get("rpg") is None:
+            if tid and (g[side].get("rpg") is None or g[side].get("last10Rpg") is None):
                 ctx = fetch_team_context(int(tid))
                 if ctx:
-                    g[side]["rpg"] = ctx.get("rpg")
-                    g[side]["rapg"] = ctx.get("rapg")
+                    if g[side].get("rpg") is None:
+                        g[side]["rpg"] = ctx.get("rpg")
+                        g[side]["rapg"] = ctx.get("rapg")
+                    g[side]["wins"] = ctx.get("wins")
+                    g[side]["losses"] = ctx.get("losses")
+                    g[side]["last10Rpg"] = ctx.get("last10Rpg")
+                    g[side]["last10Rapg"] = ctx.get("last10Rapg")
+                    g[side]["last10Record"] = ctx.get("last10Record")
                 time.sleep(0.04)
+
+
+
+_roster_bat_cache: dict[int, dict] = {}
+
+
+def fetch_roster_bat_mix(team_id: int) -> dict:
+    """Active roster non-pitcher batSide counts (L/R/S). Fallback when lineup TBD."""
+    if team_id in _roster_bat_cache:
+        return _roster_bat_cache[team_id]
+    out = {
+        "lhb": 0,
+        "rhb": 0,
+        "shb": 0,
+        "source": "roster mix (lineup TBD)",
+        "nHitters": 0,
+    }
+    try:
+        roster = fetch_json(
+            f"https://statsapi.mlb.com/api/v1/teams/{team_id}/roster"
+            f"?rosterType=active&season={SEASON}"
+        )
+        ids: list[int] = []
+        for e in roster.get("roster") or []:
+            pos = ((e.get("position") or {}).get("abbreviation") or "").upper()
+            if pos in ("P", "TWP"):
+                continue
+            pid = (e.get("person") or {}).get("id")
+            if pid:
+                ids.append(int(pid))
+        # Batch people (max ~25 per call)
+        for i in range(0, len(ids), 25):
+            chunk = ids[i : i + 25]
+            people = fetch_json(
+                "https://statsapi.mlb.com/api/v1/people?personIds="
+                + ",".join(str(x) for x in chunk)
+            )
+            for p in people.get("people") or []:
+                code = ((p.get("batSide") or {}).get("code") or "").upper()
+                if code == "L":
+                    out["lhb"] += 1
+                elif code == "R":
+                    out["rhb"] += 1
+                elif code == "S":
+                    out["shb"] += 1
+                else:
+                    continue
+                out["nHitters"] += 1
+            time.sleep(0.05)
+    except Exception as e:
+        print(f"  roster bat mix team {team_id} fail: {e}", file=sys.stderr)
+    _roster_bat_cache[team_id] = out
+    return out
+
+
+def fetch_game_lineup_bat_mix(game_pk: int) -> dict | None:
+    """If batting order posted on live feed, count batSides; else None."""
+    try:
+        feed = fetch_json(f"https://statsapi.mlb.com/api/v1.1/game/{game_pk}/feed/live")
+    except Exception:
+        return None
+    gd = feed.get("gameData") or {}
+    players = gd.get("players") or {}
+    ld = feed.get("liveData") or {}
+    box = ld.get("boxscore") or {}
+    teams = box.get("teams") or {}
+    result: dict[str, Any] = {}
+    for side in ("away", "home"):
+        t = teams.get(side) or {}
+        order = t.get("battingOrder") or []
+        if not order:
+            continue
+        counts = {"lhb": 0, "rhb": 0, "shb": 0, "nHitters": 0, "source": "projected/posted lineup"}
+        for pid in order:
+            key = f"ID{pid}" if not str(pid).startswith("ID") else str(pid)
+            # battingOrder entries can be int ids
+            p = players.get(key) or players.get(f"ID{pid}") or players.get(str(pid))
+            if not p:
+                # try scan
+                for pk, pv in players.items():
+                    if pv.get("id") == int(pid):
+                        p = pv
+                        break
+            if not p:
+                continue
+            code = ((p.get("batSide") or {}).get("code") or "").upper()
+            if code == "L":
+                counts["lhb"] += 1
+            elif code == "R":
+                counts["rhb"] += 1
+            elif code == "S":
+                counts["shb"] += 1
+            else:
+                continue
+            counts["nHitters"] += 1
+        if counts["nHitters"] > 0:
+            result[side] = counts
+    return result or None
+
+
+def enrich_platoon(games: list[dict]) -> None:
+    """Pitcher hand + vs LHB/RHB OPS splits + lineup/roster bat mix. Not W-L."""
+    print("Enriching platoon (SP hand/splits + lineup/roster bats)…", file=sys.stderr)
+    for g in games:
+        if g.get("completed"):
+            continue
+        # Pitchers: ensure stats include platoon + hand
+        for key in ("awayPitcher", "homePitcher"):
+            pp = g.get(key)
+            if not pp or not pp.get("id"):
+                continue
+            st = pp.get("stats") or {}
+            need = st.get("vsLhb") is None or st.get("pitchHand") is None
+            if need or not st:
+                fresh = fetch_pitcher_stats(int(pp["id"]))
+                if fresh:
+                    pp["stats"] = fresh
+                    pp["pitchHand"] = fresh.get("pitchHand")
+                time.sleep(0.06)
+            else:
+                pp["pitchHand"] = st.get("pitchHand") or pp.get("pitchHand")
+
+        lineup = None
+        if g.get("gamePk"):
+            try:
+                lineup = fetch_game_lineup_bat_mix(int(g["gamePk"]))
+                time.sleep(0.05)
+            except Exception as e:
+                print(f"  lineup {g.get('gamePk')} skip: {e}", file=sys.stderr)
+
+        for side in ("away", "home"):
+            if lineup and side in lineup:
+                g[side]["batMix"] = lineup[side]
+            else:
+                tid = g[side].get("id")
+                if tid:
+                    g[side]["batMix"] = fetch_roster_bat_mix(int(tid))
+                    time.sleep(0.04)
 
 
 def fetch_espn_day(ymd: str) -> list[dict]:
@@ -536,6 +784,8 @@ def main() -> int:
 
     print("3) Pitcher + team season context…", file=sys.stderr)
     enrich_games(games)
+
+    enrich_platoon(games)
 
     games_out = [with_consensus(g) for g in games]
     games_out.sort(key=lambda g: g.get("kickoffIso") or "")

@@ -1,21 +1,21 @@
 {
-  "fetchedAt": "2026-09-22T04:03:58Z",
+  "fetchedAt": "2026-09-22T04:24:32Z",
   "sport": "mlb",
   "season": 2026,
   "dateStart": "2026-09-21",
-  "dateEnd": "2026-09-24",
-  "daysAhead": 3,
+  "dateEnd": "2026-09-28",
+  "daysAhead": 7,
   "sources": {
     "mlbStatsApi": {
       "ok": true,
-      "games": 46
+      "games": 91
     },
     "espnDraftKings": {
       "ok": true,
-      "espnDaysOk": 4,
-      "espnMatched": 46,
+      "espnDaysOk": 7,
+      "espnMatched": 91,
       "espnWithOdds": 16,
-      "espnGamesSeen": 46
+      "espnGamesSeen": 91
     },
     "multiBook": {
       "ok": false,
@@ -156,9 +156,9 @@
       "key": "MIN@SF",
       "date": "2026-09-21",
       "kickoffIso": "2026-09-22T01:45:00Z",
-      "completed": false,
-      "statusDetail": "In Progress",
-      "statusState": "in",
+      "completed": true,
+      "statusDetail": "Final",
+      "statusState": "post",
       "away": {
         "abbr": "MIN",
         "name": "Minnesota Twins",
@@ -187,7 +187,7 @@
           "strikeOuts": 116,
           "strikeoutsPer9Inn": 8.01,
           "wins": 9,
-          "losses": 10,
+          "losses": 11,
           "gamesStarted": 23
         }
       },
@@ -229,7 +229,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
         "rpg": 4.56,
         "rapg": 4.03,
-        "color": "#092c5c"
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "NYY",
@@ -238,7 +245,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
         "rpg": 4.6,
         "rapg": 3.72,
-        "color": "#132448"
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 607259,
@@ -251,8 +265,36 @@
           "strikeoutsPer9Inn": 5.31,
           "wins": 15,
           "losses": 4,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.666,
+          "avgAgainst": 0.245,
+          "vsLhb": {
+            "ops": 0.638,
+            "avg": 0.229,
+            "obp": 0.259,
+            "slg": 0.379,
+            "whip": 1.02,
+            "atBats": 380,
+            "battersFaced": 398,
+            "inningsPitched": "100.2",
+            "strikeOuts": 64,
+            "homeRuns": 12
+          },
+          "vsRhb": {
+            "ops": 0.704,
+            "avg": 0.267,
+            "obp": 0.293,
+            "slg": 0.411,
+            "whip": 1.15,
+            "atBats": 270,
+            "battersFaced": 284,
+            "inningsPitched": "69.1",
+            "strikeOuts": 37,
+            "homeRuns": 9
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 607074,
@@ -265,8 +307,36 @@
           "strikeoutsPer9Inn": 9.79,
           "wins": 6,
           "losses": 3,
-          "gamesStarted": 15
-        }
+          "gamesStarted": 15,
+          "opsAgainst": 0.582,
+          "avgAgainst": 0.178,
+          "vsLhb": {
+            "ops": 0.665,
+            "avg": 0.197,
+            "obp": 0.286,
+            "slg": 0.379,
+            "whip": 1.18,
+            "atBats": 66,
+            "battersFaced": 78,
+            "inningsPitched": "18.2",
+            "strikeOuts": 22,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.556,
+            "avg": 0.172,
+            "obp": 0.28,
+            "slg": 0.276,
+            "whip": 1.11,
+            "atBats": 203,
+            "battersFaced": 237,
+            "inningsPitched": "57.2",
+            "strikeOuts": 61,
+            "homeRuns": 4
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -308,7 +378,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
         "rpg": 4.03,
         "rapg": 4.3,
-        "color": "#134a8e"
+        "color": "#134a8e",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "BAL",
@@ -317,7 +394,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
         "rpg": 4.44,
         "rapg": 4.63,
-        "color": "#df4601"
+        "color": "#df4601",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 453286,
@@ -330,8 +414,36 @@
           "strikeoutsPer9Inn": 6.69,
           "wins": 3,
           "losses": 8,
-          "gamesStarted": 16
-        }
+          "gamesStarted": 16,
+          "opsAgainst": 0.754,
+          "avgAgainst": 0.243,
+          "vsLhb": {
+            "ops": 0.851,
+            "avg": 0.28,
+            "obp": 0.371,
+            "slg": 0.48,
+            "whip": 1.71,
+            "atBats": 175,
+            "battersFaced": 203,
+            "inningsPitched": "42.2",
+            "strikeOuts": 25,
+            "homeRuns": 9
+          },
+          "vsRhb": {
+            "ops": 0.584,
+            "avg": 0.181,
+            "obp": 0.232,
+            "slg": 0.352,
+            "whip": 0.88,
+            "atBats": 105,
+            "battersFaced": 112,
+            "inningsPitched": "29.2",
+            "strikeOuts": 29,
+            "homeRuns": 5
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 605135,
@@ -344,13 +456,41 @@
           "strikeoutsPer9Inn": 6.68,
           "wins": 8,
           "losses": 5,
-          "gamesStarted": 17
-        }
+          "gamesStarted": 17,
+          "opsAgainst": 0.781,
+          "avgAgainst": 0.291,
+          "vsLhb": {
+            "ops": 0.853,
+            "avg": 0.31,
+            "obp": 0.381,
+            "slg": 0.472,
+            "whip": 1.72,
+            "atBats": 229,
+            "battersFaced": 260,
+            "inningsPitched": "55.2",
+            "strikeOuts": 41,
+            "homeRuns": 8
+          },
+          "vsRhb": {
+            "ops": 0.677,
+            "avg": 0.264,
+            "obp": 0.337,
+            "slg": 0.34,
+            "whip": 1.34,
+            "atBats": 159,
+            "battersFaced": 178,
+            "inningsPitched": "40.1",
+            "strikeOuts": 31,
+            "homeRuns": 2
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
           "name": "DraftKings",
-          "spread": -1.5,
+          "spread": 1.5,
           "total": 7.5,
           "moneylineHome": -122,
           "moneylineAway": 101,
@@ -361,11 +501,11 @@
         "home": -122,
         "away": 101
       },
-      "spread": -1.5,
+      "spread": 1.5,
       "total": 7.5,
       "espnId": "401817035",
       "consensus": {
-        "spread": -1.5,
+        "spread": 1.5,
         "total": 7.5,
         "method": "median"
       },
@@ -387,7 +527,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
         "rpg": 5.1,
         "rapg": 5.06,
-        "color": "#ab0003"
+        "color": "#ab0003",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "DET",
@@ -396,7 +543,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
         "rpg": 4.5,
         "rapg": 4.02,
-        "color": "#0a2240"
+        "color": "#0a2240",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 800600,
@@ -409,8 +563,36 @@
           "strikeoutsPer9Inn": 7.52,
           "wins": 1,
           "losses": 4,
-          "gamesStarted": 7
-        }
+          "gamesStarted": 7,
+          "opsAgainst": 0.768,
+          "avgAgainst": 0.266,
+          "vsLhb": {
+            "ops": 0.819,
+            "avg": 0.257,
+            "obp": 0.333,
+            "slg": 0.486,
+            "whip": 1.56,
+            "atBats": 35,
+            "battersFaced": 39,
+            "inningsPitched": "8.1",
+            "strikeOuts": 8,
+            "homeRuns": 1
+          },
+          "vsRhb": {
+            "ops": 0.748,
+            "avg": 0.269,
+            "obp": 0.393,
+            "slg": 0.355,
+            "whip": 1.83,
+            "atBats": 93,
+            "battersFaced": 112,
+            "inningsPitched": "24.0",
+            "strikeOuts": 19,
+            "homeRuns": 1
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 623454,
@@ -423,8 +605,36 @@
           "strikeoutsPer9Inn": 9.62,
           "wins": 5,
           "losses": 6,
-          "gamesStarted": 10
-        }
+          "gamesStarted": 10,
+          "opsAgainst": 0.713,
+          "avgAgainst": 0.234,
+          "vsLhb": {
+            "ops": 0.658,
+            "avg": 0.23,
+            "obp": 0.294,
+            "slg": 0.364,
+            "whip": 1.19,
+            "atBats": 209,
+            "battersFaced": 233,
+            "inningsPitched": "56.1",
+            "strikeOuts": 53,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.778,
+            "avg": 0.238,
+            "obp": 0.348,
+            "slg": 0.43,
+            "whip": 1.47,
+            "atBats": 172,
+            "battersFaced": 201,
+            "inningsPitched": "44.1",
+            "strikeOuts": 56,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -466,7 +676,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
         "rpg": 4.51,
         "rapg": 4.66,
-        "color": "#be0a14"
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PIT",
@@ -475,7 +692,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
         "rpg": 4.79,
         "rapg": 4.61,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 669467,
@@ -488,8 +712,36 @@
           "strikeoutsPer9Inn": 6.2,
           "wins": 12,
           "losses": 7,
-          "gamesStarted": 27
-        }
+          "gamesStarted": 27,
+          "opsAgainst": 0.676,
+          "avgAgainst": 0.25,
+          "vsLhb": {
+            "ops": 0.703,
+            "avg": 0.255,
+            "obp": 0.317,
+            "slg": 0.386,
+            "whip": 1.33,
+            "atBats": 321,
+            "battersFaced": 351,
+            "inningsPitched": "83.2",
+            "strikeOuts": 57,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.639,
+            "avg": 0.244,
+            "obp": 0.307,
+            "slg": 0.332,
+            "whip": 1.19,
+            "atBats": 250,
+            "battersFaced": 278,
+            "inningsPitched": "66.1",
+            "strikeOuts": 47,
+            "homeRuns": 4
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 683003,
@@ -502,8 +754,36 @@
           "strikeoutsPer9Inn": 10.82,
           "wins": 4,
           "losses": 6,
-          "gamesStarted": 19
-        }
+          "gamesStarted": 19,
+          "opsAgainst": 0.682,
+          "avgAgainst": 0.224,
+          "vsLhb": {
+            "ops": 0.708,
+            "avg": 0.216,
+            "obp": 0.296,
+            "slg": 0.412,
+            "whip": 1.22,
+            "atBats": 199,
+            "battersFaced": 224,
+            "inningsPitched": "53.1",
+            "strikeOuts": 67,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.648,
+            "avg": 0.234,
+            "obp": 0.282,
+            "slg": 0.366,
+            "whip": 1.16,
+            "atBats": 145,
+            "battersFaced": 156,
+            "inningsPitched": "37.0",
+            "strikeOuts": 42,
+            "homeRuns": 5
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -545,7 +825,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
         "rpg": 5.14,
         "rapg": 3.85,
-        "color": "#13294b"
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PHI",
@@ -554,7 +841,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
         "rpg": 4.47,
         "rapg": 4.28,
-        "color": "#e81828"
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 669160,
@@ -567,8 +861,36 @@
           "strikeoutsPer9Inn": 8.77,
           "wins": 7,
           "losses": 9,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.707,
+          "avgAgainst": 0.258,
+          "vsLhb": {
+            "ops": 0.743,
+            "avg": 0.272,
+            "obp": 0.358,
+            "slg": 0.385,
+            "whip": 1.51,
+            "atBats": 309,
+            "battersFaced": 357,
+            "inningsPitched": "81.1",
+            "strikeOuts": 82,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.657,
+            "avg": 0.239,
+            "obp": 0.285,
+            "slg": 0.372,
+            "whip": 1.06,
+            "atBats": 226,
+            "battersFaced": 242,
+            "inningsPitched": "58.2",
+            "strikeOuts": 55,
+            "homeRuns": 5
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 554430,
@@ -581,8 +903,36 @@
           "strikeoutsPer9Inn": 10.6,
           "wins": 13,
           "losses": 5,
-          "gamesStarted": 26
-        }
+          "gamesStarted": 26,
+          "opsAgainst": 0.632,
+          "avgAgainst": 0.207,
+          "vsLhb": {
+            "ops": 0.688,
+            "avg": 0.22,
+            "obp": 0.299,
+            "slg": 0.389,
+            "whip": 1.2,
+            "atBats": 314,
+            "battersFaced": 351,
+            "inningsPitched": "85.0",
+            "strikeOuts": 98,
+            "homeRuns": 13
+          },
+          "vsRhb": {
+            "ops": 0.556,
+            "avg": 0.189,
+            "obp": 0.234,
+            "slg": 0.322,
+            "whip": 0.88,
+            "atBats": 233,
+            "battersFaced": 248,
+            "inningsPitched": "64.2",
+            "strikeOuts": 79,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -624,7 +974,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
         "rpg": 4.16,
         "rapg": 4.15,
-        "color": "#002b5c"
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "BOS",
@@ -633,7 +990,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
         "rpg": 4.35,
         "rapg": 3.83,
-        "color": "#0d2b56"
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 800048,
@@ -646,8 +1010,36 @@
           "strikeoutsPer9Inn": 9.39,
           "wins": 12,
           "losses": 9,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.614,
+          "avgAgainst": 0.211,
+          "vsLhb": {
+            "ops": 0.689,
+            "avg": 0.242,
+            "obp": 0.301,
+            "slg": 0.388,
+            "whip": 1.2,
+            "atBats": 178,
+            "battersFaced": 195,
+            "inningsPitched": "46.2",
+            "strikeOuts": 47,
+            "homeRuns": 5
+          },
+          "vsRhb": {
+            "ops": 0.586,
+            "avg": 0.2,
+            "obp": 0.254,
+            "slg": 0.332,
+            "whip": 0.98,
+            "atBats": 476,
+            "battersFaced": 516,
+            "inningsPitched": "131.0",
+            "strikeOuts": 139,
+            "homeRuns": 12
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 801139,
@@ -660,29 +1052,57 @@
           "strikeoutsPer9Inn": 10.45,
           "wins": 9,
           "losses": 6,
-          "gamesStarted": 25
-        }
+          "gamesStarted": 25,
+          "opsAgainst": 0.64,
+          "avgAgainst": 0.217,
+          "vsLhb": {
+            "ops": 0.695,
+            "avg": 0.243,
+            "obp": 0.294,
+            "slg": 0.401,
+            "whip": 1.15,
+            "atBats": 152,
+            "battersFaced": 163,
+            "inningsPitched": "39.0",
+            "strikeOuts": 35,
+            "homeRuns": 6
+          },
+          "vsRhb": {
+            "ops": 0.618,
+            "avg": 0.207,
+            "obp": 0.268,
+            "slg": 0.35,
+            "whip": 1.05,
+            "atBats": 377,
+            "battersFaced": 412,
+            "inningsPitched": "102.2",
+            "strikeOuts": 131,
+            "homeRuns": 9
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
           "name": "DraftKings",
           "spread": -1.5,
-          "total": 7.0,
-          "moneylineHome": -132,
-          "moneylineAway": 110,
+          "total": 6.5,
+          "moneylineHome": -131,
+          "moneylineAway": 109,
           "source": "espn"
         }
       ],
       "moneyline": {
-        "home": -132,
-        "away": 110
+        "home": -131,
+        "away": 109
       },
       "spread": -1.5,
-      "total": 7.0,
+      "total": 6.5,
       "espnId": "401817031",
       "consensus": {
         "spread": -1.5,
-        "total": 7.0,
+        "total": 6.5,
         "method": "median"
       },
       "hasOdds": true
@@ -703,7 +1123,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
         "rpg": 4.56,
         "rapg": 4.03,
-        "color": "#092c5c"
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "NYY",
@@ -712,7 +1139,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
         "rpg": 4.6,
         "rapg": 3.72,
-        "color": "#132448"
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 656876,
@@ -725,8 +1159,36 @@
           "strikeoutsPer9Inn": 8.87,
           "wins": 15,
           "losses": 5,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.553,
+          "avgAgainst": 0.205,
+          "vsLhb": {
+            "ops": 0.587,
+            "avg": 0.215,
+            "obp": 0.257,
+            "slg": 0.33,
+            "whip": 1.0,
+            "atBats": 349,
+            "battersFaced": 373,
+            "inningsPitched": "92.2",
+            "strikeOuts": 102,
+            "homeRuns": 10
+          },
+          "vsRhb": {
+            "ops": 0.507,
+            "avg": 0.191,
+            "obp": 0.235,
+            "slg": 0.272,
+            "whip": 0.85,
+            "atBats": 257,
+            "battersFaced": 272,
+            "inningsPitched": "71.0",
+            "strikeOuts": 61,
+            "homeRuns": 4
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 608331,
@@ -739,8 +1201,36 @@
           "strikeoutsPer9Inn": 8.49,
           "wins": 5,
           "losses": 4,
-          "gamesStarted": 19
-        }
+          "gamesStarted": 19,
+          "opsAgainst": 0.536,
+          "avgAgainst": 0.198,
+          "vsLhb": {
+            "ops": 0.47,
+            "avg": 0.172,
+            "obp": 0.24,
+            "slg": 0.23,
+            "whip": 0.87,
+            "atBats": 87,
+            "battersFaced": 97,
+            "inningsPitched": "26.1",
+            "strikeOuts": 21,
+            "homeRuns": 0
+          },
+          "vsRhb": {
+            "ops": 0.556,
+            "avg": 0.206,
+            "obp": 0.269,
+            "slg": 0.287,
+            "whip": 1.03,
+            "atBats": 282,
+            "battersFaced": 310,
+            "inningsPitched": "78.2",
+            "strikeOuts": 79,
+            "homeRuns": 4
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -782,7 +1272,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
         "rpg": 4.12,
         "rapg": 5.16,
-        "color": "#c6011f"
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATL",
@@ -791,7 +1288,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
         "rpg": 4.63,
         "rapg": 3.86,
-        "color": "#0c2340"
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 682227,
@@ -804,8 +1308,36 @@
           "strikeoutsPer9Inn": 6.39,
           "wins": 4,
           "losses": 4,
-          "gamesStarted": 7
-        }
+          "gamesStarted": 7,
+          "opsAgainst": 0.813,
+          "avgAgainst": 0.247,
+          "vsLhb": {
+            "ops": 0.749,
+            "avg": 0.208,
+            "obp": 0.291,
+            "slg": 0.458,
+            "whip": 1.15,
+            "atBats": 48,
+            "battersFaced": 55,
+            "inningsPitched": "13.0",
+            "strikeOuts": 12,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.837,
+            "avg": 0.263,
+            "obp": 0.39,
+            "slg": 0.447,
+            "whip": 1.7,
+            "atBats": 114,
+            "battersFaced": 141,
+            "inningsPitched": "30.2",
+            "strikeOuts": 19,
+            "homeRuns": 5
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 702275,
@@ -818,8 +1350,36 @@
           "strikeoutsPer9Inn": 8.33,
           "wins": 1,
           "losses": 3,
-          "gamesStarted": 9
-        }
+          "gamesStarted": 9,
+          "opsAgainst": 0.78,
+          "avgAgainst": 0.233,
+          "vsLhb": {
+            "ops": 0.832,
+            "avg": 0.241,
+            "obp": 0.379,
+            "slg": 0.453,
+            "whip": 1.67,
+            "atBats": 137,
+            "battersFaced": 169,
+            "inningsPitched": "36.0",
+            "strikeOuts": 38,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.701,
+            "avg": 0.221,
+            "obp": 0.312,
+            "slg": 0.389,
+            "whip": 1.22,
+            "atBats": 95,
+            "battersFaced": 109,
+            "inningsPitched": "26.1",
+            "strikeOuts": 20,
+            "homeRuns": 4
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -861,7 +1421,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
         "rpg": 4.7,
         "rapg": 4.43,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "KC",
@@ -870,7 +1437,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
         "rpg": 4.21,
         "rapg": 4.86,
-        "color": "#004687"
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 641743,
@@ -883,8 +1457,36 @@
           "strikeoutsPer9Inn": 7.31,
           "wins": 9,
           "losses": 9,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.761,
+          "avgAgainst": 0.256,
+          "vsLhb": {
+            "ops": 0.518,
+            "avg": 0.186,
+            "obp": 0.251,
+            "slg": 0.267,
+            "whip": 0.89,
+            "atBats": 161,
+            "battersFaced": 178,
+            "inningsPitched": "43.2",
+            "strikeOuts": 47,
+            "homeRuns": 2
+          },
+          "vsRhb": {
+            "ops": 0.852,
+            "avg": 0.283,
+            "obp": 0.373,
+            "slg": 0.479,
+            "whip": 1.55,
+            "atBats": 420,
+            "battersFaced": 491,
+            "inningsPitched": "105.0",
+            "strikeOuts": 74,
+            "homeRuns": 18
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 663738,
@@ -897,8 +1499,36 @@
           "strikeoutsPer9Inn": 6.1,
           "wins": 6,
           "losses": 5,
-          "gamesStarted": 8
-        }
+          "gamesStarted": 8,
+          "opsAgainst": 0.611,
+          "avgAgainst": 0.208,
+          "vsLhb": {
+            "ops": 0.438,
+            "avg": 0.16,
+            "obp": 0.212,
+            "slg": 0.226,
+            "whip": 0.7,
+            "atBats": 106,
+            "battersFaced": 114,
+            "inningsPitched": "30.0",
+            "strikeOuts": 22,
+            "homeRuns": 1
+          },
+          "vsRhb": {
+            "ops": 0.712,
+            "avg": 0.236,
+            "obp": 0.308,
+            "slg": 0.404,
+            "whip": 1.31,
+            "atBats": 178,
+            "battersFaced": 198,
+            "inningsPitched": "46.2",
+            "strikeOuts": 30,
+            "homeRuns": 5
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -940,7 +1570,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
         "rpg": 4.44,
         "rapg": 4.46,
-        "color": "#00a3e0"
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "CHC",
@@ -949,7 +1586,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
         "rpg": 5.35,
         "rapg": 4.38,
-        "color": "#0e3386"
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 676083,
@@ -962,8 +1606,36 @@
           "strikeoutsPer9Inn": 6.16,
           "wins": 6,
           "losses": 9,
-          "gamesStarted": 23
-        }
+          "gamesStarted": 23,
+          "opsAgainst": 0.751,
+          "avgAgainst": 0.273,
+          "vsLhb": {
+            "ops": 0.776,
+            "avg": 0.293,
+            "obp": 0.344,
+            "slg": 0.432,
+            "whip": 1.52,
+            "atBats": 280,
+            "battersFaced": 306,
+            "inningsPitched": "67.2",
+            "strikeOuts": 54,
+            "homeRuns": 6
+          },
+          "vsRhb": {
+            "ops": 0.708,
+            "avg": 0.24,
+            "obp": 0.289,
+            "slg": 0.419,
+            "whip": 1.09,
+            "atBats": 167,
+            "battersFaced": 181,
+            "inningsPitched": "45.2",
+            "strikeOuts": 24,
+            "homeRuns": 8
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [
@@ -971,14 +1643,14 @@
           "name": "DraftKings",
           "spread": -1.5,
           "total": 6.5,
-          "moneylineHome": -218,
-          "moneylineAway": 178,
+          "moneylineHome": -217,
+          "moneylineAway": 177,
           "source": "espn"
         }
       ],
       "moneyline": {
-        "home": -218,
-        "away": 178
+        "home": -217,
+        "away": 177
       },
       "spread": -1.5,
       "total": 6.5,
@@ -1006,7 +1678,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
         "rpg": 4.28,
         "rapg": 4.54,
-        "color": "#002d72"
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "TEX",
@@ -1015,7 +1694,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
         "rpg": 4.19,
         "rapg": 4.4,
-        "color": "#003278"
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 640455,
@@ -1028,8 +1714,36 @@
           "strikeoutsPer9Inn": 8.57,
           "wins": 5,
           "losses": 7,
-          "gamesStarted": 17
-        }
+          "gamesStarted": 17,
+          "opsAgainst": 0.806,
+          "avgAgainst": 0.265,
+          "vsLhb": {
+            "ops": 0.694,
+            "avg": 0.242,
+            "obp": 0.306,
+            "slg": 0.388,
+            "whip": 1.15,
+            "atBats": 165,
+            "battersFaced": 181,
+            "inningsPitched": "44.1",
+            "strikeOuts": 52,
+            "homeRuns": 5
+          },
+          "vsRhb": {
+            "ops": 0.856,
+            "avg": 0.275,
+            "obp": 0.341,
+            "slg": 0.515,
+            "whip": 1.41,
+            "atBats": 371,
+            "battersFaced": 420,
+            "inningsPitched": "93.2",
+            "strikeOuts": 80,
+            "homeRuns": 18
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 669022,
@@ -1042,8 +1756,36 @@
           "strikeoutsPer9Inn": 9.34,
           "wins": 8,
           "losses": 11,
-          "gamesStarted": 32
-        }
+          "gamesStarted": 32,
+          "opsAgainst": 0.723,
+          "avgAgainst": 0.243,
+          "vsLhb": {
+            "ops": 0.734,
+            "avg": 0.259,
+            "obp": 0.348,
+            "slg": 0.386,
+            "whip": 1.55,
+            "atBats": 158,
+            "battersFaced": 181,
+            "inningsPitched": "40.0",
+            "strikeOuts": 35,
+            "homeRuns": 2
+          },
+          "vsRhb": {
+            "ops": 0.719,
+            "avg": 0.238,
+            "obp": 0.313,
+            "slg": 0.406,
+            "whip": 1.3,
+            "atBats": 480,
+            "battersFaced": 539,
+            "inningsPitched": "125.0",
+            "strikeOuts": 137,
+            "homeRuns": 17
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -1085,7 +1827,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
         "rpg": 4.44,
         "rapg": 4.45,
-        "color": "#aa182c"
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "COL",
@@ -1094,7 +1843,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
         "rpg": 4.66,
         "rapg": 5.79,
-        "color": "#33006f"
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 647336,
@@ -1107,8 +1863,36 @@
           "strikeoutsPer9Inn": 8.71,
           "wins": 8,
           "losses": 5,
-          "gamesStarted": 19
-        }
+          "gamesStarted": 19,
+          "opsAgainst": 0.65,
+          "avgAgainst": 0.234,
+          "vsLhb": {
+            "ops": 0.742,
+            "avg": 0.27,
+            "obp": 0.328,
+            "slg": 0.414,
+            "whip": 1.32,
+            "atBats": 237,
+            "battersFaced": 259,
+            "inningsPitched": "59.2",
+            "strikeOuts": 52,
+            "homeRuns": 5
+          },
+          "vsRhb": {
+            "ops": 0.511,
+            "avg": 0.178,
+            "obp": 0.231,
+            "slg": 0.28,
+            "whip": 0.88,
+            "atBats": 157,
+            "battersFaced": 170,
+            "inningsPitched": "44.1",
+            "strikeOuts": 49,
+            "homeRuns": 3
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 607536,
@@ -1121,8 +1905,36 @@
           "strikeoutsPer9Inn": 7.29,
           "wins": 4,
           "losses": 10,
-          "gamesStarted": 24
-        }
+          "gamesStarted": 24,
+          "opsAgainst": 0.88,
+          "avgAgainst": 0.3,
+          "vsLhb": {
+            "ops": 0.715,
+            "avg": 0.277,
+            "obp": 0.31,
+            "slg": 0.405,
+            "whip": 1.25,
+            "atBats": 148,
+            "battersFaced": 158,
+            "inningsPitched": "36.2",
+            "strikeOuts": 32,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.942,
+            "avg": 0.308,
+            "obp": 0.351,
+            "slg": 0.591,
+            "whip": 1.57,
+            "atBats": 389,
+            "battersFaced": 416,
+            "inningsPitched": "91.0",
+            "strikeOuts": 72,
+            "homeRuns": 24
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -1164,7 +1976,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
         "rpg": 4.01,
         "rapg": 4.56,
-        "color": "#ba0021"
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATH",
@@ -1173,7 +1992,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
         "rpg": 4.29,
         "rapg": 5.72,
-        "color": "#003831"
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 579328,
@@ -1186,8 +2012,36 @@
           "strikeoutsPer9Inn": 9.1,
           "wins": 1,
           "losses": 6,
-          "gamesStarted": 12
-        }
+          "gamesStarted": 12,
+          "opsAgainst": 0.801,
+          "avgAgainst": 0.272,
+          "vsLhb": {
+            "ops": 0.762,
+            "avg": 0.283,
+            "obp": 0.362,
+            "slg": 0.4,
+            "whip": 1.67,
+            "atBats": 60,
+            "battersFaced": 69,
+            "inningsPitched": "14.1",
+            "strikeOuts": 17,
+            "homeRuns": 1
+          },
+          "vsRhb": {
+            "ops": 0.816,
+            "avg": 0.268,
+            "obp": 0.346,
+            "slg": 0.47,
+            "whip": 1.52,
+            "atBats": 164,
+            "battersFaced": 191,
+            "inningsPitched": "42.2",
+            "strikeOuts": 41,
+            "homeRuns": 6
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 669620,
@@ -1200,8 +2054,36 @@
           "strikeoutsPer9Inn": 6.3,
           "wins": 1,
           "losses": 3,
-          "gamesStarted": 6
-        }
+          "gamesStarted": 6,
+          "opsAgainst": 0.815,
+          "avgAgainst": 0.31,
+          "vsLhb": {
+            "ops": 0.752,
+            "avg": 0.286,
+            "obp": 0.308,
+            "slg": 0.444,
+            "whip": 1.3,
+            "atBats": 63,
+            "battersFaced": 66,
+            "inningsPitched": "15.1",
+            "strikeOuts": 11,
+            "homeRuns": 0
+          },
+          "vsRhb": {
+            "ops": 0.853,
+            "avg": 0.324,
+            "obp": 0.348,
+            "slg": 0.505,
+            "whip": 1.6,
+            "atBats": 105,
+            "battersFaced": 112,
+            "inningsPitched": "24.1",
+            "strikeOuts": 17,
+            "homeRuns": 3
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [
         {
@@ -1243,7 +2125,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
         "rpg": 4.41,
         "rapg": 4.79,
-        "color": "#002d62"
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "SEA",
@@ -1252,7 +2141,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
         "rpg": 4.06,
         "rapg": 4.42,
-        "color": "#005c5c"
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 664299,
@@ -1265,8 +2161,36 @@
           "strikeoutsPer9Inn": 8.41,
           "wins": 2,
           "losses": 6,
-          "gamesStarted": 11
-        }
+          "gamesStarted": 11,
+          "opsAgainst": 0.782,
+          "avgAgainst": 0.265,
+          "vsLhb": {
+            "ops": 0.716,
+            "avg": 0.262,
+            "obp": 0.323,
+            "slg": 0.393,
+            "whip": 1.34,
+            "atBats": 122,
+            "battersFaced": 133,
+            "inningsPitched": "31.1",
+            "strikeOuts": 24,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.849,
+            "avg": 0.267,
+            "obp": 0.358,
+            "slg": 0.491,
+            "whip": 1.58,
+            "atBats": 116,
+            "battersFaced": 134,
+            "inningsPitched": "29.2",
+            "strikeOuts": 33,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 669302,
@@ -1279,8 +2203,36 @@
           "strikeoutsPer9Inn": 9.81,
           "wins": 12,
           "losses": 10,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.682,
+          "avgAgainst": 0.219,
+          "vsLhb": {
+            "ops": 0.648,
+            "avg": 0.212,
+            "obp": 0.272,
+            "slg": 0.376,
+            "whip": 1.07,
+            "atBats": 364,
+            "battersFaced": 400,
+            "inningsPitched": "98.1",
+            "strikeOuts": 122,
+            "homeRuns": 14
+          },
+          "vsRhb": {
+            "ops": 0.724,
+            "avg": 0.229,
+            "obp": 0.283,
+            "slg": 0.441,
+            "whip": 1.07,
+            "atBats": 288,
+            "battersFaced": 313,
+            "inningsPitched": "78.1",
+            "strikeOuts": 72,
+            "homeRuns": 14
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -1288,13 +2240,13 @@
           "spread": -1.5,
           "total": 7.5,
           "moneylineHome": -149,
-          "moneylineAway": 124,
+          "moneylineAway": 123,
           "source": "espn"
         }
       ],
       "moneyline": {
         "home": -149,
-        "away": 124
+        "away": 123
       },
       "spread": -1.5,
       "total": 7.5,
@@ -1322,7 +2274,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
         "rpg": 4.55,
         "rapg": 4.97,
-        "color": "#031f40"
+        "color": "#031f40",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "SF",
@@ -1331,7 +2290,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
         "rpg": 4.21,
         "rapg": 4.73,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 7,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 671737,
@@ -1344,8 +2310,36 @@
           "strikeoutsPer9Inn": 10.39,
           "wins": 11,
           "losses": 6,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.665,
+          "avgAgainst": 0.216,
+          "vsLhb": {
+            "ops": 0.669,
+            "avg": 0.203,
+            "obp": 0.296,
+            "slg": 0.373,
+            "whip": 1.24,
+            "atBats": 375,
+            "battersFaced": 427,
+            "inningsPitched": "102.0",
+            "strikeOuts": 123,
+            "homeRuns": 17
+          },
+          "vsRhb": {
+            "ops": 0.66,
+            "avg": 0.234,
+            "obp": 0.303,
+            "slg": 0.357,
+            "whip": 1.22,
+            "atBats": 269,
+            "battersFaced": 297,
+            "inningsPitched": "70.1",
+            "strikeOuts": 76,
+            "homeRuns": 6
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 683627,
@@ -1358,8 +2352,36 @@
           "strikeoutsPer9Inn": 8.04,
           "wins": 3,
           "losses": 1,
-          "gamesStarted": 4
-        }
+          "gamesStarted": 4,
+          "opsAgainst": 0.661,
+          "avgAgainst": 0.231,
+          "vsLhb": {
+            "ops": 0.689,
+            "avg": 0.258,
+            "obp": 0.27,
+            "slg": 0.419,
+            "whip": 1.09,
+            "atBats": 62,
+            "battersFaced": 63,
+            "inningsPitched": "15.2",
+            "strikeOuts": 10,
+            "homeRuns": 2
+          },
+          "vsRhb": {
+            "ops": 0.623,
+            "avg": 0.196,
+            "obp": 0.275,
+            "slg": 0.348,
+            "whip": 1.14,
+            "atBats": 46,
+            "battersFaced": 51,
+            "inningsPitched": "12.1",
+            "strikeOuts": 15,
+            "homeRuns": 1
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [
         {
@@ -1401,7 +2423,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
         "rpg": 4.42,
         "rapg": 4.16,
-        "color": "#2f241d"
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "LAD",
@@ -1410,7 +2439,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
         "rpg": 5.0,
         "rapg": 3.76,
-        "color": "#005a9c"
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 650633,
@@ -1423,8 +2459,36 @@
           "strikeoutsPer9Inn": 7.66,
           "wins": 12,
           "losses": 9,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.648,
+          "avgAgainst": 0.218,
+          "vsLhb": {
+            "ops": 0.63,
+            "avg": 0.214,
+            "obp": 0.295,
+            "slg": 0.335,
+            "whip": 1.18,
+            "atBats": 415,
+            "battersFaced": 465,
+            "inningsPitched": "114.1",
+            "strikeOuts": 95,
+            "homeRuns": 13
+          },
+          "vsRhb": {
+            "ops": 0.679,
+            "avg": 0.224,
+            "obp": 0.316,
+            "slg": 0.363,
+            "whip": 1.15,
+            "atBats": 237,
+            "battersFaced": 271,
+            "inningsPitched": "65.0",
+            "strikeOuts": 59,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [
@@ -1467,7 +2531,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
         "rpg": 5.1,
         "rapg": 5.06,
-        "color": "#ab0003"
+        "color": "#ab0003",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "DET",
@@ -1476,7 +2547,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
         "rpg": 4.5,
         "rapg": 4.02,
-        "color": "#0a2240"
+        "color": "#0a2240",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -1490,8 +2568,36 @@
           "strikeoutsPer9Inn": 6.88,
           "wins": 10,
           "losses": 11,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.706,
+          "avgAgainst": 0.255,
+          "vsLhb": {
+            "ops": 0.72,
+            "avg": 0.269,
+            "obp": 0.329,
+            "slg": 0.391,
+            "whip": 1.37,
+            "atBats": 156,
+            "battersFaced": 171,
+            "inningsPitched": "39.1",
+            "strikeOuts": 43,
+            "homeRuns": 4
+          },
+          "vsRhb": {
+            "ops": 0.702,
+            "avg": 0.25,
+            "obp": 0.333,
+            "slg": 0.369,
+            "whip": 1.36,
+            "atBats": 496,
+            "battersFaced": 565,
+            "inningsPitched": "129.1",
+            "strikeOuts": 86,
+            "homeRuns": 12
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [],
       "moneyline": null,
@@ -1517,7 +2623,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
         "rpg": 4.55,
         "rapg": 4.97,
-        "color": "#031f40"
+        "color": "#031f40",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "SF",
@@ -1526,7 +2639,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
         "rpg": 4.21,
         "rapg": 4.73,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 7,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -1540,8 +2660,36 @@
           "strikeoutsPer9Inn": 5.59,
           "wins": 0,
           "losses": 1,
-          "gamesStarted": 3
-        }
+          "gamesStarted": 3,
+          "opsAgainst": 0.789,
+          "avgAgainst": 0.293,
+          "vsLhb": {
+            "ops": 0.919,
+            "avg": 0.345,
+            "obp": 0.333,
+            "slg": 0.586,
+            "whip": 1.3,
+            "atBats": 29,
+            "battersFaced": 30,
+            "inningsPitched": "7.2",
+            "strikeOuts": 5,
+            "homeRuns": 2
+          },
+          "vsRhb": {
+            "ops": 0.706,
+            "avg": 0.261,
+            "obp": 0.358,
+            "slg": 0.348,
+            "whip": 1.63,
+            "atBats": 46,
+            "battersFaced": 53,
+            "inningsPitched": "11.2",
+            "strikeOuts": 7,
+            "homeRuns": 1
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [],
       "moneyline": null,
@@ -1567,7 +2715,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
         "rpg": 4.03,
         "rapg": 4.3,
-        "color": "#134a8e"
+        "color": "#134a8e",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "BAL",
@@ -1576,7 +2731,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
         "rpg": 4.44,
         "rapg": 4.63,
-        "color": "#df4601"
+        "color": "#df4601",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": null,
@@ -1604,7 +2766,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
         "rpg": 4.51,
         "rapg": 4.66,
-        "color": "#be0a14"
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PIT",
@@ -1613,7 +2782,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
         "rpg": 4.79,
         "rapg": 4.61,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 669461,
@@ -1626,8 +2802,36 @@
           "strikeoutsPer9Inn": 8.92,
           "wins": 5,
           "losses": 14,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.821,
+          "avgAgainst": 0.285,
+          "vsLhb": {
+            "ops": 0.81,
+            "avg": 0.275,
+            "obp": 0.347,
+            "slg": 0.463,
+            "whip": 1.54,
+            "atBats": 149,
+            "battersFaced": 167,
+            "inningsPitched": "36.1",
+            "strikeOuts": 38,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.824,
+            "avg": 0.289,
+            "obp": 0.349,
+            "slg": 0.475,
+            "whip": 1.5,
+            "atBats": 436,
+            "battersFaced": 485,
+            "inningsPitched": "111.0",
+            "strikeOuts": 110,
+            "homeRuns": 20
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": null,
       "books": [],
@@ -1654,7 +2858,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
         "rpg": 5.14,
         "rapg": 3.85,
-        "color": "#13294b"
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PHI",
@@ -1663,7 +2874,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
         "rpg": 4.47,
         "rapg": 4.28,
-        "color": "#e81828"
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 701656,
@@ -1676,8 +2894,36 @@
           "strikeoutsPer9Inn": 10.32,
           "wins": 10,
           "losses": 3,
-          "gamesStarted": 17
-        }
+          "gamesStarted": 17,
+          "opsAgainst": 0.571,
+          "avgAgainst": 0.181,
+          "vsLhb": {
+            "ops": 0.578,
+            "avg": 0.174,
+            "obp": 0.221,
+            "slg": 0.357,
+            "whip": 0.8,
+            "atBats": 213,
+            "battersFaced": 227,
+            "inningsPitched": "61.0",
+            "strikeOuts": 71,
+            "homeRuns": 10
+          },
+          "vsRhb": {
+            "ops": 0.56,
+            "avg": 0.195,
+            "obp": 0.221,
+            "slg": 0.339,
+            "whip": 0.84,
+            "atBats": 118,
+            "battersFaced": 122,
+            "inningsPitched": "32.0",
+            "strikeOuts": 36,
+            "homeRuns": 4
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 605400,
@@ -1690,8 +2936,36 @@
           "strikeoutsPer9Inn": 9.04,
           "wins": 7,
           "losses": 10,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.793,
+          "avgAgainst": 0.261,
+          "vsLhb": {
+            "ops": 0.782,
+            "avg": 0.249,
+            "obp": 0.333,
+            "slg": 0.449,
+            "whip": 1.45,
+            "atBats": 385,
+            "battersFaced": 439,
+            "inningsPitched": "100.1",
+            "strikeOuts": 98,
+            "homeRuns": 20
+          },
+          "vsRhb": {
+            "ops": 0.808,
+            "avg": 0.279,
+            "obp": 0.304,
+            "slg": 0.504,
+            "whip": 1.24,
+            "atBats": 262,
+            "battersFaced": 275,
+            "inningsPitched": "66.0",
+            "strikeOuts": 71,
+            "homeRuns": 14
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -1717,7 +2991,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
         "rpg": 4.56,
         "rapg": 4.03,
-        "color": "#092c5c"
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "NYY",
@@ -1726,7 +3007,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
         "rpg": 4.6,
         "rapg": 3.72,
-        "color": "#132448"
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -1740,8 +3028,36 @@
           "strikeoutsPer9Inn": 9.12,
           "wins": 9,
           "losses": 9,
-          "gamesStarted": 21
-        }
+          "gamesStarted": 21,
+          "opsAgainst": 0.7,
+          "avgAgainst": 0.238,
+          "vsLhb": {
+            "ops": 0.686,
+            "avg": 0.224,
+            "obp": 0.266,
+            "slg": 0.42,
+            "whip": 1.08,
+            "atBats": 281,
+            "battersFaced": 298,
+            "inningsPitched": "73.0",
+            "strikeOuts": 83,
+            "homeRuns": 14
+          },
+          "vsRhb": {
+            "ops": 0.72,
+            "avg": 0.258,
+            "obp": 0.288,
+            "slg": 0.432,
+            "whip": 1.15,
+            "atBats": 190,
+            "battersFaced": 199,
+            "inningsPitched": "48.0",
+            "strikeOuts": 40,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -1767,7 +3083,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
         "rpg": 4.16,
         "rapg": 4.15,
-        "color": "#002b5c"
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "BOS",
@@ -1776,7 +3099,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
         "rpg": 4.35,
         "rapg": 3.83,
-        "color": "#0d2b56"
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 656492,
@@ -1789,8 +3119,36 @@
           "strikeoutsPer9Inn": 8.15,
           "wins": 15,
           "losses": 5,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.708,
+          "avgAgainst": 0.243,
+          "vsLhb": {
+            "ops": 0.644,
+            "avg": 0.198,
+            "obp": 0.266,
+            "slg": 0.378,
+            "whip": 0.95,
+            "atBats": 172,
+            "battersFaced": 188,
+            "inningsPitched": "46.1",
+            "strikeOuts": 54,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.732,
+            "avg": 0.26,
+            "obp": 0.316,
+            "slg": 0.416,
+            "whip": 1.3,
+            "atBats": 461,
+            "battersFaced": 505,
+            "inningsPitched": "119.2",
+            "strikeOuts": 97,
+            "homeRuns": 16
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 543243,
@@ -1803,8 +3161,36 @@
           "strikeoutsPer9Inn": 8.06,
           "wins": 17,
           "losses": 5,
-          "gamesStarted": 28
-        }
+          "gamesStarted": 28,
+          "opsAgainst": 0.672,
+          "avgAgainst": 0.238,
+          "vsLhb": {
+            "ops": 0.665,
+            "avg": 0.229,
+            "obp": 0.291,
+            "slg": 0.374,
+            "whip": 1.13,
+            "atBats": 385,
+            "battersFaced": 425,
+            "inningsPitched": "105.0",
+            "strikeOuts": 102,
+            "homeRuns": 10
+          },
+          "vsRhb": {
+            "ops": 0.686,
+            "avg": 0.253,
+            "obp": 0.301,
+            "slg": 0.385,
+            "whip": 1.22,
+            "atBats": 221,
+            "battersFaced": 236,
+            "inningsPitched": "57.1",
+            "strikeOuts": 44,
+            "homeRuns": 6
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -1830,7 +3216,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
         "rpg": 4.12,
         "rapg": 5.16,
-        "color": "#c6011f"
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATL",
@@ -1839,7 +3232,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
         "rpg": 4.63,
         "rapg": 3.86,
-        "color": "#0c2340"
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 671096,
@@ -1852,8 +3252,36 @@
           "strikeoutsPer9Inn": 7.08,
           "wins": 6,
           "losses": 11,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.764,
+          "avgAgainst": 0.258,
+          "vsLhb": {
+            "ops": 0.772,
+            "avg": 0.269,
+            "obp": 0.304,
+            "slg": 0.468,
+            "whip": 1.31,
+            "atBats": 171,
+            "battersFaced": 184,
+            "inningsPitched": "42.2",
+            "strikeOuts": 49,
+            "homeRuns": 8
+          },
+          "vsRhb": {
+            "ops": 0.759,
+            "avg": 0.254,
+            "obp": 0.346,
+            "slg": 0.413,
+            "whip": 1.55,
+            "atBats": 445,
+            "battersFaced": 517,
+            "inningsPitched": "114.2",
+            "strikeOuts": 76,
+            "homeRuns": 16
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": {
         "id": 519242,
@@ -1866,8 +3294,36 @@
           "strikeoutsPer9Inn": 10.89,
           "wins": 14,
           "losses": 9,
-          "gamesStarted": 26
-        }
+          "gamesStarted": 26,
+          "opsAgainst": 0.574,
+          "avgAgainst": 0.216,
+          "vsLhb": {
+            "ops": 0.595,
+            "avg": 0.23,
+            "obp": 0.273,
+            "slg": 0.322,
+            "whip": 1.01,
+            "atBats": 152,
+            "battersFaced": 162,
+            "inningsPitched": "39.2",
+            "strikeOuts": 53,
+            "homeRuns": 1
+          },
+          "vsRhb": {
+            "ops": 0.566,
+            "avg": 0.211,
+            "obp": 0.271,
+            "slg": 0.295,
+            "whip": 0.99,
+            "atBats": 427,
+            "battersFaced": 465,
+            "inningsPitched": "117.0",
+            "strikeOuts": 137,
+            "homeRuns": 8
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [],
       "moneyline": null,
@@ -1893,7 +3349,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
         "rpg": 4.7,
         "rapg": 4.43,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "KC",
@@ -1902,7 +3365,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
         "rpg": 4.21,
         "rapg": 4.86,
-        "color": "#004687"
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 607200,
@@ -1915,8 +3385,36 @@
           "strikeoutsPer9Inn": 6.31,
           "wins": 8,
           "losses": 9,
-          "gamesStarted": 15
-        }
+          "gamesStarted": 15,
+          "opsAgainst": 0.749,
+          "avgAgainst": 0.254,
+          "vsLhb": {
+            "ops": 0.695,
+            "avg": 0.243,
+            "obp": 0.324,
+            "slg": 0.371,
+            "whip": 1.38,
+            "atBats": 280,
+            "battersFaced": 319,
+            "inningsPitched": "73.0",
+            "strikeOuts": 50,
+            "homeRuns": 7
+          },
+          "vsRhb": {
+            "ops": 0.807,
+            "avg": 0.266,
+            "obp": 0.315,
+            "slg": 0.492,
+            "whip": 1.31,
+            "atBats": 252,
+            "battersFaced": 274,
+            "inningsPitched": "64.1",
+            "strikeOuts": 47,
+            "homeRuns": 16
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 607625,
@@ -1929,8 +3427,36 @@
           "strikeoutsPer9Inn": 6.98,
           "wins": 7,
           "losses": 9,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.828,
+          "avgAgainst": 0.292,
+          "vsLhb": {
+            "ops": 0.872,
+            "avg": 0.307,
+            "obp": 0.37,
+            "slg": 0.502,
+            "whip": 1.61,
+            "atBats": 410,
+            "battersFaced": 459,
+            "inningsPitched": "101.2",
+            "strikeOuts": 85,
+            "homeRuns": 14
+          },
+          "vsRhb": {
+            "ops": 0.757,
+            "avg": 0.268,
+            "obp": 0.313,
+            "slg": 0.444,
+            "whip": 1.28,
+            "atBats": 250,
+            "battersFaced": 273,
+            "inningsPitched": "65.0",
+            "strikeOuts": 46,
+            "homeRuns": 9
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -1956,7 +3482,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
         "rpg": 4.44,
         "rapg": 4.46,
-        "color": "#00a3e0"
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "CHC",
@@ -1965,7 +3498,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
         "rpg": 5.35,
         "rapg": 4.38,
-        "color": "#0e3386"
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 687473,
@@ -1978,8 +3518,36 @@
           "strikeoutsPer9Inn": 7.51,
           "wins": 1,
           "losses": 5,
-          "gamesStarted": 17
-        }
+          "gamesStarted": 17,
+          "opsAgainst": 0.776,
+          "avgAgainst": 0.277,
+          "vsLhb": {
+            "ops": 0.763,
+            "avg": 0.266,
+            "obp": 0.336,
+            "slg": 0.427,
+            "whip": 1.46,
+            "atBats": 192,
+            "battersFaced": 214,
+            "inningsPitched": "48.2",
+            "strikeOuts": 39,
+            "homeRuns": 5
+          },
+          "vsRhb": {
+            "ops": 0.793,
+            "avg": 0.292,
+            "obp": 0.335,
+            "slg": 0.458,
+            "whip": 1.41,
+            "atBats": 144,
+            "battersFaced": 155,
+            "inningsPitched": "34.0",
+            "strikeOuts": 30,
+            "homeRuns": 6
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [],
@@ -2006,7 +3574,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
         "rpg": 4.28,
         "rapg": 4.54,
-        "color": "#002d72"
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "TEX",
@@ -2015,7 +3590,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
         "rpg": 4.19,
         "rapg": 4.4,
-        "color": "#003278"
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 690997,
@@ -2028,8 +3610,36 @@
           "strikeoutsPer9Inn": 9.85,
           "wins": 11,
           "losses": 10,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.647,
+          "avgAgainst": 0.218,
+          "vsLhb": {
+            "ops": 0.73,
+            "avg": 0.249,
+            "obp": 0.336,
+            "slg": 0.394,
+            "whip": 1.37,
+            "atBats": 386,
+            "battersFaced": 444,
+            "inningsPitched": "101.1",
+            "strikeOuts": 115,
+            "homeRuns": 13
+          },
+          "vsRhb": {
+            "ops": 0.515,
+            "avg": 0.169,
+            "obp": 0.264,
+            "slg": 0.251,
+            "whip": 0.96,
+            "atBats": 243,
+            "battersFaced": 278,
+            "inningsPitched": "70.0",
+            "strikeOuts": 74,
+            "homeRuns": 4
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [],
@@ -2056,7 +3666,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
         "rpg": 4.44,
         "rapg": 4.45,
-        "color": "#aa182c"
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "COL",
@@ -2065,7 +3682,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
         "rpg": 4.66,
         "rapg": 5.79,
-        "color": "#33006f"
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 518876,
@@ -2078,8 +3702,36 @@
           "strikeoutsPer9Inn": 6.38,
           "wins": 9,
           "losses": 14,
-          "gamesStarted": 28
-        }
+          "gamesStarted": 28,
+          "opsAgainst": 0.816,
+          "avgAgainst": 0.27,
+          "vsLhb": {
+            "ops": 0.864,
+            "avg": 0.27,
+            "obp": 0.363,
+            "slg": 0.501,
+            "whip": 1.62,
+            "atBats": 355,
+            "battersFaced": 411,
+            "inningsPitched": "90.0",
+            "strikeOuts": 58,
+            "homeRuns": 19
+          },
+          "vsRhb": {
+            "ops": 0.745,
+            "avg": 0.269,
+            "obp": 0.321,
+            "slg": 0.424,
+            "whip": 1.32,
+            "atBats": 245,
+            "battersFaced": 272,
+            "inningsPitched": "64.1",
+            "strikeOuts": 53,
+            "homeRuns": 9
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 690279,
@@ -2092,8 +3744,36 @@
           "strikeoutsPer9Inn": 9.0,
           "wins": 0,
           "losses": 1,
-          "gamesStarted": 5
-        }
+          "gamesStarted": 5,
+          "opsAgainst": 0.949,
+          "avgAgainst": 0.299,
+          "vsLhb": {
+            "ops": 1.022,
+            "avg": 0.341,
+            "obp": 0.431,
+            "slg": 0.591,
+            "whip": 2.13,
+            "atBats": 44,
+            "battersFaced": 51,
+            "inningsPitched": "10.1",
+            "strikeOuts": 12,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.875,
+            "avg": 0.256,
+            "obp": 0.34,
+            "slg": 0.535,
+            "whip": 1.3,
+            "atBats": 43,
+            "battersFaced": 50,
+            "inningsPitched": "12.1",
+            "strikeOuts": 11,
+            "homeRuns": 3
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2119,7 +3799,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
         "rpg": 4.01,
         "rapg": 4.56,
-        "color": "#ba0021"
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATH",
@@ -2128,7 +3815,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
         "rpg": 4.29,
         "rapg": 5.72,
-        "color": "#003831"
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 700712,
@@ -2141,8 +3835,36 @@
           "strikeoutsPer9Inn": 8.73,
           "wins": 9,
           "losses": 10,
-          "gamesStarted": 26
-        }
+          "gamesStarted": 26,
+          "opsAgainst": 0.596,
+          "avgAgainst": 0.203,
+          "vsLhb": {
+            "ops": 0.648,
+            "avg": 0.224,
+            "obp": 0.329,
+            "slg": 0.319,
+            "whip": 1.41,
+            "atBats": 295,
+            "battersFaced": 344,
+            "inningsPitched": "78.2",
+            "strikeOuts": 70,
+            "homeRuns": 4
+          },
+          "vsRhb": {
+            "ops": 0.528,
+            "avg": 0.177,
+            "obp": 0.264,
+            "slg": 0.264,
+            "whip": 0.98,
+            "atBats": 231,
+            "battersFaced": 261,
+            "inningsPitched": "64.1",
+            "strikeOuts": 70,
+            "homeRuns": 5
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 605488,
@@ -2155,8 +3877,36 @@
           "strikeoutsPer9Inn": 7.09,
           "wins": 4,
           "losses": 14,
-          "gamesStarted": 28
-        }
+          "gamesStarted": 28,
+          "opsAgainst": 0.854,
+          "avgAgainst": 0.269,
+          "vsLhb": {
+            "ops": 0.936,
+            "avg": 0.293,
+            "obp": 0.357,
+            "slg": 0.579,
+            "whip": 1.61,
+            "atBats": 164,
+            "battersFaced": 185,
+            "inningsPitched": "40.1",
+            "strikeOuts": 30,
+            "homeRuns": 10
+          },
+          "vsRhb": {
+            "ops": 0.82,
+            "avg": 0.259,
+            "obp": 0.33,
+            "slg": 0.49,
+            "whip": 1.44,
+            "atBats": 382,
+            "battersFaced": 427,
+            "inningsPitched": "96.0",
+            "strikeOuts": 79,
+            "homeRuns": 23
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [],
       "moneyline": null,
@@ -2182,7 +3932,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
         "rpg": 4.42,
         "rapg": 4.16,
-        "color": "#2f241d"
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "LAD",
@@ -2191,7 +3948,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
         "rpg": 5.0,
         "rapg": 3.76,
-        "color": "#005a9c"
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 592662,
@@ -2204,8 +3968,36 @@
           "strikeoutsPer9Inn": 7.65,
           "wins": 13,
           "losses": 8,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.703,
+          "avgAgainst": 0.225,
+          "vsLhb": {
+            "ops": 0.669,
+            "avg": 0.258,
+            "obp": 0.332,
+            "slg": 0.337,
+            "whip": 1.41,
+            "atBats": 163,
+            "battersFaced": 186,
+            "inningsPitched": "43.1",
+            "strikeOuts": 42,
+            "homeRuns": 2
+          },
+          "vsRhb": {
+            "ops": 0.715,
+            "avg": 0.213,
+            "obp": 0.315,
+            "slg": 0.4,
+            "whip": 1.32,
+            "atBats": 427,
+            "battersFaced": 499,
+            "inningsPitched": "117.0",
+            "strikeOuts": 96,
+            "homeRuns": 20
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": null,
       "books": [],
@@ -2232,7 +4024,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
         "rpg": 4.41,
         "rapg": 4.79,
-        "color": "#002d62"
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "SEA",
@@ -2241,7 +4040,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
         "rpg": 4.06,
         "rapg": 4.42,
-        "color": "#005c5c"
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -2255,8 +4061,36 @@
           "strikeoutsPer9Inn": 7.59,
           "wins": 9,
           "losses": 11,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.775,
+          "avgAgainst": 0.286,
+          "vsLhb": {
+            "ops": 0.81,
+            "avg": 0.284,
+            "obp": 0.342,
+            "slg": 0.468,
+            "whip": 1.45,
+            "atBats": 348,
+            "battersFaced": 380,
+            "inningsPitched": "88.2",
+            "strikeOuts": 69,
+            "homeRuns": 13
+          },
+          "vsRhb": {
+            "ops": 0.736,
+            "avg": 0.288,
+            "obp": 0.32,
+            "slg": 0.416,
+            "whip": 1.32,
+            "atBats": 320,
+            "battersFaced": 338,
+            "inningsPitched": "80.1",
+            "strikeOuts": 74,
+            "homeRuns": 8
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2282,7 +4116,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
         "rpg": 4.51,
         "rapg": 4.66,
-        "color": "#be0a14"
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PIT",
@@ -2291,7 +4132,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
         "rpg": 4.79,
         "rapg": 4.61,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 681517,
@@ -2304,8 +4152,36 @@
           "strikeoutsPer9Inn": 8.41,
           "wins": 10,
           "losses": 5,
-          "gamesStarted": 29
-        }
+          "gamesStarted": 29,
+          "opsAgainst": 0.742,
+          "avgAgainst": 0.268,
+          "vsLhb": {
+            "ops": 0.85,
+            "avg": 0.31,
+            "obp": 0.382,
+            "slg": 0.468,
+            "whip": 1.76,
+            "atBats": 284,
+            "battersFaced": 318,
+            "inningsPitched": "68.1",
+            "strikeOuts": 65,
+            "homeRuns": 9
+          },
+          "vsRhb": {
+            "ops": 0.618,
+            "avg": 0.221,
+            "obp": 0.258,
+            "slg": 0.36,
+            "whip": 0.95,
+            "atBats": 253,
+            "battersFaced": 269,
+            "inningsPitched": "68.2",
+            "strikeOuts": 64,
+            "homeRuns": 6
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 694973,
@@ -2318,8 +4194,36 @@
           "strikeoutsPer9Inn": 10.29,
           "wins": 10,
           "losses": 11,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.674,
+          "avgAgainst": 0.23,
+          "vsLhb": {
+            "ops": 0.683,
+            "avg": 0.222,
+            "obp": 0.291,
+            "slg": 0.392,
+            "whip": 1.15,
+            "atBats": 360,
+            "battersFaced": 402,
+            "inningsPitched": "98.2",
+            "strikeOuts": 109,
+            "homeRuns": 12
+          },
+          "vsRhb": {
+            "ops": 0.663,
+            "avg": 0.24,
+            "obp": 0.297,
+            "slg": 0.366,
+            "whip": 1.12,
+            "atBats": 262,
+            "battersFaced": 287,
+            "inningsPitched": "68.2",
+            "strikeOuts": 83,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2345,7 +4249,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
         "rpg": 4.7,
         "rapg": 4.43,
-        "color": "#000000"
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "KC",
@@ -2354,7 +4265,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
         "rpg": 4.21,
         "rapg": 4.86,
-        "color": "#004687"
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -2368,8 +4286,36 @@
           "strikeoutsPer9Inn": 5.92,
           "wins": 3,
           "losses": 4,
-          "gamesStarted": 12
-        }
+          "gamesStarted": 12,
+          "opsAgainst": 0.712,
+          "avgAgainst": 0.26,
+          "vsLhb": {
+            "ops": 0.757,
+            "avg": 0.276,
+            "obp": 0.326,
+            "slg": 0.431,
+            "whip": 1.29,
+            "atBats": 174,
+            "battersFaced": 191,
+            "inningsPitched": "45.2",
+            "strikeOuts": 27,
+            "homeRuns": 6
+          },
+          "vsRhb": {
+            "ops": 0.636,
+            "avg": 0.233,
+            "obp": 0.325,
+            "slg": 0.311,
+            "whip": 1.41,
+            "atBats": 103,
+            "battersFaced": 117,
+            "inningsPitched": "27.0",
+            "strikeOuts": 21,
+            "homeRuns": 1
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2395,7 +4341,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
         "rpg": 4.44,
         "rapg": 4.46,
-        "color": "#00a3e0"
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "CHC",
@@ -2404,7 +4357,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
         "rpg": 5.35,
         "rapg": 4.38,
-        "color": "#0e3386"
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 663969,
@@ -2417,8 +4377,36 @@
           "strikeoutsPer9Inn": 7.26,
           "wins": 5,
           "losses": 6,
-          "gamesStarted": 19
-        }
+          "gamesStarted": 19,
+          "opsAgainst": 0.707,
+          "avgAgainst": 0.236,
+          "vsLhb": {
+            "ops": 0.747,
+            "avg": 0.25,
+            "obp": 0.338,
+            "slg": 0.409,
+            "whip": 1.48,
+            "atBats": 252,
+            "battersFaced": 289,
+            "inningsPitched": "64.2",
+            "strikeOuts": 55,
+            "homeRuns": 9
+          },
+          "vsRhb": {
+            "ops": 0.657,
+            "avg": 0.219,
+            "obp": 0.29,
+            "slg": 0.367,
+            "whip": 1.13,
+            "atBats": 210,
+            "battersFaced": 231,
+            "inningsPitched": "57.1",
+            "strikeOuts": 44,
+            "homeRuns": 8
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [],
@@ -2445,7 +4433,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
         "rpg": 4.28,
         "rapg": 4.54,
-        "color": "#002d72"
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "TEX",
@@ -2454,7 +4449,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
         "rpg": 4.19,
         "rapg": 4.4,
-        "color": "#003278"
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 804267,
@@ -2467,8 +4469,36 @@
           "strikeoutsPer9Inn": 6.69,
           "wins": 5,
           "losses": 5,
-          "gamesStarted": 14
-        }
+          "gamesStarted": 14,
+          "opsAgainst": 0.716,
+          "avgAgainst": 0.25,
+          "vsLhb": {
+            "ops": 0.624,
+            "avg": 0.22,
+            "obp": 0.264,
+            "slg": 0.36,
+            "whip": 0.99,
+            "atBats": 100,
+            "battersFaced": 106,
+            "inningsPitched": "27.1",
+            "strikeOuts": 18,
+            "homeRuns": 4
+          },
+          "vsRhb": {
+            "ops": 0.762,
+            "avg": 0.265,
+            "obp": 0.313,
+            "slg": 0.449,
+            "whip": 1.25,
+            "atBats": 196,
+            "battersFaced": 212,
+            "inningsPitched": "51.1",
+            "strikeOuts": 41,
+            "homeRuns": 9
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": null,
       "books": [],
@@ -2495,7 +4525,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
         "rpg": 4.44,
         "rapg": 4.45,
-        "color": "#aa182c"
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "COL",
@@ -2504,7 +4541,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
         "rpg": 4.66,
         "rapg": 5.79,
-        "color": "#33006f"
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 593958,
@@ -2517,8 +4561,36 @@
           "strikeoutsPer9Inn": 6.86,
           "wins": 15,
           "losses": 7,
-          "gamesStarted": 31
-        }
+          "gamesStarted": 31,
+          "opsAgainst": 0.672,
+          "avgAgainst": 0.236,
+          "vsLhb": {
+            "ops": 0.712,
+            "avg": 0.265,
+            "obp": 0.314,
+            "slg": 0.398,
+            "whip": 1.31,
+            "atBats": 211,
+            "battersFaced": 227,
+            "inningsPitched": "54.1",
+            "strikeOuts": 43,
+            "homeRuns": 6
+          },
+          "vsRhb": {
+            "ops": 0.654,
+            "avg": 0.224,
+            "obp": 0.294,
+            "slg": 0.36,
+            "whip": 1.2,
+            "atBats": 483,
+            "battersFaced": 534,
+            "inningsPitched": "129.1",
+            "strikeOuts": 97,
+            "homeRuns": 12
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "homePitcher": null,
       "books": [],
@@ -2545,7 +4617,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
         "rpg": 5.14,
         "rapg": 3.85,
-        "color": "#13294b"
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "PHI",
@@ -2554,7 +4633,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
         "rpg": 4.47,
         "rapg": 4.28,
-        "color": "#e81828"
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": null,
@@ -2582,7 +4668,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
         "rpg": 4.16,
         "rapg": 4.15,
-        "color": "#002b5c"
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "BOS",
@@ -2591,7 +4684,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
         "rpg": 4.35,
         "rapg": 3.83,
-        "color": "#0d2b56"
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -2605,8 +4705,36 @@
           "strikeoutsPer9Inn": 8.48,
           "wins": 8,
           "losses": 4,
-          "gamesStarted": 27
-        }
+          "gamesStarted": 27,
+          "opsAgainst": 0.642,
+          "avgAgainst": 0.237,
+          "vsLhb": {
+            "ops": 0.731,
+            "avg": 0.259,
+            "obp": 0.32,
+            "slg": 0.411,
+            "whip": 1.26,
+            "atBats": 158,
+            "battersFaced": 172,
+            "inningsPitched": "40.1",
+            "strikeOuts": 41,
+            "homeRuns": 4
+          },
+          "vsRhb": {
+            "ops": 0.605,
+            "avg": 0.228,
+            "obp": 0.295,
+            "slg": 0.31,
+            "whip": 1.18,
+            "atBats": 378,
+            "battersFaced": 421,
+            "inningsPitched": "102.2",
+            "strikeOuts": 94,
+            "homeRuns": 5
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
       },
       "books": [],
       "moneyline": null,
@@ -2632,7 +4760,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
         "rpg": 4.56,
         "rapg": 4.03,
-        "color": "#092c5c"
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "NYY",
@@ -2641,7 +4776,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
         "rpg": 4.6,
         "rapg": 3.72,
-        "color": "#132448"
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": {
@@ -2655,8 +4797,36 @@
           "strikeoutsPer9Inn": 11.05,
           "wins": 14,
           "losses": 6,
-          "gamesStarted": 32
-        }
+          "gamesStarted": 32,
+          "opsAgainst": 0.543,
+          "avgAgainst": 0.184,
+          "vsLhb": {
+            "ops": 0.563,
+            "avg": 0.189,
+            "obp": 0.251,
+            "slg": 0.312,
+            "whip": 0.96,
+            "atBats": 407,
+            "battersFaced": 450,
+            "inningsPitched": "113.2",
+            "strikeOuts": 155,
+            "homeRuns": 9
+          },
+          "vsRhb": {
+            "ops": 0.512,
+            "avg": 0.177,
+            "obp": 0.227,
+            "slg": 0.285,
+            "whip": 0.83,
+            "atBats": 277,
+            "battersFaced": 297,
+            "inningsPitched": "76.2",
+            "strikeOuts": 79,
+            "homeRuns": 7
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2682,7 +4852,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
         "rpg": 4.12,
         "rapg": 5.16,
-        "color": "#c6011f"
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATL",
@@ -2691,7 +4868,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
         "rpg": 4.63,
         "rapg": 3.86,
-        "color": "#0c2340"
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 663903,
@@ -2704,8 +4888,36 @@
           "strikeoutsPer9Inn": 7.31,
           "wins": 6,
           "losses": 15,
-          "gamesStarted": 30
-        }
+          "gamesStarted": 30,
+          "opsAgainst": 0.854,
+          "avgAgainst": 0.29,
+          "vsLhb": {
+            "ops": 0.909,
+            "avg": 0.312,
+            "obp": 0.381,
+            "slg": 0.528,
+            "whip": 1.69,
+            "atBats": 407,
+            "battersFaced": 460,
+            "inningsPitched": "96.0",
+            "strikeOuts": 90,
+            "homeRuns": 23
+          },
+          "vsRhb": {
+            "ops": 0.752,
+            "avg": 0.249,
+            "obp": 0.333,
+            "slg": 0.419,
+            "whip": 1.41,
+            "atBats": 217,
+            "battersFaced": 247,
+            "inningsPitched": "56.0",
+            "strikeOuts": 35,
+            "homeRuns": 8
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": {
         "id": 641816,
@@ -2718,8 +4930,36 @@
           "strikeoutsPer9Inn": 8.31,
           "wins": 7,
           "losses": 10,
-          "gamesStarted": 26
-        }
+          "gamesStarted": 26,
+          "opsAgainst": 0.697,
+          "avgAgainst": 0.246,
+          "vsLhb": {
+            "ops": 0.622,
+            "avg": 0.209,
+            "obp": 0.26,
+            "slg": 0.362,
+            "whip": 0.97,
+            "atBats": 301,
+            "battersFaced": 328,
+            "inningsPitched": "85.2",
+            "strikeOuts": 80,
+            "homeRuns": 10
+          },
+          "vsRhb": {
+            "ops": 0.791,
+            "avg": 0.292,
+            "obp": 0.359,
+            "slg": 0.432,
+            "whip": 1.6,
+            "atBats": 236,
+            "battersFaced": 264,
+            "inningsPitched": "58.0",
+            "strikeOuts": 53,
+            "homeRuns": 8
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "books": [],
       "moneyline": null,
@@ -2745,7 +4985,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
         "rpg": 4.41,
         "rapg": 4.79,
-        "color": "#002d62"
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "ATH",
@@ -2754,7 +5001,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
         "rpg": 4.29,
         "rapg": 5.72,
-        "color": "#003831"
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": null,
@@ -2782,7 +5036,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
         "rpg": 4.01,
         "rapg": 4.56,
-        "color": "#ba0021"
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "SEA",
@@ -2791,7 +5052,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
         "rpg": 4.06,
         "rapg": 4.42,
-        "color": "#005c5c"
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": null,
       "homePitcher": null,
@@ -2819,7 +5087,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
         "rpg": 4.42,
         "rapg": 4.16,
-        "color": "#2f241d"
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "home": {
         "abbr": "LAD",
@@ -2828,7 +5103,14 @@
         "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
         "rpg": 5.0,
         "rapg": 3.76,
-        "color": "#005a9c"
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
       },
       "awayPitcher": {
         "id": 601713,
@@ -2841,8 +5123,36 @@
           "strikeoutsPer9Inn": 10.5,
           "wins": 3,
           "losses": 2,
-          "gamesStarted": 7
-        }
+          "gamesStarted": 7,
+          "opsAgainst": 0.551,
+          "avgAgainst": 0.204,
+          "vsLhb": {
+            "ops": 0.5,
+            "avg": 0.194,
+            "obp": 0.242,
+            "slg": 0.258,
+            "whip": 0.96,
+            "atBats": 62,
+            "battersFaced": 66,
+            "inningsPitched": "16.2",
+            "strikeOuts": 20,
+            "homeRuns": 0
+          },
+          "vsRhb": {
+            "ops": 0.612,
+            "avg": 0.216,
+            "obp": 0.259,
+            "slg": 0.353,
+            "whip": 1.05,
+            "atBats": 51,
+            "battersFaced": 54,
+            "inningsPitched": "13.1",
+            "strikeOuts": 15,
+            "homeRuns": 2
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
       },
       "homePitcher": null,
       "books": [],
@@ -2852,10 +5162,2469 @@
       "espnId": "401817071",
       "consensus": null,
       "hasOdds": false
+    },
+    {
+      "id": "824220",
+      "gamePk": 824220,
+      "key": "PIT@DET",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": {
+        "id": 695549,
+        "name": "Jackson Jobe",
+        "stats": {
+          "era": 3.98,
+          "whip": 1.2,
+          "inningsPitched": "40.2",
+          "strikeOuts": 43,
+          "strikeoutsPer9Inn": 9.52,
+          "wins": 2,
+          "losses": 3,
+          "gamesStarted": 8,
+          "opsAgainst": 0.742,
+          "avgAgainst": 0.23,
+          "vsLhb": {
+            "ops": 0.668,
+            "avg": 0.193,
+            "obp": 0.274,
+            "slg": 0.394,
+            "whip": 1.0,
+            "atBats": 109,
+            "battersFaced": 124,
+            "inningsPitched": "31.0",
+            "strikeOuts": 32,
+            "homeRuns": 5
+          },
+          "vsRhb": {
+            "ops": 0.931,
+            "avg": 0.326,
+            "obp": 0.396,
+            "slg": 0.535,
+            "whip": 1.93,
+            "atBats": 43,
+            "battersFaced": 48,
+            "inningsPitched": "9.1",
+            "strikeOuts": 11,
+            "homeRuns": 2
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
+      },
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817077",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823409",
+      "gamePk": 823409,
+      "key": "TB@PHI",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T22:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817078",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822681",
+      "gamePk": 822681,
+      "key": "NYM@WSH",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T22:45:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817076",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823491",
+      "gamePk": 823491,
+      "key": "BAL@NYY",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817073",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822760",
+      "gamePk": 822760,
+      "key": "CIN@TOR",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:07:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": {
+        "id": 666157,
+        "name": "Nick Lodolo",
+        "stats": {
+          "era": 5.04,
+          "whip": 1.47,
+          "inningsPitched": "103.2",
+          "strikeOuts": 80,
+          "strikeoutsPer9Inn": 6.95,
+          "wins": 3,
+          "losses": 6,
+          "gamesStarted": 20,
+          "opsAgainst": 0.858,
+          "avgAgainst": 0.276,
+          "vsLhb": {
+            "ops": 0.932,
+            "avg": 0.323,
+            "obp": 0.411,
+            "slg": 0.521,
+            "whip": 1.75,
+            "atBats": 96,
+            "battersFaced": 112,
+            "inningsPitched": "24.0",
+            "strikeOuts": 24,
+            "homeRuns": 4
+          },
+          "vsRhb": {
+            "ops": 0.834,
+            "avg": 0.26,
+            "obp": 0.348,
+            "slg": 0.486,
+            "whip": 1.39,
+            "atBats": 296,
+            "battersFaced": 350,
+            "inningsPitched": "79.1",
+            "strikeOuts": 56,
+            "homeRuns": 16
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817075",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824706",
+      "gamePk": 824706,
+      "key": "CHC@BOS",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817074",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823816",
+      "gamePk": 823816,
+      "key": "ATL@MIA",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817072",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824058",
+      "gamePk": 824058,
+      "key": "CLE@KC",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817079",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824544",
+      "gamePk": 824544,
+      "key": "COL@CHW",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817080",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823735",
+      "gamePk": 823735,
+      "key": "STL@MIL",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-25T23:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817081",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823652",
+      "gamePk": 823652,
+      "key": "TEX@MIN",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-26T00:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817082",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824947",
+      "gamePk": 824947,
+      "key": "HOU@ATH",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-26T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817085",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823248",
+      "gamePk": 823248,
+      "key": "ARI@SD",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-26T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817084",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823085",
+      "gamePk": 823085,
+      "key": "LAA@SEA",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-26T02:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817083",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823167",
+      "gamePk": 823167,
+      "key": "LAD@SF",
+      "date": "2026-09-25",
+      "kickoffIso": "2026-09-26T02:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 7,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817086",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824219",
+      "gamePk": 824219,
+      "key": "PIT@DET",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T17:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817092",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822759",
+      "gamePk": 822759,
+      "key": "CIN@TOR",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T19:07:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": {
+        "id": 695076,
+        "name": "Rhett Lowder",
+        "stats": {
+          "era": 6.01,
+          "whip": 1.55,
+          "inningsPitched": "127.1",
+          "strikeOuts": 101,
+          "strikeoutsPer9Inn": 7.14,
+          "wins": 6,
+          "losses": 12,
+          "gamesStarted": 25,
+          "opsAgainst": 0.809,
+          "avgAgainst": 0.279,
+          "vsLhb": {
+            "ops": 0.843,
+            "avg": 0.277,
+            "obp": 0.37,
+            "slg": 0.473,
+            "whip": 1.69,
+            "atBats": 311,
+            "battersFaced": 360,
+            "inningsPitched": "76.1",
+            "strikeOuts": 66,
+            "homeRuns": 12
+          },
+          "vsRhb": {
+            "ops": 0.756,
+            "avg": 0.282,
+            "obp": 0.324,
+            "slg": 0.432,
+            "whip": 1.35,
+            "atBats": 206,
+            "battersFaced": 221,
+            "inningsPitched": "51.0",
+            "strikeOuts": 35,
+            "homeRuns": 6
+          },
+          "pitchHand": "R"
+        },
+        "pitchHand": "R"
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817090",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822678",
+      "gamePk": 822678,
+      "key": "NYM@WSH",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T20:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817091",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823165",
+      "gamePk": 823165,
+      "key": "LAD@SF",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T20:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 7,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817101",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823653",
+      "gamePk": 823653,
+      "key": "TEX@MIN",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T20:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817097",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823813",
+      "gamePk": 823813,
+      "key": "ATL@MIA",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T20:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817087",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824057",
+      "gamePk": 824057,
+      "key": "CLE@KC",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817094",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824543",
+      "gamePk": 824543,
+      "key": "COL@CHW",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817095",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823733",
+      "gamePk": 823733,
+      "key": "STL@MIL",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817096",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824705",
+      "gamePk": 824705,
+      "key": "CHC@BOS",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817089",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823407",
+      "gamePk": 823407,
+      "key": "TB@PHI",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817093",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823489",
+      "gamePk": 823489,
+      "key": "BAL@NYY",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-26T23:15:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817088",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823245",
+      "gamePk": 823245,
+      "key": "ARI@SD",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-27T00:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817099",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824949",
+      "gamePk": 824949,
+      "key": "HOU@ATH",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-27T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817100",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823083",
+      "gamePk": 823083,
+      "key": "LAA@SEA",
+      "date": "2026-09-26",
+      "kickoffIso": "2026-09-27T01:40:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817098",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824703",
+      "gamePk": 824703,
+      "key": "CHC@BOS",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CHC",
+        "name": "Chicago Cubs",
+        "id": 112,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chc.png",
+        "rpg": 5.35,
+        "rapg": 4.38,
+        "color": "#0e3386",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 9,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "BOS",
+        "name": "Boston Red Sox",
+        "id": 111,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bos.png",
+        "rpg": 4.35,
+        "rapg": 3.83,
+        "color": "#0d2b56",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817104",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822679",
+      "gamePk": 822679,
+      "key": "NYM@WSH",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "NYM",
+        "name": "New York Mets",
+        "id": 121,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nym.png",
+        "rpg": 4.28,
+        "rapg": 4.54,
+        "color": "#002d72",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 8,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "WSH",
+        "name": "Washington Nationals",
+        "id": 120,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/wsh.png",
+        "rpg": 5.1,
+        "rapg": 5.06,
+        "color": "#ab0003",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817106",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824948",
+      "gamePk": 824948,
+      "key": "HOU@ATH",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Astros",
+        "id": 117,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/hou.png",
+        "rpg": 4.41,
+        "rapg": 4.79,
+        "color": "#002d62",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 10,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "ATH",
+        "name": "Athletics",
+        "id": 133,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ath.png",
+        "rpg": 4.29,
+        "rapg": 5.72,
+        "color": "#003831",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817115",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823164",
+      "gamePk": 823164,
+      "key": "LAD@SF",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAD",
+        "name": "Los Angeles Dodgers",
+        "id": 119,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/lad.png",
+        "rpg": 5.0,
+        "rapg": 3.76,
+        "color": "#005a9c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco Giants",
+        "id": 137,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sf.png",
+        "rpg": 4.21,
+        "rapg": 4.73,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 7,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817116",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823408",
+      "gamePk": 823408,
+      "key": "TB@PHI",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:05:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TB",
+        "name": "Tampa Bay Rays",
+        "id": 139,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tb.png",
+        "rpg": 4.56,
+        "rapg": 4.03,
+        "color": "#092c5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "PHI",
+        "name": "Philadelphia Phillies",
+        "id": 143,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/phi.png",
+        "rpg": 4.47,
+        "rapg": 4.28,
+        "color": "#e81828",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817108",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "822761",
+      "gamePk": 822761,
+      "key": "CIN@TOR",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:07:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Reds",
+        "id": 113,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cin.png",
+        "rpg": 4.12,
+        "rapg": 5.16,
+        "color": "#c6011f",
+        "batMix": {
+          "lhb": 3,
+          "rhb": 8,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "TOR",
+        "name": "Toronto Blue Jays",
+        "id": 141,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tor.png",
+        "rpg": 4.03,
+        "rapg": 4.3,
+        "color": "#134a8e",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": {
+        "id": 682227,
+        "name": "Brandon Williamson",
+        "stats": {
+          "era": 5.56,
+          "whip": 1.53,
+          "inningsPitched": "43.2",
+          "strikeOuts": 31,
+          "strikeoutsPer9Inn": 6.39,
+          "wins": 4,
+          "losses": 4,
+          "gamesStarted": 7,
+          "opsAgainst": 0.813,
+          "avgAgainst": 0.247,
+          "vsLhb": {
+            "ops": 0.749,
+            "avg": 0.208,
+            "obp": 0.291,
+            "slg": 0.458,
+            "whip": 1.15,
+            "atBats": 48,
+            "battersFaced": 55,
+            "inningsPitched": "13.0",
+            "strikeOuts": 12,
+            "homeRuns": 3
+          },
+          "vsRhb": {
+            "ops": 0.837,
+            "avg": 0.263,
+            "obp": 0.39,
+            "slg": 0.447,
+            "whip": 1.7,
+            "atBats": 114,
+            "battersFaced": 141,
+            "inningsPitched": "30.2",
+            "strikeOuts": 19,
+            "homeRuns": 5
+          },
+          "pitchHand": "L"
+        },
+        "pitchHand": "L"
+      },
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817105",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824055",
+      "gamePk": 824055,
+      "key": "CLE@KC",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "CLE",
+        "name": "Cleveland Guardians",
+        "id": 114,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/cle.png",
+        "rpg": 4.16,
+        "rapg": 4.15,
+        "color": "#002b5c",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 3,
+          "shb": 5,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "KC",
+        "name": "Kansas City Royals",
+        "id": 118,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/kc.png",
+        "rpg": 4.21,
+        "rapg": 4.86,
+        "color": "#004687",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817109",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824217",
+      "gamePk": 824217,
+      "key": "PIT@DET",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Pirates",
+        "id": 134,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/pit.png",
+        "rpg": 4.79,
+        "rapg": 4.61,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 6,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Tigers",
+        "id": 116,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/det.png",
+        "rpg": 4.5,
+        "rapg": 4.02,
+        "color": "#0a2240",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817107",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823246",
+      "gamePk": 823246,
+      "key": "ARI@SD",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ARI",
+        "name": "Arizona Diamondbacks",
+        "id": 109,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/ari.png",
+        "rpg": 4.44,
+        "rapg": 4.45,
+        "color": "#aa182c",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SD",
+        "name": "San Diego Padres",
+        "id": 135,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sd.png",
+        "rpg": 4.42,
+        "rapg": 4.16,
+        "color": "#2f241d",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 9,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817114",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823084",
+      "gamePk": 823084,
+      "key": "LAA@SEA",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "LAA",
+        "name": "Los Angeles Angels",
+        "id": 108,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/laa.png",
+        "rpg": 4.01,
+        "rapg": 4.56,
+        "color": "#ba0021",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "SEA",
+        "name": "Seattle Mariners",
+        "id": 136,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/sea.png",
+        "rpg": 4.06,
+        "rapg": 4.42,
+        "color": "#005c5c",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 7,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817113",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823650",
+      "gamePk": 823650,
+      "key": "TEX@MIN",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "TEX",
+        "name": "Texas Rangers",
+        "id": 140,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/tex.png",
+        "rpg": 4.19,
+        "rapg": 4.4,
+        "color": "#003278",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIN",
+        "name": "Minnesota Twins",
+        "id": 142,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/min.png",
+        "rpg": 4.55,
+        "rapg": 4.97,
+        "color": "#031f40",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 7,
+          "shb": 3,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817112",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "824542",
+      "gamePk": 824542,
+      "key": "COL@CHW",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "COL",
+        "name": "Colorado Rockies",
+        "id": 115,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/col.png",
+        "rpg": 4.66,
+        "rapg": 5.79,
+        "color": "#33006f",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 6,
+          "shb": 2,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "CHW",
+        "name": "Chicago White Sox",
+        "id": 145,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/chw.png",
+        "rpg": 4.7,
+        "rapg": 4.43,
+        "color": "#000000",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817110",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823814",
+      "gamePk": 823814,
+      "key": "ATL@MIA",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "ATL",
+        "name": "Atlanta Braves",
+        "id": 144,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/atl.png",
+        "rpg": 4.63,
+        "rapg": 3.86,
+        "color": "#0c2340",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 7,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIA",
+        "name": "Miami Marlins",
+        "id": 146,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mia.png",
+        "rpg": 4.44,
+        "rapg": 4.46,
+        "color": "#00a3e0",
+        "batMix": {
+          "lhb": 5,
+          "rhb": 8,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817102",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823731",
+      "gamePk": 823731,
+      "key": "STL@MIL",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:10:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "STL",
+        "name": "St. Louis Cardinals",
+        "id": 138,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/stl.png",
+        "rpg": 4.51,
+        "rapg": 4.66,
+        "color": "#be0a14",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "MIL",
+        "name": "Milwaukee Brewers",
+        "id": 158,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/mil.png",
+        "rpg": 5.14,
+        "rapg": 3.85,
+        "color": "#13294b",
+        "batMix": {
+          "lhb": 7,
+          "rhb": 6,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817111",
+      "consensus": null,
+      "hasOdds": false
+    },
+    {
+      "id": "823490",
+      "gamePk": 823490,
+      "key": "BAL@NYY",
+      "date": "2026-09-27",
+      "kickoffIso": "2026-09-27T19:20:00Z",
+      "completed": false,
+      "statusDetail": "Scheduled",
+      "statusState": "pre",
+      "away": {
+        "abbr": "BAL",
+        "name": "Baltimore Orioles",
+        "id": 110,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/bal.png",
+        "rpg": 4.44,
+        "rapg": 4.63,
+        "color": "#df4601",
+        "batMix": {
+          "lhb": 4,
+          "rhb": 9,
+          "shb": 1,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "home": {
+        "abbr": "NYY",
+        "name": "New York Yankees",
+        "id": 147,
+        "logo": "https://a.espncdn.com/i/teamlogos/mlb/500/scoreboard/nyy.png",
+        "rpg": 4.6,
+        "rapg": 3.72,
+        "color": "#132448",
+        "batMix": {
+          "lhb": 6,
+          "rhb": 8,
+          "shb": 0,
+          "source": "roster mix (lineup TBD)",
+          "nHitters": 14
+        }
+      },
+      "awayPitcher": null,
+      "homePitcher": null,
+      "books": [],
+      "moneyline": null,
+      "spread": null,
+      "total": null,
+      "espnId": "401817103",
+      "consensus": null,
+      "hasOdds": false
     }
   ],
   "counts": {
-    "games": 46,
+    "games": 91,
     "withOdds": 16,
     "withBothPitchers": 25
   }

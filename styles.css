@@ -1341,3 +1341,73 @@ code {
   font-size: 0.78rem;
   line-height: 1.35;
 }
+
+
+/* —— Edge Play of the Day —— */
+.edge-play-card {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(91, 140, 255, 0.14), rgba(61, 214, 140, 0.08));
+  border: 1px solid rgba(91, 140, 255, 0.35);
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  margin-bottom: 4px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+.edge-play-banner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ep-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8eb6ff;
+}
+.ep-day { font-size: 0.78rem; color: var(--muted, #9aa3b5); }
+.edge-play-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.edge-play-matchup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+}
+.edge-play-pick { text-align: right; }
+.ep-side { font-size: 0.95rem; margin-bottom: 2px; }
+.ep-edge {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #3dd68c;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.ep-compare { font-size: 0.85rem; margin-top: 4px; }
+.ep-stat { font-size: 0.8rem; color: var(--muted, #9aa3b5); margin-top: 8px; }
+.ep-why {
+  margin: 12px 0 8px;
+  padding-left: 1.1rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+.ep-why li { margin-bottom: 4px; }
+.ep-disclaimer { font-size: 0.75rem; margin: 0 0 6px; }
+.pick-box.model-win .edge-line.pos { color: #3dd68c; font-weight: 600; }
+.pick-box .thin-flag { color: #e6b84d; }
+.pick-rpg { font-size: 0.78rem; margin: 4px 0 8px; }
+.model-label {
+  font-size: 0.75rem;
+  color: var(--muted, #9aa3b5);
+  margin-top: 6px;
+}
+
+.pick-batmix { font-size: 0.72rem; margin: 2px 0 6px; line-height: 1.35; }
+.pick-sp { line-height: 1.35; }

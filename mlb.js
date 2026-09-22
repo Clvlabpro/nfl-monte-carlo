@@ -285,15 +285,17 @@ export async function loadMlbBoard(opts = {}) {
     }
   }
 
-  // Merge live ESPN: update status/odds by key (and date when possible)
+  // Merge live ESPN: match by id/gamePk first, then same matchup near same first pitch.
+  // Do NOT fall back to "any same key" — that collapses doubleheaders (e.g. TB@NYY twice).
   for (const eg of liveGames) {
     let g =
+      byId.get(String(eg.id)) ||
       [...byId.values()].find(
         (x) =>
           x.key === eg.key &&
           !x.completed &&
-          Math.abs((x.kickoffMs || 0) - (eg.kickoffMs || 0)) < 6 * 3600 * 1000
-      ) || [...byId.values()].find((x) => x.key === eg.key && !x.completed);
+          Math.abs((x.kickoffMs || 0) - (eg.kickoffMs || 0)) < 3 * 3600 * 1000
+      );
 
     if (!g) {
       g = {

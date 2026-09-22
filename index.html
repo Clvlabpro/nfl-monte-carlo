@@ -6,7 +6,7 @@
     <title>clvpro</title>
     <meta
       name="description"
-      content="clvpro — NFL + MLB Pick Board and market-calibrated sims. Research tool — not betting advice."
+      content="clvpro — NFL + MLB Pick Board. MLB uses an independent stats model (can disagree with books). Research tool — not betting advice."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +22,7 @@
         <div class="brand">
           <h1>clvpro</h1>
           <p class="tagline">
-            Pick Board · multi-book consensus · public splits · market-implied sims
+            Pick Board · multi-book consensus · public splits · MLB stats model vs books
           </p>
         </div>
         <div class="badge-row">
@@ -79,8 +79,9 @@
 
         <div class="disclaimer pickboard-disclaimer">
           <strong>Research tool — not betting advice.</strong>
-          Leans are transparent heuristics (line shop ≥0.5 vs consensus; market-implied sim win% ≥58%/≤42%)
-          plus sims around consensus means — <em>not</em> a proprietary edge model and not a recommendation to wager.
+          Leans are transparent heuristics (line shop ≥0.5 vs consensus; model win% ≥58%/≤42%).
+          MLB expected runs are <strong>stats-based</strong> (rpg/rapg + SP ERA) and can disagree with books; books are for comparison / edge only.
+          <em>Edge Play of the Day</em> is largest model−book ML edge among upcoming games — not guaranteed profit / not betting advice.
           <strong>Bets vs Money</strong> is an Action Network public-betting snapshot (tickets % vs money %);
           a money−tickets gap is often read as a sharper lean but is not a guarantee of sharp action.
           Public splits ≠ proven sharps. Splits/lines refresh when fetch scripts are re-run and redeployed. Branding: <strong>clvpro</strong>.
@@ -175,7 +176,7 @@
                     <tbody id="meta-body"></tbody>
                   </table>
                   <p style="margin: 10px 0 0">
-                    Market expected:
+                    Model expected:
                     <span style="color: var(--away)" id="exp-away">—</span>
                     –
                     <span style="color: var(--home)" id="exp-home">—</span>

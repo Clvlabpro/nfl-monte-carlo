@@ -1,98 +1,87 @@
 # clvpro
 
-Browser-side **Pick Board** + simulator calibrated to market consensus lines.
+Browser-side **Pick Board** + simulator for **NFL** and **MLB**.
 
-**Sports:** **NFL** (default) and **MLB** — switch with the top **NFL | MLB** tabs.
+**Branding: clvpro only.** Live: [https://clvlabpro.github.io/nfl-monte-carlo/](https://clvlabpro.github.io/nfl-monte-carlo/)
 
-**Not betting advice.** Lines move — hit Refresh. Branding: **clvpro** only.
-
-Live site: [https://clvlabpro.github.io/nfl-monte-carlo/](https://clvlabpro.github.io/nfl-monte-carlo/)
+**Not betting advice.** Lines move — hit Refresh.
 
 ## Views
 
-Within each sport:
-
-- **Pick Board** (default) — upcoming games with consensus lines, best book numbers, Action Network bets-vs-money splits, quick sim win%, transparent lean heuristics.
-- **Sim** — deep dive one matchup with margin/total histograms.
+- **Pick Board** — upcoming games only (today forward; hide final/completed). **Edge Play of the Day** (largest model−book ML edge) featured at top.
+- **Sim** — deep dive one matchup with histograms.
 
 ### NFL
 
-Week 3 (2026) + featured remaining Week 2 MNF (e.g. NYG@LAR). Multi-book median consensus (DraftKings via ESPN + FanDuel / BetMGM / Bovada snapshot).
+Market-calibrated from consensus spread + total (multi-book median). Books drive means.
 
-### MLB
+### MLB (independent — can disagree with books)
 
-Schedule window: **today + next 2–3 days** (America/Chicago) so quiet nights still show a board. Probable SPs + season ERA/WHIP from MLB Stats API. Run line / total / ML from ESPN DraftKings when posted. Public splits from Action Network when the page has that slate.
+Expected runs are **stats-based**, not taken from run line + total:
+
+```
+leagueR ≈ 4.25 · leagueERA ≈ 4.10 · HFA ≈ 0.12
+
+awayExp = 0.5*(away.rpg + home.rapg) + 0.35*(leagueERA − homeSP.era)
+homeExp = 0.5*(home.rpg + away.rapg) + 0.35*(leagueERA − awaySP.era) + HFA
+```
+
+- Missing SP ERA → drop that pitcher’s term (0). Clamp each side ≈ `[1.5, 7.5]`.
+- Optional WHIP/K9 nudge vs opposing SP (±0.15 max).
+- **Platoon / handedness** (real splits, not W–L):
+  - SP throwing hand (LHP/RHP)
+  - SP OPS-against vs LHB / vs RHB (MLB Stats API `sitCodes=vl,vr`)
+  - Opposing bat mix: posted lineup if available, else **active roster mix (lineup TBD)**
+  - Switch-hitters bat opposite of pitcher hand
+  - `facedOPS` = lineup-weighted vsL/vsR OPS; `neutralOPS` = 0.5*(vsL+vsR)
+  - `platoonAdj = clamp((facedOPS − neutralOPS) × 2.0, ±0.30)` added to that offense’s expected runs
+- **No ties** — extras until scores differ.
+- σ ≈ 3.0 runs · ρ ≈ 0.20
+- Books (ESPN DraftKings) stay for **comparison / edge only**: model win% vs no-vig ML implied, ATS/OU vs posted RL/total.
+
+**Do not calibrate win% to match the moneyline.**
+
+## Edge Play of the Day
+
+Among upcoming games with both model win% and book ML:
+
+`edge_pp = (modelWinPct − bookImpliedWinPct) × 100`
+
+Featured card = largest **positive** edge on today / next slate day with lines. Honest label: model edge vs market — not guaranteed profit / not betting advice.
 
 ## Quick start
 
 ```bash
 cd /workspace/nfl-monte-carlo
-python3 scripts/fetch-lines.py       # NFL lines.json
-python3 scripts/fetch-splits.py      # NFL splits.json
-python3 scripts/fetch-mlb-lines.py   # MLB mlb-lines.json
-python3 scripts/fetch-mlb-splits.py  # MLB mlb-splits.json
+python3 scripts/fetch-lines.py
+python3 scripts/fetch-splits.py
+python3 scripts/fetch-mlb-lines.py   # schedule + ESPN odds + rpg/rapg + SP ERA/WHIP/K9 + platoon splits + bat mix
+python3 scripts/fetch-mlb-splits.py
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open: [http://127.0.0.1:8080](http://127.0.0.1:8080) → use **NFL | MLB** tabs.
+## Data sources (free)
 
-## Lean rules (transparent)
+| Sport | Source | Notes |
+|-------|--------|--------|
+| MLB | Stats API schedule, team rpg/rapg, last-10, SP ERA/WHIP/K9 | Snapshot |
+| MLB | Stats API pitcher `vl`/`vr` OPS splits + pitch hand | Platoon |
+| MLB | Stats API roster batSide (or live battingOrder when posted) | Lineup / roster mix |
+| MLB | ESPN scoreboard DraftKings RL/total/ML | Comparison only |
+| MLB | Action Network → `mlb-splits.json` | Bets vs Money |
+| NFL | ESPN DK + FD/MGM/Bovada snapshot | Market means |
+| NFL | Action Network → `splits.json` | Bets vs Money |
 
-1. **Line shop** (spread / run line): best book number for a side ≥ 0.5 better than consensus → lean that side.
-2. **ML**: quick sim home win% ≥ 58% → home ML; ≤ 42% → away ML (labeled market-implied).
-3. **Sharp lean** (display): Action Network money% − tickets% ≥ 10 on a side (public sample ≠ proven sharps).
-4. Else: “No lean — market too tight / no shop edge.”
+## Lean heuristics (transparent)
 
-## Model
-
-### NFL
-
-```
-marginExp = −spread
-homeExp   = (total − spread) / 2
-awayExp   = (total + spread) / 2
-σ ≈ 10.5 pts · ρ ≈ 0.18
-```
-
-### MLB
-
-Same market algebra on **run line + total**. Then optional pitcher adjust when **both** probable SPs have season ERA:
-
-```
-pitcherAdj = clamp((awayERA − homeERA) × 0.12, −0.75, +0.75)
-homeExp   += pitcherAdj / 2
-awayExp   −= pitcherAdj / 2
-σ ≈ 3.2 runs · ρ ≈ 0.22
-```
-
-Integer runs ≥ 0. Pick Board uses 8k sims; Sim default 10k. Does **not** invent odds — cards show “Waiting on lines” when RL/total are missing.
-
-## Data sources
-
-| Sport | Source | Browser live? |
-|-------|--------|---------------|
-| NFL | ESPN scoreboard DraftKings | Yes |
-| NFL | FanDuel / BetMGM / Bovada → `lines.json` | Snapshot |
-| NFL | Action Network → `splits.json` | Snapshot |
-| MLB | MLB Stats API schedule + SP/team context → `mlb-lines.json` | Snapshot (+ enrich) |
-| MLB | ESPN MLB scoreboard DK odds | Yes (merge on Refresh) |
-| MLB | Action Network → `mlb-splits.json` | Snapshot |
-| MLB multi-book (FD/MGM/Bovada) | — | **Not adapted** (gap) |
-
-Home-team spread / run line: **negative = home favored**. Consensus = **median**.
-
-## Files
-
-- `mlb-lines.json` / `scripts/fetch-mlb-lines.py`
-- `mlb-splits.json` / `scripts/fetch-mlb-splits.py`
-- `mlb.js` — load/merge MLB board
-- `splits.json` / `scripts/fetch-splits.py` — NFL public betting
-- `lines.json` / `scripts/fetch-lines.py` — NFL multi-book
-- `index.html` / `styles.css` / `app.js` / `sim.js` / `picks.js` / `charts.js`
+1. Line shop ≥ 0.5 pts vs consensus → ATS/RL lean  
+2. Model win% ≥ 58% / ≤ 42% → ML lean  
+3. Sharp lean display: money% − tickets% ≥ 10  
+4. Else: no lean  
 
 ## Caveats
 
-- Market-calibrated ≠ predictive edge; the sim embeds the consensus line (plus a small MLB pitcher nudge).
-- Snapshot books/splits can lag until you re-run fetch scripts and redeploy.
-- Public betting splits are a sample — not a guarantee of sharp action.
-- Leans are heuristics, not a proprietary edge model.
+- MLB model is independent of books and can be wrong; edge ≠ EV guarantee.
+- Roster bat mix is used when lineup is TBD.
+- Snapshot books/splits lag until fetch scripts re-run and redeploy.
+- Public splits ≠ proven sharps.
